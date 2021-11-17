@@ -1,0 +1,13 @@
+.picture-right {
+    margin-top: 50px;
+    background-image: url("https://wallpapers.com/images/high/junk-food-wallpaper-creative-junk-food-wallpaper-mei658-al391i0251m5z2b1.jpg");
+    width: 100%;
+    background-size: cover;
+    margin-bottom: 27px;
+}
+
+.background{
+    height: 700px;
+    background: rgb(2,0,36);
+    background: linear-gradient(35deg, rgba(2,0,36,1) 0%, rgba(177,35,79,0.37048322747067575) 100%, rgba(0,212,255,1) 100%);
+}
