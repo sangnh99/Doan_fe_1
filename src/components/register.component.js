@@ -37,11 +37,42 @@ const vusername = value => {
   }
 };
 
+const vfullname = value => {
+  if (value.length < 1 || value.length > 20) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        The full name must be between 1 and 20 characters.
+      </div>
+    );
+  }
+};
+
+const vconfirmpassword = value => {
+  if (value.length < 6 || value.length > 20) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        Confirm password incorrect .
+      </div>
+    );
+  }
+};
+
 const vpassword = value => {
+  console.log("password");
   if (value.length < 6 || value.length > 40) {
     return (
       <div className="alert alert-danger" role="alert">
         The password must be between 6 and 40 characters.
+      </div>
+    );
+  }
+};
+
+const vphone = value => {
+  if (value.length < 8 || value.length > 20 ) {
+    return (
+      <div className="alert alert-danger" role="alert">
+        Phone number is incorrect .
       </div>
     );
   }
@@ -54,11 +85,17 @@ export default class Register extends Component {
     this.onChangeUsername = this.onChangeUsername.bind(this);
     this.onChangeEmail = this.onChangeEmail.bind(this);
     this.onChangePassword = this.onChangePassword.bind(this);
+    this.onChangeConfirmPassword = this.onChangeConfirmPassword.bind(this);
+    this.onChangePhone = this.onChangePhone.bind(this);
+    this.onChangeFullname = this.onChangeFullname.bind(this);
 
     this.state = {
       username: "",
       email: "",
       password: "",
+      confirmPassword: "",
+      fullname: "",
+      phone:"",        
       successful: false,
       message: ""
     };
@@ -82,6 +119,24 @@ export default class Register extends Component {
     });
   }
 
+  onChangePhone(e) {
+    this.setState({
+      phone: e.target.value
+    });
+  }
+
+  onChangeFullname(e) {
+    this.setState({
+      fullname: e.target.value
+    });
+  }
+
+  onChangeConfirmPassword(e) {
+    this.setState({
+      confirmPassword: e.target.value
+    });
+  }
+
   handleRegister(e) {
     e.preventDefault();
 
@@ -96,13 +151,19 @@ export default class Register extends Component {
       AuthService.register(
         this.state.username,
         this.state.email,
-        this.state.password
+        this.state.password,
+        this.state.confirmPassword,
+        this.state.phone,
+        this.state.fullname
       ).then(
         response => {
           this.setState({
             message: response.data.message,
             successful: true
           });
+          localStorage.setItem("email", this.state.email);
+          this.props.history.push("/validate-register");
+          window.location.reload();
         },
         error => {
           const resMessage =
@@ -158,18 +219,6 @@ export default class Register extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label htmlFor="email">Email</label>
-                      <Input
-                        type="text"
-                        className="form-control"
-                        name="email"
-                        value={this.state.email}
-                        onChange={this.onChangeEmail}
-                        validations={[required, email]}
-                      />
-                    </div>
-
-                    <div className="form-group">
                       <label htmlFor="password">Password</label>
                       <Input
                         type="password"
@@ -180,19 +229,31 @@ export default class Register extends Component {
                         validations={[required, vpassword]}
                       />
                     </div>
+                    <div className="form-group">
+                      <label htmlFor="confirm-password">Confirm password</label>
+                      <Input
+                        type="password"
+                        className="form-control"
+                        name="confirm-password"
+                        value={this.state.confirmPassword}
+                        onChange={this.onChangeConfirmPassword}
+                        validations={[required, vconfirmpassword]}
+                      />
+                    </div>
+
 
                   </div>
 
                   <div className="col-xl-6">
-                    <div className="form-group">
-                      <label htmlFor="username">Username</label>
+                  <div className="form-group">
+                      <label htmlFor="fullname">Full Name</label>
                       <Input
                         type="text"
                         className="form-control"
-                        name="username"
-                        value={this.state.username}
-                        onChange={this.onChangeUsername}
-                        validations={[required, vusername]}
+                        name="fullname"
+                        value={this.state.fullname}
+                        onChange={this.onChangeFullname}
+                        validations={[required, vfullname]}
                       />
                     </div>
 
@@ -209,14 +270,14 @@ export default class Register extends Component {
                     </div>
 
                     <div className="form-group">
-                      <label htmlFor="password">Password</label>
+                      <label htmlFor="phone">Phone number</label>
                       <Input
-                        type="password"
+                        type="number"
                         className="form-control"
-                        name="password"
-                        value={this.state.password}
-                        onChange={this.onChangePassword}
-                        validations={[required, vpassword]}
+                        name="phone"
+                        value={this.state.phone}
+                        onChange={this.onChangePhone}
+                        validations={[required, vphone]}
                       />
                     </div>
                   </div>
