@@ -15,6 +15,12 @@ import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
 import { Menu, Dropdown, Button, Space } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
+import ValidateRegister from "./components/validate-register";
+import "./cssConfig/footer.css";
+import Footer from "./components/footer";
+import MenuPage from "./components/menupage/menu-page";
+import MenuCategory from "./components/menupage/menu-category";
+import FoodDetail from "./components/food-detail/food-detail";
 
 // import AuthVerify from "./common/auth-verify";
 import EventBus from "./common/EventBus";
@@ -170,11 +176,16 @@ class App extends Component {
               <Route path="/user" component={BoardUser} />
               <Route path="/mod" component={BoardModerator} />
               <Route path="/admin" component={BoardAdmin} />
+              <Route path="/validate-register" component={ValidateRegister} />
+              <Route exact path="/menu" component={MenuPage} />   
+              <Route path="/menu/:category" component={MenuCategory} />        
+              <Route path="/food/:id" component={FoodDetail} />      
             </Switch>
           </div>
 
           { /*<AuthVerify logOut={this.logOut}/> */}
         </Router>
+        <Footer />
       </div>
     );
   }

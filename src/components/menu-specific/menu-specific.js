@@ -13,9 +13,13 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import FoodService from '../../services/food-service';
 import Card from '../card/card';
+import { BrowserRouter as Router , useHistory} from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Pagination, Row, Col } from 'antd';
 import { useState, useEffect } from 'react';
+import { food_category } from '../../enum/food-category';
+import FoodDetail from '../food-detail/food-detail';
+
 
 
 // export default class MenuSpecific extends Component {
@@ -160,7 +164,7 @@ export default function MenuSpecific(props) {
     useEffect(() => {
         console.log("update state");
         getListFood();
-    }, [sortType, sortValue, offset, searchValue]);
+    }, [sortType, sortValue, offset, searchValue, type]);
 
 
     const getListFood = () => {
@@ -178,22 +182,36 @@ export default function MenuSpecific(props) {
         setOffset(page);
     };
 
-         return (
+    const history = useHistory();
+
+    return (
+        <Router>
             <div className="container">
                 <div className="row">
                     <div className="col-xl-3" style={{ display: "inline", marginTop: 50 }}>
-                    <div className="w3-light-grey w3-bar-block" style={{ width: 270, height: 400, }}>
-                                    <h3 className="w3-bar-item" style={{
+                        <div className="w3-light-grey w3-bar-block" style={{ width: 270, height: 400, }}>
+                            <h3 className="w3-bar-item" style={{
+                            }}>Bạn muốn ăn gì </h3>
 
-                                    }}>Bạn muốn ăn gì </h3>
-
-                                    <Link to={"/menu/rice"}> <p href="#" className="w3-bar-item w3-button">Cơm</p></Link>
-                                    <p href="#" className="w3-bar-item w3-button">Bún/phở</p>
-                                    <p href="#" className="w3-bar-item w3-button">Ăn vặt</p>
-                                    <p href="#" className="w3-bar-item w3-button">Đặc sản</p>
-                                    <p href="#" className="w3-bar-item w3-button">Healthy</p>
-                                    <p href="#" className="w3-bar-item w3-button">Đồ uống</p>
-                                </div>
+                            <Link to={"/menu/rice"} onClick={() => {
+                                setType(1);
+                            }}> <p className="w3-bar-item w3-button">Cơm</p></Link>
+                            <Link to={"/menu/noodle"} onClick={() => {
+                                setType(2);
+                            }}> <p className="w3-bar-item w3-button">Bún/phở</p></Link>
+                            <Link to={"/menu/fastfood"} onClick={() => {
+                                setType(3);
+                            }}> <p className="w3-bar-item w3-button">Ăn vặt</p></Link>
+                            <Link to={"/menu/fastfood"} onClick={() => {
+                                setType(4);
+                            }}> <p className="w3-bar-item w3-button">Đặc sản</p></Link>
+                            <Link to={"/menu/speciality"} onClick={() => {
+                                setType(5);
+                            }}> <p className="w3-bar-item w3-button">Healthy</p></Link>
+                            <Link to={"/menu/fastfood"} onClick={() => {
+                                setType(6);
+                            }}> <p className="w3-bar-item w3-button">Đồ uống</p></Link>
+                        </div>
                     </div>
                     <div className="col-xl-9">
                         <div className="row">
@@ -201,8 +219,8 @@ export default function MenuSpecific(props) {
                                 listItems.map(item => {
                                     return (
                                         <div className="col-xl-4">
-                                            <Link to={"/menu/" + item.id} >
-                                                <Card
+                                            <div  onClick={() => {history.push(`/food/${item.id}`)}}>
+                                                <Card 
                                                     name={item.name}
                                                     store={item.store_name}
                                                     ima={item.avatar}
@@ -210,7 +228,7 @@ export default function MenuSpecific(props) {
                                                     price={item.price}
                                                 />
 
-                                            </Link>
+                                            </div>
                                         </div>
                                     );
                                 })
@@ -220,6 +238,8 @@ export default function MenuSpecific(props) {
                     </div>
                 </div>
             </div>
-        );
-    
+        </Router>
+    );
+
 }
+

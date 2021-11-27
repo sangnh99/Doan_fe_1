@@ -22,13 +22,27 @@ class AuthService {
 
   logout() {
     localStorage.removeItem("user");
+    localStorage.removeItem("email");
   }
 
-  register(username, email, password) {
+  register(username, email, password, confirmpassword, phone, fullname) {
+    console.log(confirmpassword);
     return axios.post(API_URL + "register", {
       username,
       email,
-      password
+      password,
+      confirmpassword,
+      phone,
+      fullname
+    });
+  }
+
+  verifyemail(email, token){
+    console.log(email);
+    console.log(token);
+    return axios.post(API_URL + "register/handle-register", {
+      email,
+      token
     });
   }
 
