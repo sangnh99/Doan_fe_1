@@ -13,7 +13,7 @@ export default function Card(props) {
       <img className="card-image" src={props.ima} alt="Logo" style={{height: 170, width:225}}/>
       <div className="card-text">{props.price} đ</div>
       <div className="card-like-bar">
-      <i class="far fa-star"></i> <b>{props.rating}</b>
+      <i className="far fa-star"></i> <b>{props.rating}</b>
         {/* <div className="rating-text">
           <b>{props.rating}</b> kişi bu tarifi beğendi.
         </div> */}
