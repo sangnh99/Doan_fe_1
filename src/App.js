@@ -24,6 +24,7 @@ import FoodDetail from "./components/food-detail/food-detail";
 
 // import AuthVerify from "./common/auth-verify";
 import EventBus from "./common/EventBus";
+import Store from "./components/store/store";
 
 class App extends Component {
   constructor(props) {
@@ -180,6 +181,7 @@ class App extends Component {
               <Route exact path="/menu" component={MenuPage} />   
               <Route path="/menu/:category" component={MenuCategory} />        
               <Route path="/food/:id" component={FoodDetail} />      
+              <Route path="/store/:id" component={Store} />    
             </Switch>
           </div>
 
