@@ -25,6 +25,7 @@ import FoodDetail from "./components/food-detail/food-detail";
 // import AuthVerify from "./common/auth-verify";
 import EventBus from "./common/EventBus";
 import Store from "./components/store/store";
+import UserManager from "./components/user-profile/user-manager";
 
 class App extends Component {
   constructor(props) {
@@ -141,7 +142,7 @@ class App extends Component {
             {currentUser ? (
               <div className="navbar-nav ml-auto">
                 <li className="nav-item">
-                  <Link to={"/profile"} className="nav-link">
+                  <Link to={"/user"} className="nav-link">
                     {currentUser.username}
                   </Link>
                 </li>
@@ -174,14 +175,15 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/profile" component={Profile} />
-              <Route path="/user" component={BoardUser} />
+              {/* <Route path="/user" component={BoardUser} /> */}
               <Route path="/mod" component={BoardModerator} />
               <Route path="/admin" component={BoardAdmin} />
               <Route path="/validate-register" component={ValidateRegister} />
               <Route exact path="/menu" component={MenuPage} />   
               <Route path="/menu/:category" component={MenuCategory} />        
               <Route path="/food/:id" component={FoodDetail} />      
-              <Route path="/store/:id" component={Store} />    
+              <Route path="/store/:id" component={Store} /> 
+              <Route path="/user" component={UserManager} />   
             </Switch>
           </div>
 
