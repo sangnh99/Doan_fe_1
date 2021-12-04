@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_URL = "http://localhost:8866/";
-// const API_URL = "https://sang-delivery.herokuapp.com/";
+//const API_URL = "http://localhost:8866/";
+const API_URL = "https://sang-delivery.herokuapp.com/";
 
 class AuthService {
   login(username, password) {
