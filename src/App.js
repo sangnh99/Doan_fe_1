@@ -5,6 +5,7 @@ import "./App.css";
 import "./cssConfig/login.css";
 
 import AuthService from "./services/auth.service";
+import 'antd/dist/antd.css';
 
 import Login from "./components/login.component";
 import Register from "./components/register.component";
@@ -13,7 +14,7 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
-import { Menu, Dropdown, Button, Space } from 'antd';
+import { Menu, Dropdown, Button, Space,Badge } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import ValidateRegister from "./components/validate-register";
 import "./cssConfig/footer.css";
@@ -26,6 +27,9 @@ import FoodDetail from "./components/food-detail/food-detail";
 import EventBus from "./common/EventBus";
 import Store from "./components/store/store";
 import UserManager from "./components/user-profile/user-manager";
+import { CartProvider, CartContext } from './contexts/cart-context';
+import { ShoppingCartOutlined } from '@ant-design/icons';
+import userService from "./services/user.service";
 
 class App extends Component {
   constructor(props) {
@@ -92,105 +96,120 @@ class App extends Component {
 
 
     return (
-      <div>
-        <Router>
-          <nav className="navbar navbar-expand navbar-light" style={{ backgroundColor: "#e3f2fd" }}>
-            <Link to={"/"} className="navbar-brand">
-              bezKoder
-            </Link>
-            <div className="navbar-nav mr-auto">
-              <li className="nav-item">
-                <Link to={"/home"} className="nav-link">
-                  Home
+      <CartProvider>
+
+        <div>
+          <Router>
+            <nav className="navbar navbar-expand navbar-light" style={{ backgroundColor: "#e3f2fd" }}>
+              <Link to={"/"} className="navbar-brand">
+                bezKoder
+              </Link>
+              <div className="navbar-nav mr-auto">
+                <li className="nav-item">
+                  <Link to={"/home"} className="nav-link">
+                    Home
+                  </Link>
+                </li>
+
+                <li className="nav-item" style={{ marginTop: "8px", marginLeft: "7px", fontSize: "16px" }}>
+                  <Dropdown overlay={menu}>
+                    <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                      Hover me <DownOutlined />
+                    </a>
+                  </Dropdown>
+                </li>
+
+
+                {showModeratorBoard && (
+                  <li className="nav-item">
+                    <Link to={"/mod"} className="nav-link">
+                      Moderator Board
+                    </Link>
+                  </li>
+                )}
+
+                {showAdminBoard && (
+                  <li className="nav-item">
+                    <Link to={"/admin"} className="nav-link">
+                      Admin Board
+                    </Link>
+                  </li>
+                )}
+
+                {/* {currentUser && (
+                <li className="nav-item">
+                <Link to={"/user"} className="nav-link">
+                User
                 </Link>
-              </li>
-
-              <li className="nav-item" style={{marginTop: "8px", marginLeft:"7px", fontSize:"16px"}}>
-                <Dropdown overlay={menu}>
-                  <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                    Hover me <DownOutlined />
-                  </a>
-                </Dropdown>
-              </li>
-
-
-              {showModeratorBoard && (
-                <li className="nav-item">
-                  <Link to={"/mod"} className="nav-link">
-                    Moderator Board
-                  </Link>
-                </li>
-              )}
-
-              {showAdminBoard && (
-                <li className="nav-item">
-                  <Link to={"/admin"} className="nav-link">
-                    Admin Board
-                  </Link>
-                </li>
-              )}
-
-              {/* {currentUser && (
-                <li className="nav-item">
-                  <Link to={"/user"} className="nav-link">
-                    User
-                  </Link>
                 </li>
               )} */}
+              </div>
+
+              {currentUser ? (
+                <div className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <Link to={"/user"} className="nav-link">
+                      {currentUser.username}
+                    </Link>
+                  </li>
+                  <li className="nav-item">
+                    <a href="/login" className="nav-link" onClick={this.logOut}>
+                      LogOut
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <CartContext.Consumer>
+                      {({ cartItems }) => (
+                        <Badge count={cartItems.length} showZero="true">
+                          {
+                            JSON.stringify(cartItems)
+                          }
+                          <ShoppingCartOutlined style={{ fontSize: "30px" }} />
+                        </Badge>
+                      )}
+                    </CartContext.Consumer>
+                  </li>
+                </div>
+              ) : (
+                <div className="navbar-nav ml-auto">
+                  <li className="nav-item">
+                    <Link to={"/login"} className="nav-link">
+                      Login
+                    </Link>
+                  </li>
+
+                  <li className="nav-item">
+                    <Link to={"/register"} className="nav-link">
+                      Sign Up
+                    </Link>
+                  </li>
+                </div>
+              )}
+            </nav>
+
+            <div>
+              <Switch>
+                <Route exact path={["/", "/home"]} component={Home} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/register" component={Register} />
+                <Route exact path="/profile" component={Profile} />
+                {/* <Route path="/user" component={BoardUser} /> */}
+                <Route path="/mod" component={BoardModerator} />
+                <Route path="/admin" component={BoardAdmin} />
+                <Route path="/validate-register" component={ValidateRegister} />
+                <Route exact path="/menu" component={MenuPage} />
+                <Route path="/menu/:category" component={MenuCategory} />
+                <Route path="/food/:id" component={FoodDetail} />
+                <Route path="/store/:id" component={Store} />
+                <Route path="/user" component={UserManager} />
+              </Switch>
             </div>
 
-            {currentUser ? (
-              <div className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link to={"/user"} className="nav-link">
-                    {currentUser.username}
-                  </Link>
-                </li>
-                <li className="nav-item">
-                  <a href="/login" className="nav-link" onClick={this.logOut}>
-                    LogOut
-                  </a>
-                </li>
-              </div>
-            ) : (
-              <div className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link to={"/login"} className="nav-link">
-                    Login
-                  </Link>
-                </li>
-
-                <li className="nav-item">
-                  <Link to={"/register"} className="nav-link">
-                    Sign Up
-                  </Link>
-                </li>
-              </div>
-            )}
-          </nav>
-
-          <div>
-            <Switch>
-              <Route exact path={["/", "/home"]} component={Home} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/profile" component={Profile} />
-              {/* <Route path="/user" component={BoardUser} /> */}
-              <Route path="/mod" component={BoardModerator} />
-              <Route path="/admin" component={BoardAdmin} />
-              <Route path="/validate-register" component={ValidateRegister} />
-              <Route exact path="/menu" component={MenuPage} />   
-              <Route path="/menu/:category" component={MenuCategory} />        
-              <Route path="/food/:id" component={FoodDetail} />      
-              <Route path="/store/:id" component={Store} /> 
-              <Route path="/user" component={UserManager} />   
-            </Switch>
-          </div>
-
-          { /*<AuthVerify logOut={this.logOut}/> */}
-        </Router>
-        <Footer />
-      </div>
+            { /*<AuthVerify logOut={this.logOut}/> */}
+          </Router>
+          <Footer />
+        </div>
+      </CartProvider>
     );
   }
 }
