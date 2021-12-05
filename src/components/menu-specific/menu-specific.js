@@ -202,13 +202,13 @@ export default function MenuSpecific(props) {
                             <Link to={"/menu/fastfood"} onClick={() => {
                                 setType(3);
                             }}> <p className="w3-bar-item w3-button">Ăn vặt</p></Link>
-                            <Link to={"/menu/fastfood"} onClick={() => {
+                            <Link to={"/menu/speciality"} onClick={() => {
                                 setType(4);
                             }}> <p className="w3-bar-item w3-button">Đặc sản</p></Link>
-                            <Link to={"/menu/speciality"} onClick={() => {
+                            <Link to={"/menu/healthy"} onClick={() => {
                                 setType(5);
                             }}> <p className="w3-bar-item w3-button">Healthy</p></Link>
-                            <Link to={"/menu/fastfood"} onClick={() => {
+                            <Link to={"/menu/drink"} onClick={() => {
                                 setType(6);
                             }}> <p className="w3-bar-item w3-button">Đồ uống</p></Link>
                         </div>

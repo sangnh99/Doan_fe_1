@@ -6,10 +6,11 @@ import { food_category_vn } from '../../enum/food-category-vn';
 import foodService from '../../services/food-service';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
-import { InputNumber, Cascader, Button} from 'antd';
+import { InputNumber, Cascader, Button } from 'antd';
 import { ShoppingCartOutlined, DollarCircleOutlined } from '@ant-design/icons';
-import {Divider} from 'antd';
+import { Divider } from 'antd';
 import CommentBox from '../comment-box/comment-box';
+import { CartContext } from '../../contexts/cart-context';
 
 
 export default function FoodDetail() {
@@ -50,23 +51,28 @@ export default function FoodDetail() {
                         <InputNumber
                             addonBefore={<Cascader placeholder="cascader" style={{ width: 250 }} />}
                             defaultValue={quantity}
-                            onChange={(value) => {
-                                setQuantity(value);
+                            onChange={(event) => {
+                                setQuantity(event);
                             }}
                         />
                     </div>
                     <div>
-                        <Button type="primary" icon={<ShoppingCartOutlined style={{fontSize : 20, marginBottom:5}}/>} size={"large"} style={{marginTop : 50}}>
-                            Thêm vào giỏ hàng
-                        </Button>
-                        <Button type="primary" icon={<DollarCircleOutlined  style={{fontSize : 20, marginBottom:5}}/>} size={"large"} style={{backgroundColor : "#52c41a"}}>
+                        <CartContext.Consumer >
+                            {({ addToCart }) => (
+                                <Button onClick={() => addToCart(foodDetail, quantity)} type="primary" icon={<ShoppingCartOutlined style={{ fontSize: 20, marginBottom: 5 }} />} size={"large"} style={{ marginTop: 50 }}>
+                                    Thêm vào giỏ hàng
+                                </Button>
+                            )}
+
+                        </CartContext.Consumer>
+                        <Button type="primary" icon={<DollarCircleOutlined style={{ fontSize: 20, marginBottom: 5 }} />} size={"large"} style={{ backgroundColor: "#52c41a" }}>
                             Mua hàng
                         </Button>
                     </div>
                 </div>
             </div>
 
-            <div style={{marginTop: 100}}>
+            <div style={{ marginTop: 100 }}>
                 <h3>Bình luận</h3>
                 <Divider />
                 {
@@ -75,20 +81,20 @@ export default function FoodDetail() {
                             {
                                 listComment.map(item => {
                                     return (
-                                        <CommentBox id = {item.id}
-                                         name = {item.user_app_name}
-                                          rating = {item.rating} 
-                                          comment = {item.comment}
-                                          likenum = {item.like_number}
-                                          dislikenum = {item.dislike_number}/>
+                                        <CommentBox id={item.id}
+                                            name={item.user_app_name}
+                                            rating={item.rating}
+                                            comment={item.comment}
+                                            likenum={item.like_number}
+                                            dislikenum={item.dislike_number} />
                                     );
                                 })
                             }
                         </div>
-                    ) 
+                    )
                 }
                 {
-                    listComment.length === 0 && (<div style = {{marginBottom : 100}}>Hiện chưa có đánh giá cho sản phẩm</div>)
+                    listComment.length === 0 && (<div style={{ marginBottom: 100 }}>Hiện chưa có đánh giá cho sản phẩm</div>)
                 }
             </div>
         </div>
