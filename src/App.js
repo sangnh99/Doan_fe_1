@@ -14,7 +14,7 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
-import { Menu, Dropdown, Button, Space,Badge } from 'antd';
+import { Menu, Dropdown, Button, Space, Badge, Modal, List, Avatar, InputNumber } from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import ValidateRegister from "./components/validate-register";
 import "./cssConfig/footer.css";
@@ -31,6 +31,21 @@ import { CartProvider, CartContext } from './contexts/cart-context';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import userService from "./services/user.service";
 
+const data = [
+  {
+    title: 'Ant Design Title 1',
+  },
+  {
+    title: 'Ant Design Title 2',
+  },
+  {
+    title: 'Ant Design Title 3',
+  },
+  {
+    title: 'Ant Design Title 4',
+  },
+];
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -40,6 +55,8 @@ class App extends Component {
       showModeratorBoard: false,
       showAdminBoard: false,
       currentUser: undefined,
+      visible: false,
+      confirmModalVisible : false
     };
   }
 
@@ -159,13 +176,58 @@ class App extends Component {
                   </li>
                   <li className="nav-item">
                     <CartContext.Consumer>
-                      {({ cartItems }) => (
-                        <Badge count={cartItems.length} showZero="true">
-                          {
-                            JSON.stringify(cartItems)
+                      {({ amount, cartItems, addToCart }) => (
+                        <div>
+                          <Badge count={amount} showZero="true">
+                            {/* {
+                              JSON.stringify(cartItems)
+                            } */}
+                            <ShoppingCartOutlined style={{ fontSize: "30px" }} onClick={() => this.setState(
+                              {
+                                ...this.state,
+                                visible : !this.state.visible
+                              }
+                            )}/>
+                          </Badge>
+                          <Modal
+                            title="Giỏ hàng của bạn"
+                            centered
+                            visible={this.state.visible}
+                            onOk={() => {this.setState(
+                              {
+                                ...this.state,
+                                visible : false
+                              }
+                            )
+
+                            }
                           }
-                          <ShoppingCartOutlined style={{ fontSize: "30px" }} />
-                        </Badge>
+                            onCancel={() => this.setState(
+                              {
+                                ...this.state,
+                                visible : false
+                              }
+                            )}
+                            width={600}
+                          >
+                            <List
+                              itemLayout="horizontal"
+                              dataSource={cartItems}
+                              renderItem={item => (
+                                <List.Item>
+                                  <List.Item.Meta
+                                    avatar={<Avatar src={item.avatar} />}
+                                    title={<a href="https://ant.design">{item.food_name}</a>}
+                                    description={item.store_name}
+                                  />
+                                  <span>  Số lượng :  <InputNumber value={item.amount} onChange={(value) => {
+                                    addToCart(item, value - item.amount);
+                                  }} /></span>
+                                </List.Item>
+                              )}
+                            />,
+                          </Modal>
+                        </div>
                       )}
                     </CartContext.Consumer>
                   </li>

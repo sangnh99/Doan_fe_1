@@ -6,7 +6,7 @@ import { food_category_vn } from '../../enum/food-category-vn';
 import foodService from '../../services/food-service';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
-import { InputNumber, Cascader, Button } from 'antd';
+import { InputNumber, Cascader, Button , message} from 'antd';
 import { ShoppingCartOutlined, DollarCircleOutlined } from '@ant-design/icons';
 import { Divider } from 'antd';
 import CommentBox from '../comment-box/comment-box';
@@ -33,15 +33,17 @@ export default function FoodDetail() {
         );
     }
 
+
+
     return (
         <div className="container">
-            <span style={{ color: "#C0C0C0", fontSize: 16 }}>Trang chủ </span> <span style={{ color: "#C0C0C0", fontSize: 10 }}>>> </span> <span style={{ color: "#C0C0C0", fontSize: 16 }}>{food_category_vn[foodDetail.food_type_id]}</span><span style={{ color: "#C0C0C0", fontSize: 10 }}> >> </span> <span style={{ color: "#187caa", fontSize: 16 }}>{foodDetail.name}</span>
+            <span style={{ color: "#C0C0C0", fontSize: 16 }}>Trang chủ </span> <span style={{ color: "#C0C0C0", fontSize: 10 }}>>> </span> <span style={{ color: "#C0C0C0", fontSize: 16 }}>{food_category_vn[foodDetail.food_type_id]}</span><span style={{ color: "#C0C0C0", fontSize: 10 }}> >> </span> <span style={{ color: "#187caa", fontSize: 16 }}>{foodDetail.food_name}</span>
             <div className="row">
                 <div className="col-xl-5">
                     <img className="card-image" src={foodDetail.avatar} alt="Logo" style={{ backgroundSize: "cover", width: 450, height: 300 }} />
                 </div>
                 <div className="col-xl-7">
-                    <h1 style={{ fontFamily: "Shadows Into Light", fontFamily: "cursive" }}>{foodDetail.name}</h1>
+                    <h1 style={{ fontFamily: "Shadows Into Light", fontFamily: "cursive" }}>{foodDetail.food_name}</h1>
                     <Link to={"/store/1"}><h3 style={{ color: "#187caa" }}>{foodDetail.store_name}</h3></Link>
                     <div >
                         <Rating name="read-only" value={foodDetail.summary_rating} precision={0.5} readOnly /><span style={{ fontSize: 20 }}> {foodDetail.summary_rating} ({foodDetail.number_of_vote})</span>
@@ -58,8 +60,8 @@ export default function FoodDetail() {
                     </div>
                     <div>
                         <CartContext.Consumer >
-                            {({ addToCart }) => (
-                                <Button onClick={() => addToCart(foodDetail, quantity)} type="primary" icon={<ShoppingCartOutlined style={{ fontSize: 20, marginBottom: 5 }} />} size={"large"} style={{ marginTop: 50 }}>
+                            {({ confirmAddToCart }) => (
+                                <Button onClick={() => {confirmAddToCart(foodDetail, quantity)}} type="primary" icon={<ShoppingCartOutlined style={{ fontSize: 20, marginBottom: 5 }} />} size={"large"} style={{ marginTop: 50 }}>
                                     Thêm vào giỏ hàng
                                 </Button>
                             )}
