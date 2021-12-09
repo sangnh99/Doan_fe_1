@@ -58,7 +58,7 @@ export default function UserInfo () {
     formData.append('filea', ima);
 
     userService.updateUserInfo(JSON.parse(localStorage.getItem("userInfo")).id, fullName, phone, address, ava);
-    ima !== null && imageService.postImage(formData);
+    ima !== null && imageService.postImageUserAvatar(formData, JSON.parse(localStorage.getItem("user")).id);
   }
 
   return (
@@ -122,7 +122,7 @@ export default function UserInfo () {
 
         </div>
         <div className="col-xl-5">
-          <img src={ava} style = {{height : 300}}></img>
+          <img src={ima != null ? ima : "https://abcgcabogados.com/wp-content/uploads/2019/11/sin-perfil.jpg"} style = {{height : 300}}></img>
         </div>
       </div>
     </Form>
