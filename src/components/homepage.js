@@ -40,6 +40,7 @@ export default function(){
     const [checked, setChecked] = useState(false);
     useEffect(() => {
       setChecked(true);
+      console.log("collapse begin ")
     }, []);
     return (
         <div>
@@ -50,7 +51,7 @@ export default function(){
         <Collapse
         in={checked}
         {...(checked ? { timeout: 1000 } : {})}
-        collapsedHeight={50}
+        collapsedSize={50}
       >
         <div className={classes.container}>
             <h1 className={classes.title}>

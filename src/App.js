@@ -30,21 +30,22 @@ import UserManager from "./components/user-profile/user-manager";
 import { CartProvider, CartContext } from './contexts/cart-context';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import userService from "./services/user.service";
+import SearchBar from "./components/search/search-bar";
 
-const data = [
-  {
-    title: 'Ant Design Title 1',
-  },
-  {
-    title: 'Ant Design Title 2',
-  },
-  {
-    title: 'Ant Design Title 3',
-  },
-  {
-    title: 'Ant Design Title 4',
-  },
-];
+// const data = [
+//   {
+//     title: 'Ant Design Title 1',
+//   },
+//   {
+//     title: 'Ant Design Title 2',
+//   },
+//   {
+//     title: 'Ant Design Title 3',
+//   },
+//   {
+//     title: 'Ant Design Title 4',
+//   },
+// ];
 
 class App extends Component {
   constructor(props) {
@@ -264,6 +265,7 @@ class App extends Component {
                 <Route path="/food/:id" component={FoodDetail} />
                 <Route path="/store/:id" component={Store} />
                 <Route path="/user" component={UserManager} />
+                <Route path="/search" component={SearchBar} />
               </Switch>
             </div>
 
