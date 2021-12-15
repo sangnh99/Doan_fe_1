@@ -8,7 +8,7 @@
 	border-style: solid;
 	transition: 200ms;
     width: 270px;
-	height: 370px;
+	height:370px;
 }
 
 .card:hover {
@@ -84,3 +84,7 @@
 	font-size: small;
 	margin-left: 10px;
 }
+
+/* ===================================================================================== */
+
+

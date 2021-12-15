@@ -48,11 +48,15 @@ const CommentBox = (props) => {
   return (
     <Comment
       actions={actions}
-      author={<span><a style={{color : "#595959", fontSize: 15}}>{props.name}</a> đã đánh giá {props.rating} sao !</span>}
+      author={
+      props.foodName == null ? <span><a style={{color : "#595959", fontSize: 15}}>{props.name}</a> đã đánh giá {props.rating} sao !</span>
+      :  <span><a style={{color : "#595959", fontSize: 15}}>{props.name}</a> đã đánh giá {props.rating} sao ! cho {props.foodName}</span>
+      }
       avatar={<Avatar src="https://joeschmoe.io/api/v1/random" alt="Han Solo" />}
       content={
         <p>
             {props.comment}
+            
         </p>
       }
       // datetime={

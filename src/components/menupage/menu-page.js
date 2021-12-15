@@ -11,6 +11,7 @@ import Card from '../card/card.js';
 import Divider from '@mui/material/Divider';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import MenuCategory from './menu-category.js';
+import HeroSession from '../decorate-component/hero-session.js';
 
 export default class TitlebarImageList extends Component {
   render() {
@@ -19,7 +20,7 @@ export default class TitlebarImageList extends Component {
       <div>
 
         <div className="container">
-
+          <HeroSession />
           <ImageList sx={{ width: 1100, height: 550 }}>
             <ImageListItem key="Subheader" cols={3}>
 

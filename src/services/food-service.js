@@ -14,5 +14,11 @@ class FoodService {
     updateVoteForFood(rating_id, vote){
         return axios.post(API_URL + "food/vote", { "rating_id" : rating_id, "vote" : vote}, { headers : authHeader()});
     }
+    getAllFoodOfStoreByFoodId(food_id){
+        return axios.get(API_URL + "food/" + food_id +"/store", { headers : authHeader()});
+    }
+    getAllByValueSearch(value_search, type_search, offset){
+        return axios.get(API_URL + "food/search", {params : { value_search : value_search, type_search : type_search, offset: offset}, headers : authHeader()});
+    }
 }
 export default new FoodService();

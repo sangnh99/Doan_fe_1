@@ -30,6 +30,9 @@ export class CartProvider extends Component {
                 const total = response.data.data.reduce((tota, item) => {
                     return parseInt(tota + item.amount);
                 }, 0);
+                // const totalPrice = response.data.data.reduce((tota, item) => {
+                //     return parseInt(tota + item.amount * item.price);
+                // }, 0);
                 this.setState({
                     ...this.state,
                     amount : total,
@@ -131,6 +134,7 @@ export class CartProvider extends Component {
             amount : this.state.amount,
             cartItems: this.state.cartItems,
             addToCart: this.addToCart.bind(this),
+            totalPrice: this.state.totalPrice,
             confirmAddToCart : this.confirmAddToCart.bind(this)
         }}>
             <div>
