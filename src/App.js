@@ -14,7 +14,7 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
-import { Menu, Dropdown, Button, Space, Badge, Modal, List, Avatar, InputNumber } from 'antd';
+import { Menu, Dropdown, Button, Space, Badge, Modal, List, Avatar, InputNumber} from 'antd';
 import { DownOutlined } from '@ant-design/icons';
 import ValidateRegister from "./components/validate-register";
 import "./cssConfig/footer.css";
@@ -128,6 +128,16 @@ class App extends Component {
                     Home
                   </Link>
                 </li>
+                <li className="nav-item">
+                  <Link to={"/menu"} className="nav-link">
+                    Menu
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link to={"/search"} className="nav-link">
+                    Tìm kiếm
+                  </Link>
+                </li>
 
                 <li className="nav-item" style={{ marginTop: "8px", marginLeft: "7px", fontSize: "16px" }}>
                   <Dropdown overlay={menu}>
@@ -177,7 +187,7 @@ class App extends Component {
                   </li>
                   <li className="nav-item">
                     <CartContext.Consumer>
-                      {({ amount, cartItems, addToCart }) => (
+                      {({ amount, cartItems, addToCart, totalPrice }) => (
                         <div>
                           <Badge count={amount} showZero="true">
                             {/* {
@@ -215,18 +225,27 @@ class App extends Component {
                               itemLayout="horizontal"
                               dataSource={cartItems}
                               renderItem={item => (
+                                <Badge.Ribbon text = {(item.amount * item.price).toLocaleString() + "đ"}  color={"Red"}>
+
                                 <List.Item>
                                   <List.Item.Meta
                                     avatar={<Avatar src={item.avatar} />}
                                     title={<a href="https://ant.design">{item.food_name}</a>}
                                     description={item.store_name}
-                                  />
-                                  <span>  Số lượng :  <InputNumber value={item.amount} onChange={(value) => {
+                                    />
+                                  <span style={{marginRight : 50}}>  Số lượng :  <InputNumber value={item.amount} onChange={(value) => {
                                     addToCart(item, value - item.amount);
                                   }} /></span>
                                 </List.Item>
+                                  </Badge.Ribbon>
                               )}
                             />,
+                            <div style={{marginLeft : 210}}>Tổng tiền : {
+                              cartItems.length != 0 && (cartItems.reduce((tota, item) => {
+                                return parseInt(tota + item.amount * item.price)
+                              }, 0)).toLocaleString() + "đ"
+                              }
+                            </div>
                           </Modal>
                         </div>
                       )}

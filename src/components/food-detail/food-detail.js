@@ -55,11 +55,11 @@ export default function FoodDetail() {
             <span style={{ color: "#C0C0C0", fontSize: 16 }}><Link to={"/home"}> Trang chủ </Link> </span> <span style={{ color: "#C0C0C0", fontSize: 10 }}>>> </span> <span style={{ color: "#C0C0C0", fontSize: 16 }}><Link to = {"/menu/" + food_category[foodDetail.food_type_id]} >{food_category_vn[foodDetail.food_type_id]} </Link></span><span style={{ color: "#C0C0C0", fontSize: 10 }}> >> </span> <span style={{ color: "#187caa", fontSize: 16 }}>{foodDetail.food_name}</span>
             <div className="row">
                 <div className="col-xl-5">
-                    <img className="card-image" src={foodDetail.avatar} alt="Logo" style={{ backgroundSize: "cover", width: 450, height: 300 }} />
+                    <img className="card-image" src={foodDetail.avatar != null ? foodDetail.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl85MbwvCl_l-ri_GAYI2iCr8F8cSze8Ho8A&usqp=CAU"} alt="" style={{ backgroundSize: "cover", width: 450, height: 300 }} />
                 </div>
                 <div className="col-xl-7">
                     <h1 style={{ fontFamily: "Shadows Into Light", fontFamily: "cursive" }}>{foodDetail.food_name}</h1>
-                    <Link to={"/store/1"}><h3 style={{ color: "#187caa" }}>{foodDetail.store_name}</h3></Link>
+                    <Link to={"/store/" + foodDetail.store_id}><h3 style={{ color: "#187caa" }}>{foodDetail.store_name}</h3></Link>
                     <div >
                         <Rating name="read-only" value={foodDetail.summary_rating} precision={0.5} readOnly /><span style={{ fontSize: 20 }}> {foodDetail.summary_rating} ({foodDetail.number_of_vote})</span>
                     </div>

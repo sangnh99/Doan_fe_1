@@ -96,7 +96,7 @@ export default function SearchBar() {
                                                         <Card
                                                             name={item.name}
                                                             store={item.store_name}
-                                                            ima={item.avatar}
+                                                            ima={item.avatar != null ? item.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl85MbwvCl_l-ri_GAYI2iCr8F8cSze8Ho8A&usqp=CAU"}
                                                             rating={item.rating}
                                                             price={item.price}
                                                         />
