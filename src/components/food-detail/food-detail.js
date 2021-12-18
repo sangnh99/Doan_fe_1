@@ -8,14 +8,20 @@ import foodService from '../../services/food-service';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 import { InputNumber, Cascader, Button, message, Tabs } from 'antd';
-import { ShoppingCartOutlined, DollarCircleOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, DollarCircleOutlined, HeartOutlined } from '@ant-design/icons';
 import { Divider } from 'antd';
 import CommentBox from '../comment-box/comment-box';
 import { CartContext } from '../../contexts/cart-context';
 import CardSmall from '../card/card-small';
 import Card from '../card/card';
+import userFavouriteService from '../../services/user.favourite.service';
 
 const { TabPane } = Tabs;
+
+const success = () => {
+    message.success('Đã thêm vào sách ưa thích !');
+};
+
 
 export default function FoodDetail() {
     const [id, setId] = useState(useParams().id);
@@ -23,6 +29,7 @@ export default function FoodDetail() {
     const [quantity, setQuantity] = useState(1);
     const [listComment, setListComment] = useState([]);
     const [foodOfStore, setFoodOfStore] = useState([]);
+    const [isFavourite, setIsFavourite] = useState(null);
 
     useEffect(() => {
         getFoodDetail(id);
@@ -39,7 +46,8 @@ export default function FoodDetail() {
         foodService.getFoodDetail(id).then(
             response => {
                 setFoodDetail(response.data.data);
-                setListComment(response.data.data.list_comments)
+                setListComment(response.data.data.list_comments);
+                setIsFavourite(response.data.data.is_favourite);
                 console.log(response.data.data)
             }
         );
@@ -49,10 +57,19 @@ export default function FoodDetail() {
         getFoodDetail(id);
     }
 
+    const addToFavourite = () => {
+        userFavouriteService.addToFavourite(JSON.parse(localStorage.getItem("user")).id, foodDetail.food_id, 2).then(
+            response => {
+                setIsFavourite(1);
+                success();
+            }
+        );
+    }
+
 
     return (
         <div className="container">
-            <span style={{ color: "#C0C0C0", fontSize: 16 }}><Link to={"/home"}> Trang chủ </Link> </span> <span style={{ color: "#C0C0C0", fontSize: 10 }}>>> </span> <span style={{ color: "#C0C0C0", fontSize: 16 }}><Link to = {"/menu/" + food_category[foodDetail.food_type_id]} >{food_category_vn[foodDetail.food_type_id]} </Link></span><span style={{ color: "#C0C0C0", fontSize: 10 }}> >> </span> <span style={{ color: "#187caa", fontSize: 16 }}>{foodDetail.food_name}</span>
+            <span style={{ color: "#C0C0C0", fontSize: 16 }}><Link to={"/home"}> Trang chủ </Link> </span> <span style={{ color: "#C0C0C0", fontSize: 10 }}>>> </span> <span style={{ color: "#C0C0C0", fontSize: 16 }}><Link to={"/menu/" + food_category[foodDetail.food_type_id]} >{food_category_vn[foodDetail.food_type_id]} </Link></span><span style={{ color: "#C0C0C0", fontSize: 10 }}> >> </span> <span style={{ color: "#187caa", fontSize: 16 }}>{foodDetail.food_name}</span>
             <div className="row">
                 <div className="col-xl-5">
                     <img className="card-image" src={foodDetail.avatar != null ? foodDetail.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl85MbwvCl_l-ri_GAYI2iCr8F8cSze8Ho8A&usqp=CAU"} alt="" style={{ backgroundSize: "cover", width: 450, height: 300 }} />
@@ -73,10 +90,18 @@ export default function FoodDetail() {
                             }}
                         />
                     </div>
+                    <Button disabled={isFavourite == 1 ? true : false}
+                            type="primary" icon={<HeartOutlined
+                            style={{ fontSize: 20, marginBottom: 5 }} />} size={"large"}
+                            style={{ backgroundColor: "#52c41a", marginTop: 20 }}
+                            onClick={addToFavourite}
+                            >
+                        {isFavourite == 1 ? "Đã thêm vào ưa thích" : "Thêm vào ưa thích"}
+                    </Button>
                     <div>
                         <CartContext.Consumer >
                             {({ confirmAddToCart }) => (
-                                <Button onClick={() => { confirmAddToCart(foodDetail, quantity) }} type="primary" icon={<ShoppingCartOutlined style={{ fontSize: 20, marginBottom: 5 }} />} size={"large"} style={{ marginTop: 50 }}>
+                                <Button onClick={() => { confirmAddToCart(foodDetail, quantity) }} type="primary" icon={<ShoppingCartOutlined style={{ fontSize: 20, marginBottom: 5 }} />} size={"large"} style={{ marginTop: 20 }}>
                                     Thêm vào giỏ hàng
                                 </Button>
                             )}

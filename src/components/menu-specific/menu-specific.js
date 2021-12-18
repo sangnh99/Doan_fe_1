@@ -226,6 +226,7 @@ export default function MenuSpecific(props) {
                                                     ima={item.avatar != null ? item.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl85MbwvCl_l-ri_GAYI2iCr8F8cSze8Ho8A&usqp=CAU"}
                                                     rating={item.rating}
                                                     price={item.price}
+                                                    discountPercent={item.discount_percent}
                                                 />
 
                                             </div>

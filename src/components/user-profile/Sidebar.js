@@ -64,7 +64,7 @@ export default function Sidebar() {
                 <Link to={"/user/info"}  style={{width : 180}}><NavItem navSize={navSize} icon={FiCalendar} title="Calendar"/></Link> */}
                 <Link to={"/user/info"}  style={{width : 180}}><NavItem navSize={navSize} icon={FiUser} title="Thông tin cá nhân" /></Link>
                 <Link to={"/user/password"}  style={{width : 180}}><NavItem navSize={navSize} icon={IoLockClosedOutline} title="Đổi mật khẩu" /></Link>
-                <NavItem navSize={navSize} icon={IoHeartOutline} title="Ưa thích"/>
+                <Link to={"/user/favourite"}  style={{width : 180}}><NavItem navSize={navSize} icon={IoHeartOutline} title="Ưa thích"/></Link>
                 <NavItem navSize={navSize} icon={FiBriefcase} title="Đơn hàng"/>
                 <NavItem navSize={navSize} icon={FiSettings} title="Cài đặt"/>
             </Flex>

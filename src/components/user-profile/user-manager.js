@@ -52,6 +52,7 @@ import { useState, useEffect } from "react";
 import { Switch, Route } from "react-router";
 import userService from "../../services/user.service";
 import Sidebar from "./Sidebar";
+import UserFavourite from "./user-favourite";
 import UserInfo from "./user-info.js";
 import UserPassword from "./user-password";
 
@@ -75,6 +76,7 @@ export default function UserManager(props) {
             <Switch>
                 <Route path="/user/info" component={UserInfo} />
                 <Route path="/user/password" component={UserPassword} />
+                <Route path="/user/favourite" component={UserFavourite} />
             </Switch>
         </div>
     </div>);

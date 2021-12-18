@@ -5,22 +5,41 @@ import { useParams } from 'react-router';
 import storeService from "../../services/store-service";
 import { Link } from 'react-router-dom';
 import CardSmall from "../card/card-small";
+import { Button, message} from 'antd';
+import userFavouriteService from "../../services/user.favourite.service";
+import { HeartOutlined } from '@ant-design/icons';
 
 const { TabPane } = Tabs;
+
+const success = () => {
+    message.success('Đã thêm vào sách ưa thích !');
+};
 
 export default function Store(props){
     const [storeId, setStoreId] = useState(useParams().id);
     const [storeDetail, setStoreDetail] = useState(0);
     const [listComment, setListComment] = useState([]);
+    const [isFavourite, setIsFavourite] = useState(null);
+
     useEffect(() => {
         storeService.getStoreDetail(storeId).then(
             response => {
                 setStoreDetail(response.data.data);
                 setListComment(response.data.data.list_comments);
+                setIsFavourite(response.data.data.is_favourite);
                 console.log(response.data.data);
             }
         );
     }, []);
+
+    const addToFavourite = () => {
+        userFavouriteService.addToFavourite(JSON.parse(localStorage.getItem("user")).id, storeDetail.id, 1).then(
+            response => {
+                setIsFavourite(1);
+                success();
+            }
+        );
+    }
 
     return(
         <div className="container">
@@ -33,6 +52,14 @@ export default function Store(props){
                     <h1 style={{ fontFamily: 'Nunito' }}>{storeDetail.name}</h1>
                     <h2>{storeDetail.address}</h2>  
                     <h4>Số điện thoại : {storeDetail.phone}</h4>
+                    <Button disabled={isFavourite == 1 ? true : false}
+                            type="primary" icon={<HeartOutlined
+                            style={{ fontSize: 20, marginBottom: 5 }} />} size={"large"}
+                            style={{ backgroundColor: "#52c41a", marginTop: 20 }}
+                            onClick={addToFavourite}
+                            >
+                        {isFavourite == 1 ? "Đã thêm vào ưa thích" : "Thêm vào ưa thích"}
+                    </Button>
                 </div>
             </div>
             <Divider />
