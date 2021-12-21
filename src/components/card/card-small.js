@@ -20,7 +20,13 @@ export default function CardSmall(props) {
         </div>
       </div>
       <img className="card-image" src={props.ima} alt="Logo" style={{ height: 160, width: 215 }} />
-      <div className="card-text">{props.price} đ</div>
+      {
+        props.discountPercent == null ? (<div className="card-text">{parseInt(props.price).toLocaleString()} đ</div>)
+          : (
+            // <div className="card-text"><span style={{textDecoration: "line-through"}}>{props.price} đ</span> -> {parseInt(props.price)/100*(100-props.discountPercent)} đ</div>
+            <div className="card-text" style={{ color: "#d4380d" }}>{parseInt(props.price).toLocaleString()} đ</div>
+          )
+      }
       <div className="card-like-bar">
         <i className="far fa-star"></i> <b>{props.rating}</b>
         {/* <div className="rating-text">

@@ -17,7 +17,7 @@ import {
     FiSettings,
 } from 'react-icons/fi';
 
-import { IoPawOutline, IoLockClosedOutline, IoHeartOutline } from 'react-icons/io5';
+import { IoPawOutline, IoLockClosedOutline, IoHeartOutline, IoLocationOutline } from 'react-icons/io5';
 import NavItem from './NavItem';
 
 import { Link } from 'react-router-dom';
@@ -66,7 +66,7 @@ export default function Sidebar() {
                 <Link to={"/user/password"}  style={{width : 180}}><NavItem navSize={navSize} icon={IoLockClosedOutline} title="Đổi mật khẩu" /></Link>
                 <Link to={"/user/favourite"}  style={{width : 180}}><NavItem navSize={navSize} icon={IoHeartOutline} title="Ưa thích"/></Link>
                 <NavItem navSize={navSize} icon={FiBriefcase} title="Đơn hàng"/>
-                <NavItem navSize={navSize} icon={FiSettings} title="Cài đặt"/>
+                <Link to={"/user/delivery-address"}  style={{width : 180}}><NavItem navSize={navSize} icon={IoLocationOutline} title="Địa chỉ giao hàng"/></Link>
             </Flex>
 
             <Flex

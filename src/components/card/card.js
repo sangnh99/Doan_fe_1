@@ -25,7 +25,7 @@ export default function Card(props) {
         props.discountPercent == null ? (<div className="card-text">{parseInt(props.price).toLocaleString()} đ</div>)
         : (
           // <div className="card-text"><span style={{textDecoration: "line-through"}}>{props.price} đ</span> -> {parseInt(props.price)/100*(100-props.discountPercent)} đ</div>
-          <div className="card-text" style={{color : "#d4380d"}}>{parseInt(parseInt(props.price)/100*(100-props.discountPercent)).toLocaleString()} đ</div>
+          <div className="card-text" style={{color : "#d4380d"}}>{parseInt(props.price).toLocaleString()} đ</div>
         )
       }
       <div className="card-like-bar">

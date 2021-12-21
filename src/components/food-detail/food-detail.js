@@ -75,7 +75,7 @@ export default function FoodDetail() {
                     <img className="card-image" src={foodDetail.avatar != null ? foodDetail.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl85MbwvCl_l-ri_GAYI2iCr8F8cSze8Ho8A&usqp=CAU"} alt="" style={{ backgroundSize: "cover", width: 450, height: 300 }} />
                 </div>
                 <div className="col-xl-7">
-                    <h1 style={{ fontFamily: "Shadows Into Light", fontFamily: "cursive" }}>{foodDetail.food_name}</h1>
+                    <h1 style={{ fontFamily: "Nunito" }}>{foodDetail.food_name}</h1>
                     <Link to={"/store/" + foodDetail.store_id}><h3 style={{ color: "#187caa" }}>{foodDetail.store_name}</h3></Link>
                     <div >
                         <Rating name="read-only" value={foodDetail.summary_rating} precision={0.5} readOnly /><span style={{ fontSize: 20 }}> {foodDetail.summary_rating} ({foodDetail.number_of_vote})</span>
@@ -89,6 +89,12 @@ export default function FoodDetail() {
                                 setQuantity(event);
                             }}
                         />
+                    </div>
+                    <div style={{marginTop : 5}}>
+                        <h2 style={{color : "#d4380d"}}>{foodDetail.price}đ</h2>
+                        {
+                            foodDetail.discount_percent != null && (<span><span style={{textDecoration : "line-through"}}>{foodDetail.original_price}đ </span><span>&nbsp;-{foodDetail.discount_percent}%</span></span>)
+                        }
                     </div>
                     <Button disabled={isFavourite == 1 ? true : false}
                             type="primary" icon={<HeartOutlined
@@ -136,6 +142,7 @@ export default function FoodDetail() {
                                                                     ima={item.avatar}
                                                                     rating={item.rating}
                                                                     price={item.price}
+                                                                    discountPercent = {item.discount_percent}
                                                                 />
                                                             </div>
                                                         </Link>

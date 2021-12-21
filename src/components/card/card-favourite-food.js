@@ -80,7 +80,7 @@ export default function CardFavouriteStore(props) {
                         {
                             props.discountPercent != null && (
                                 <div class="ribbon ribbon-top-right">
-                                <span>Giảm {props.discountPercent}%</span>
+                                    <span>Giảm {props.discountPercent}%</span>
                                 </div>
                             )
                         }
@@ -101,8 +101,12 @@ export default function CardFavouriteStore(props) {
                     </Link>
                     <div>
                         {
-                            parseInt(props.price).toLocaleString()
-                        } đ
+                            props.discountPercent == null ? (<div className="card-text">{parseInt(props.price).toLocaleString()} đ</div>)
+                                : (
+                                    // <div className="card-text"><span style={{textDecoration: "line-through"}}>{props.price} đ</span> -> {parseInt(props.price)/100*(100-props.discountPercent)} đ</div>
+                                    <div className="card-text" style={{ color: "#d4380d" }}>{parseInt(props.price).toLocaleString()} đ</div>
+                                )
+                        }
                     </div>
                     <div>
                         <Button style={{ marginTop: 10, marginLeft: 30, color: "#fa541c" }} onClick={() => { showModal(props.item, 2) }}><span style={{ fontFamily: "Nunito" }}>Xóa khỏi ưa thích</span></Button>

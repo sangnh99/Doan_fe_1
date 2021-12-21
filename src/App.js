@@ -31,6 +31,7 @@ import { CartProvider, CartContext } from './contexts/cart-context';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import userService from "./services/user.service";
 import SearchBar from "./components/search/search-bar";
+import TestGoogleMapAutoComplete from "./components/test-ggmap/test-ggmap-autocomplete";
 
 // const data = [
 //   {
@@ -285,6 +286,7 @@ class App extends Component {
                 <Route path="/store/:id" component={Store} />
                 <Route path="/user" component={UserManager} />
                 <Route path="/search" component={SearchBar} />
+                {/* <Route path="/test" component={TestGoogleMapAutoComplete} /> */}
               </Switch>
             </div>
 

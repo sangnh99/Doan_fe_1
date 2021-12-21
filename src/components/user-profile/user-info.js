@@ -316,7 +316,7 @@ export default function UserInfo () {
   useEffect(() => {
     userService.getUserInfo(JSON.parse(localStorage.getItem("user")).id).then(response => {
       setData(response.data.data);
-      console.log(response.data.data);
+      console.log("address",response.data.data.address);
       form.setFieldsValue({
         user: {
           name : response.data.data.full_name,
@@ -418,7 +418,7 @@ export default function UserInfo () {
         <Input disabled={!canUpdate}/>
       </Form.Item>
       <Form.Item name={['user', 'address']} label={(<span>Địa chỉ &emsp;&emsp;&ensp;</span>)}>
-        <Input.TextArea disabled={!canUpdate}/>&emsp;
+        <Input.TextArea disabled={!canUpdate}/>
       </Form.Item>
       {/* <Form.Item label={(<span>Ảnh đại diện</span>)}>
             <Input type="file" accept="image/*" onChange={fileSeletedHandler} />
