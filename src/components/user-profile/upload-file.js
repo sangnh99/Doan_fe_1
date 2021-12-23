@@ -107,9 +107,9 @@ export const RestUpload = ({
                         showUploadList={false}
                     >
                         {image && (
-                            <img src={image} style={{backgroundSize : "cover", width : "100%", height : 270}}/>
+                            <img src={image} style={{ backgroundSize: "cover", width: "100%", height: 270 }} />
                         )}
-                               {uploadButton}             
+                        {uploadButton}
                     </Dragger>
 
                 </div>

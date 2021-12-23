@@ -76,7 +76,7 @@ export default function FoodDetail() {
                 </div>
                 <div className="col-xl-7">
                     <h1 style={{ fontFamily: "Nunito" }}>{foodDetail.food_name}</h1>
-                    <Link to={"/store/" + foodDetail.store_id}><h3 style={{ color: "#187caa" }}>{foodDetail.store_name}</h3></Link>
+                    <Link to={"/store/" + foodDetail.store_id}><h3 style={{ color: "#187caa" }}>{foodDetail.store_name} || {foodDetail.distance} km</h3></Link>
                     <div >
                         <Rating name="read-only" value={foodDetail.summary_rating} precision={0.5} readOnly /><span style={{ fontSize: 20 }}> {foodDetail.summary_rating} ({foodDetail.number_of_vote})</span>
                     </div>
@@ -143,6 +143,7 @@ export default function FoodDetail() {
                                                                     rating={item.rating}
                                                                     price={item.price}
                                                                     discountPercent = {item.discount_percent}
+                                                                    distance = {item.distance}
                                                                 />
                                                             </div>
                                                         </Link>

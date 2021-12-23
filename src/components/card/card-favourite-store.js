@@ -91,16 +91,16 @@ export default function CardFavouriteStore(props) {
 
                             <div className="card-title-group">
                                 <h5 className="card-title">{props.name}</h5>
-                                <div className="card-store">{props.store}</div>
+                                <div className="card-store">{props.distance} km</div>
                             </div>
                         </div>
-                        <img className="card-image" src={props.ima} alt="Logo" style={{ height: 170, width: 225 }} />
-                        <div>
+                        <img className="card-image" src={props.ima} alt="Logo" style={{ height: 160, width: 225 }} />
+                        <div style={{height: 40}}>
                             {props.address}
                         </div>
                     </Link>
                     <div>
-                        <Button style={{ marginTop: 20, marginLeft: 30, color: "#fa541c" }} onClick={() => { showModal(props.item, 1) }}><span style={{ fontFamily: "Nunito" }}>Xóa khỏi ưa thích</span></Button>
+                        <Button style={{ marginTop: 5, marginLeft: 30, color: "#fa541c" }} onClick={() => { showModal(props.item, 1) }}><span style={{ fontFamily: "Nunito" }}>Xóa khỏi ưa thích</span></Button>
                     </div>
                     {/* <div className="rating-text">
           <b>{props.rating}</b> kişi bu tarifi beğendi.

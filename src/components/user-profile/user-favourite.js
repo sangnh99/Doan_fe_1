@@ -46,6 +46,7 @@ export default function UserFavourite(props) {
                                                                 store={item.store_name}
                                                                 ima={item.avatar}
                                                                 address={item.address}
+                                                                distance={item.distance}
                                                             />
                                                         </div>
 
@@ -75,6 +76,7 @@ export default function UserFavourite(props) {
                                                                 rating={item.rating}
                                                                 price={item.price}
                                                                 discountPercent = {item.discount_percent}
+                                                                distance={item.distance}
                                                             />
                                                         </div>
                                                     )

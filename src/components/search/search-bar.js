@@ -73,6 +73,7 @@ export default function SearchBar() {
                                                             ima={item.avatar}
                                                             rating={item.rating}
                                                             price={item.price}
+                                                            distance={item.distance}
                                                         />
 
                                                     </div>
@@ -101,6 +102,7 @@ export default function SearchBar() {
                                                             price={item.price}
                                                             discountPercent = {item.discount_percent}
                                                             originalPrice = {item.original_price}
+                                                            distance={item.distance}
                                                         />
 
                                                     </div>

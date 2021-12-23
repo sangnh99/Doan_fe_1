@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Search, GpsFixed } from "@mui/icons-material"
 import './google-map-autocomplete.css'
 import ShowMap1 from './show-map1';
@@ -80,7 +80,7 @@ export default function TestGoogleMapAutoComplete() {
   // init gmap script
   const initMapScript = () => {
     // if script already loaded
-    if(window.google) {
+    if (window.google) {
       return Promise.resolve();
     }
     const src = `${mapApiJs}?key=${apiKey}&libraries=places&v=weekly`;
@@ -112,20 +112,20 @@ export default function TestGoogleMapAutoComplete() {
   }
 
 
-  const reverseGeocode = ({ latitude: lat, longitude: lng}) => {
+  const reverseGeocode = ({ latitude: lat, longitude: lng }) => {
     const url = `${geocodeJson}?key=${apiKey}&latlng=${lat},${lng}`;
     searchInput.current.value = "Getting your location...";
     fetch(url)
-        .then(response => response.json())
-        .then(location => {
-          const place = location.results[0];
-          console.log(place);
-          setLat(place.geometry.location.lat);
-          setLng(place.geometry.location.lng);
-          const _address = extractAddress(place);
-          setAddress(_address);
-          searchInput.current.value = _address.plain();
-        })
+      .then(response => response.json())
+      .then(location => {
+        const place = location.results[0];
+        console.log(place);
+        setLat(place.geometry.location.lat);
+        setLng(place.geometry.location.lng);
+        const _address = extractAddress(place);
+        setAddress(_address);
+        searchInput.current.value = _address.plain();
+      })
   }
 
 
@@ -153,22 +153,15 @@ export default function TestGoogleMapAutoComplete() {
       <div className="search-container">
         <div className="search">
           <span><Search /></span>
-          <input ref={searchInput} type="text" placeholder="Tìm địa điểm của bạn...."/>
+          <input ref={searchInput} type="text" placeholder="Tìm địa điểm của bạn...." />
           <button onClick={findMyLocation}><GpsFixed /></button>
         </div>
 
-        {/* <div className="address">
-          <p>City: <span>{address.city}</span></p>
-          <p>State: <span>{address.state}</span></p>
-          <p>Zip: <span>{address.zip}</span></p>
-          <p>Country: <span>{address.country}</span></p>
-        </div> */}
-
       </div>
       {
-          lat != null && (
-            <ShowMap1 lat={lat} lng={lng} />
-          )
+        lat != null && (
+          <ShowMap1 lat={lat} lng={lng} />
+        )
       }
     </div>
   )
