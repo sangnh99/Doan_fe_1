@@ -85,6 +85,7 @@ export default function Store(props){
                                                                     ima={item.avatar}
                                                                     rating={item.rating}
                                                                     price={item.price}
+                                                                    distance={item.distance}
                                                                 />
                                                             </div>
                                                         </Link>
