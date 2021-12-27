@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
-//onst API_URL = 'http://localhost:8866/';
-const API_URL = "https://sang-delivery.herokuapp.com/";
+const API_URL = 'http://localhost:8866/';
+//const API_URL = "https://sang-delivery.herokuapp.com/";
 
 class UserService {
   getPublicContent() {
@@ -33,12 +33,16 @@ class UserService {
     return axios.post(API_URL + 'user/cart/add', {"user_app_id" : user_app_id, "food_id" : food_id, "amount" : amount}, {headers : authHeader()})
   }
 
+  addToCartWithNote(user_app_id, food_id, amount, note){
+    return axios.post(API_URL + 'user/cart/add-with-note', {"user_app_id" : user_app_id, "food_id" : food_id, "amount" : amount, "note" : note}, {headers : authHeader()})
+  }
+
   getCurrentCart(id){
     return axios.get(API_URL + 'user/cart', {params : {id : id},  headers: authHeader() });
   }
 
-  deleteAndAddToCart(user_app_id, food_id, amount){
-    return axios.post(API_URL + 'user/cart/delete-and-add', {"user_app_id" : user_app_id, "food_id" : food_id, "amount" : amount}, {headers : authHeader()})
+  deleteAndAddToCart(user_app_id, food_id, amount, note){
+    return axios.post(API_URL + 'user/cart/delete-and-add', {"user_app_id" : user_app_id, "food_id" : food_id, "amount" : amount, "note" : note}, {headers : authHeader()})
   }
 
   getUserBoard() {

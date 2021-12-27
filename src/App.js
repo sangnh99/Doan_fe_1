@@ -33,6 +33,7 @@ import userService from "./services/user.service";
 import SearchBar from "./components/search/search-bar";
 import TestGoogleMapAutoComplete from "./components/test-ggmap/test-ggmap-autocomplete";
 import AddAddressNewUser from "./components/test-ggmap/add-address-new-user";
+import PaymentPage from "./components/payment/payment-page";
 
 // const data = [
 //   {
@@ -232,7 +233,7 @@ class App extends Component {
                                 <List.Item>
                                   <List.Item.Meta
                                     avatar={<Avatar src={item.avatar} />}
-                                    title={<a href="https://ant.design">{item.food_name}</a>}
+                                    title={<a href="https://ant.design">{item.food_name}  {item.note != "" ? " - " + item.note : " "}</a>}
                                     description={item.store_name}
                                     />
                                   <span style={{marginRight : 50}}>  Số lượng :  <InputNumber value={item.amount} onChange={(value) => {
@@ -288,6 +289,7 @@ class App extends Component {
                 <Route path="/user" component={UserManager} />
                 <Route path="/search" component={SearchBar} />
                 <Route path="/add-address-new-user" component={AddAddressNewUser} />
+                <Route path="/payment" component={PaymentPage} />
               </Switch>
             </div>
 
