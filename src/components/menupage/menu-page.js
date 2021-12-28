@@ -55,30 +55,6 @@ export default class TitlebarImageList extends Component {
           </ImageList>
           <Divider />
           <NearMeList />
-          <div className="row">
-
-            <Card
-              ima="https://www.thaistreet.com.vn/wp-content/uploads/2021/04/Food.jpg"
-              liked={isLiked}
-              likeCount={like}
-            />
-                        <Card
-              ima="https://www.thaistreet.com.vn/wp-content/uploads/2021/04/Food.jpg"
-              liked={isLiked}
-              likeCount={like}
-            />
-                        <Card
-              ima="https://www.thaistreet.com.vn/wp-content/uploads/2021/04/Food.jpg"
-              liked={isLiked}
-              likeCount={like}
-            />
-                        <Card
-              ima="https://www.thaistreet.com.vn/wp-content/uploads/2021/04/Food.jpg"
-              liked={isLiked}
-              likeCount={like}
-            />
- 
-          </div>
 
         </div>
 

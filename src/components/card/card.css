@@ -7,10 +7,11 @@
 	border-color: tomato;
 	border-style: solid;
 	transition: 200ms;
-    width: 270px;
+    width: 265px;
 	height:370px;
 	--ribbon-span-bg: #d4380d;
 	--ribbon-border: #d4380d;
+	visibility: unset !important;
 }
 
 .card:hover {
