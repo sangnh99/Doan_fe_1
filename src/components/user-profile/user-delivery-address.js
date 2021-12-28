@@ -9,6 +9,7 @@ import { Search, GpsFixed } from "@mui/icons-material"
 import '../test-ggmap/google-map-autocomplete.css';
 import ShowMap1 from '../test-ggmap/show-map1';
 import TestGoogleMapAutoComplete from "../test-ggmap/test-ggmap-autocomplete";
+import useUnload from "../reload/use-reload";
 
 const { Panel } = Collapse;
 
@@ -81,6 +82,7 @@ const extractAddress = (place) => {
 
 
 export default function UserDeliveryAddress(props) {
+    const val = useRef();
     const searchInput = useRef(null);
     const [address, setAddress] = useState({});
     const [lat, setLat] = useState(null);
@@ -100,10 +102,16 @@ export default function UserDeliveryAddress(props) {
 
     // ==================================
 
-
+    useEffect(
+      () => {
+        val.current = props;
+      },
+      [props]
+    );
   
 
     useEffect(() => {
+
         userAddressService.getListAddressOfUser(JSON.parse(localStorage.getItem("user")).id).then(
             response => {
                 setData(response.data.data);
@@ -112,6 +120,10 @@ export default function UserDeliveryAddress(props) {
                 }
             }
         );
+
+        return () => {
+          window.location.reload();
+        };
     }, []);
 
 
@@ -287,6 +299,10 @@ export default function UserDeliveryAddress(props) {
       const handleCancelAdd = () => {
         setIsVisibleAddModal(false);
       };
+
+      window.onbeforeunload = function () {
+        window.location.reload();
+      }
 
     return (
         <div className="container" style={{ marginTop: 35 }}>

@@ -7,6 +7,9 @@ class UserAddressService {
   getListAddressOfUser(user_app_id) {
     return axios.get(API_URL + 'address/' + user_app_id + "/get-address", { headers: authHeader() });
   }
+  getActiveAddress(user_app_id){
+    return axios.get(API_URL + 'address/' + user_app_id + "/get-active-address", { headers: authHeader() });
+  }
   setActiveAddress(user_app_id, address_id) {
     return axios.post(API_URL + 'address/' + user_app_id + "/active-address", { "address_id": address_id }, { headers: authHeader() });
   }

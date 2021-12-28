@@ -12,8 +12,10 @@ import Divider from '@mui/material/Divider';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import MenuCategory from './menu-category.js';
 import HeroSession from '../decorate-component/hero-session.js';
+import NearMeList from './nearme-list.js';
 
 export default class TitlebarImageList extends Component {
+
   render() {
 
     return (
@@ -52,36 +54,30 @@ export default class TitlebarImageList extends Component {
             ))}
           </ImageList>
           <Divider />
+          <NearMeList />
           <div className="row">
 
             <Card
-              author={recipeAuthor}
-              title={recipeItem.title}
-              date={recipeItem.date}
-              description={recipeItem.description}
               ima="https://www.thaistreet.com.vn/wp-content/uploads/2021/04/Food.jpg"
               liked={isLiked}
               likeCount={like}
             />
-            <Card
-              author={recipeAuthor}
-              title={recipeItem.title}
-              date={recipeItem.date}
-              description={recipeItem.description}
-              ima="https://asianfoodnetwork.com/content/dam/afn/global/en/homepage/new-content-carousel/AFN_Food_Made_Good_HK_Awards_good_to_go_award_mobile.jpg.transform/desktop-img/img.jpg"
+                        <Card
+              ima="https://www.thaistreet.com.vn/wp-content/uploads/2021/04/Food.jpg"
               liked={isLiked}
               likeCount={like}
             />
-
-            <Card
-              author={recipeAuthor}
-              title={recipeItem.title}
-              date={recipeItem.date}
-              description={recipeItem.description}
-              ima="https://asianfoodnetwork.com/content/dam/afn/global/en/homepage/new-content-carousel/AFN_Food_Made_Good_HK_Awards_good_to_go_award_mobile.jpg.transform/desktop-img/img.jpg"
+                        <Card
+              ima="https://www.thaistreet.com.vn/wp-content/uploads/2021/04/Food.jpg"
               liked={isLiked}
               likeCount={like}
             />
+                        <Card
+              ima="https://www.thaistreet.com.vn/wp-content/uploads/2021/04/Food.jpg"
+              liked={isLiked}
+              likeCount={like}
+            />
+ 
           </div>
 
         </div>
