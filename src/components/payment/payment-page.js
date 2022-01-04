@@ -1,12 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
 import './payment.css';
-import { Divider, InputNumber, Badge, Button, Modal } from 'antd';
-import { Link } from 'react-router-dom';
+import { Divider, InputNumber, Badge, Button, Modal, message } from 'antd';
+import { Link, useHistory } from 'react-router-dom';
 import { CartContext } from '../../contexts/cart-context';
 import Loading from '../loading/loading-component';
 import userAddressService from "../../services/user.address.service";
 import { PlusOutlined } from '@ant-design/icons';
 import { width } from '@mui/system';
+import paypalService from '../../services/paypal.service';
+import userService from '../../services/user.service';
+
+
+const error = () => {
+    message.error('Đã có lỗi xảy ra, vui lòng thử lại sau giây lát !');
+};
 
 export default function PaymentPage(props) {
     const [activeAddress, setActiveAddress] = useState(null);
@@ -14,6 +21,10 @@ export default function PaymentPage(props) {
     const [totalPrice, setTotalPrice] = useState(0);
     const [cartItemsCopy, setCartItemsCopy] = useState([]);
     const [visibleConfirm, setVisibleConfirm] = useState(false);
+    const [visiblePaypal, setVisiblePaypal] = useState(false);
+    const [paypalUrl, setPaypalUrl] = useState("");
+
+    const val = useRef();
 
     useEffect(() => {
         userAddressService.getActiveAddress(JSON.parse(localStorage.getItem("user")).id).then(
@@ -21,23 +32,72 @@ export default function PaymentPage(props) {
                 setActiveAddress(response.data.data);
             }
         )
+        return () => {
+            window.location.reload();
+          };
     }, []);
 
-    const handlePayment = (listCart) => {
-        setCartItemsCopy(listCart);
-        const total = listCart.reduce((tota, item) => {
-            return parseInt(tota + item.amount * item.price)
-        }, parseInt(listCart[0].distance * 7) * 1000);
-        setTotalPrice(total);
-    }
+    useEffect(
+        () => {
+          val.current = props;
+        },
+        [props]
+      );
+
+    const history = useHistory();
+
+    // const handlePayment = (listCart) => {
+    //     setCartItemsCopy(listCart);
+    //     const total = listCart.reduce((tota, item) => {
+    //         return parseInt(tota + item.amount * item.price)
+    //     }, parseInt(listCart[0].distance * 7) * 1000);
+    //     setTotalPrice(total);
+    // }
 
     const handleOk = () => {
-        setVisibleConfirm(false);
+        userService.paymentDirect(JSON.parse(localStorage.getItem("user")).id, totalPrice).then(
+            response => {
+                if ("success" == response.data.data){
+                    setVisibleConfirm(false);
+                    message.info("Đơn hàng sẽ được giao tới bạn rong vài phút nữa, vui lòng thanh toán khi nhận hàng !");
+                    setTimeout(() => {history.push("/user/transaction");}, 1000);
+                } else {
+                    setVisibleConfirm(false);
+                    message.error("Đã có lỗi xảy ra trong quá trình thanh toán, vui lòng thử lại sau ít phút nữa !");
+                }
+            }
+        )
     }
 
     const handleCancel = () => {
         setVisibleConfirm(false);
     }
+
+    const handlePaypalPayment = (listCart) => {
+        setCartItemsCopy(listCart);
+        const total = listCart.reduce((tota, item) => {
+            return parseInt(tota + item.amount * item.price)
+        }, parseInt(listCart[0].distance * 7) * 1000);
+        setTotalPrice(total);
+
+        // get link 
+        paypalService.getLinkPaypal(total).then(
+            response => {
+                setPaypalUrl(response.data.data);
+                setVisiblePaypal(true);
+            }
+        );
+    }
+
+    const handlePaymentDirect = (listCart) => {
+        setCartItemsCopy(listCart);
+        const total = listCart.reduce((tota, item) => {
+            return parseInt(tota + item.amount * item.price)
+        }, parseInt(listCart[0].distance * 7) * 1000);
+        setTotalPrice(total);
+        setVisibleConfirm(true);
+    }
+
 
     return (
         <CartContext.Consumer>
@@ -47,10 +107,25 @@ export default function PaymentPage(props) {
                     activeAddress != null ? (
 
                         <div className="container">
-                            <a href='/user/favourite' >hello</a>
 
-                            <Modal title="Tạo giỏ hàng mới ?" visible={visibleConfirm} onOk={handleOk} onCancel={handleCancel}>
+                            <Modal title="Xác nhân thanh toán khi nhận hàng " visible={visibleConfirm} onOk={handleOk} onCancel={handleCancel}
+                            >
                                 <p style={{ fontFamily: "Nunito" }}>Bạn có muốn xác nhận thanh toán đơn hàng trị giá  {totalPrice.toLocaleString()}đ ?</p>
+                            </Modal>
+
+                            <Modal title="Xác nhận thanh toán bằng paypal" visible={visiblePaypal} onCancel={() => {setVisiblePaypal(false)}}
+                                footer={[
+                                    <div>
+                                    <Button onClick={() => {setVisiblePaypal(false)}}>
+                                        Hủy
+                                    </Button>
+                                    <a href={paypalUrl}> <Button>
+                                        Xác nhận
+                                    </Button></a>
+                                    </div>
+                                ]}
+                            >
+                                <p style={{ fontFamily: "Nunito" }}>Bạn có muốn xác nhận thanh toán đơn hàng trị giá  {totalPrice.toLocaleString()}đ qua Paypal ?</p>
                             </Modal>
 
                             <p style={{ fontSize: 35, marginTop: 30 }}>Trang thanh toán</p>
@@ -181,18 +256,16 @@ export default function PaymentPage(props) {
 
                                             </p>
 
-                                            <Button size='large' style={{ width: "100%", backgroundColor: "#52c41a", color: "white", marginBottom : 12 }} onClick={
+                                            <Button size='large' style={{ width: "100%", backgroundColor: "#52c41a", color: "white", marginBottom: 12 }} onClick={
                                                 () => {
-                                                    handlePayment(cartItems);
-                                                    setVisibleConfirm(true);
+                                                    handlePaymentDirect(cartItems);
                                                 }
 
                                             }>Thanh toán khi nhận hàng</Button>
 
                                             <Button size='large' style={{ width: "100%", backgroundColor: "#fa541c", color: "white" }} onClick={
                                                 () => {
-                                                    handlePayment(cartItems);
-                                                    setVisibleConfirm(true);
+                                                    handlePaypalPayment(cartItems);
                                                 }
 
                                             }>Thanh toán bằng paypal</Button>

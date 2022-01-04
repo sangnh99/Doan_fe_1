@@ -144,9 +144,9 @@ export default function FoodDetail() {
                                         )}
 
                                     </CartContext.Consumer>
-                                    <Button type="primary" icon={<DollarCircleOutlined style={{ fontSize: 20, marginBottom: 5 }} />} size={"large"} style={{ backgroundColor: "#52c41a" }}>
+                                    <Link to={"/payment"}> <Button type="primary" icon={<DollarCircleOutlined style={{ fontSize: 20, marginBottom: 5 }} />} size={"large"} style={{ backgroundColor: "#52c41a" }}>
                                         Mua hàng
-                                    </Button>
+                                    </Button></Link>
                                 </div>
                             </div>
                         </div>

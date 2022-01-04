@@ -24,11 +24,7 @@ import { Link } from 'react-router-dom';
 
 export default function Sidebar() {
     const [navSize, changeNavSize] = useState("large");
-    const [isActive, setIsActive] = useState(0);
-
-    const changeItem = (value) => {
-        setIsActive(value)
-    }
+    const [activeRow, setActiveRow] = useState(0);
     return (
         <Flex
             pos="sticky"
@@ -62,11 +58,11 @@ export default function Sidebar() {
                 /> */}
                 {/* <NavItem style={{border : "none"}} navSize={navSize} icon={FiHome} title="Dashboard" description="This is the description for the dashboard." active/>
                 <Link to={"/user/info"}  style={{width : 180}}><NavItem navSize={navSize} icon={FiCalendar} title="Calendar"/></Link> */}
-                <Link to={"/user/info"}  style={{width : 180}}><NavItem navSize={navSize} icon={FiUser} title="Thông tin cá nhân" /></Link>
-                <Link to={"/user/password"}  style={{width : 180}}><NavItem navSize={navSize} icon={IoLockClosedOutline} title="Đổi mật khẩu" /></Link>
-                <Link to={"/user/favourite"}  style={{width : 180}}><NavItem navSize={navSize} icon={IoHeartOutline} title="Ưa thích"/></Link>
-                <NavItem navSize={navSize} icon={FiBriefcase} title="Đơn hàng"/>
-                <Link to={"/user/delivery-address"}  style={{width : 180}}><NavItem navSize={navSize} icon={IoLocationOutline} title="Địa chỉ giao hàng"/></Link>
+                <Link to={"/user/info"}  style={{width : 185}} onClick={() => {setActiveRow(1)}}>{ activeRow == 1 ? <NavItem navSize={navSize} icon={FiUser} title="Thông tin cá nhân" active/> : <NavItem navSize={navSize} icon={FiUser} title="Thông tin cá nhân" />}</Link>
+                <Link to={"/user/password"}  style={{width : 180}} onClick={() => {setActiveRow(2)}}>{ activeRow == 2 ? <NavItem navSize={navSize} icon={IoLockClosedOutline} title="Đổi mật khẩu" active/> : <NavItem navSize={navSize} icon={IoLockClosedOutline} title="Đổi mật khẩu" />}</Link>
+                <Link to={"/user/favourite"}  style={{width : 180}} onClick={() => {setActiveRow(3)}}>{activeRow == 3 ? <NavItem navSize={navSize} icon={IoHeartOutline} title="Ưa thích" active /> : <NavItem navSize={navSize} icon={IoHeartOutline} title="Ưa thích"/>}</Link>
+                <Link to={"/user/transaction"}  style={{width : 180}} onClick={() => {setActiveRow(4)}}>{activeRow == 4 ? <NavItem navSize={navSize} icon={FiBriefcase} title="Đơn hàng" active /> :  <NavItem navSize={navSize} icon={FiBriefcase} title="Đơn hàng"/>}</Link>
+                <Link to={"/user/delivery-address"}  style={{width : 180}} onClick={() => {setActiveRow(5)}}>{activeRow == 5 ? <NavItem navSize={navSize} icon={IoLocationOutline} title="Địa chỉ giao hàng" active /> : <NavItem navSize={navSize} icon={IoLocationOutline} title="Địa chỉ giao hàng"/>}</Link>
             </Flex>
 
             <Flex

@@ -59,12 +59,12 @@ export default function UserPassword(props) {
 
 
         <Form.Item
-          label="Password"
+          label="Mật khẩu mới"
           name="password"
           rules={[
             {
               required: true,
-              message: "Please input your password!"
+              message: "Vui lòng nhập mật khẩu mới!"
             }
           ]}
         >
@@ -74,12 +74,12 @@ export default function UserPassword(props) {
         </Form.Item>
 
         <Form.Item
-          label="Confirm Password"
+          label="Xác nhận mật khẩu mới"
           name="confirmPassword"
           rules={[
             {
               required: true,
-              message: "Please input your confirm password!"
+              message: "Vui lòng xác nhận mật khẩu mới !"
             }
           ]}
         >

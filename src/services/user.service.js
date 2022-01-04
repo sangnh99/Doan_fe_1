@@ -1,7 +1,7 @@
 import axios from 'axios';
 import authHeader from './auth-header';
-const API_URL = 'http://localhost:8866/';
-//const API_URL = "https://sang-delivery.herokuapp.com/";
+//const API_URL = 'http://localhost:8866/';
+const API_URL = "https://sang-delivery.herokuapp.com/";
 
 class UserService {
   getPublicContent() {
@@ -43,6 +43,14 @@ class UserService {
 
   deleteAndAddToCart(user_app_id, food_id, amount, note){
     return axios.post(API_URL + 'user/cart/delete-and-add', {"user_app_id" : user_app_id, "food_id" : food_id, "amount" : amount, "note" : note}, {headers : authHeader()})
+  }
+
+  getUserTransaction(user_app_id){
+    return axios.get(API_URL + 'user/transaction', {params : {user_app_id : user_app_id},  headers: authHeader() });
+  }
+
+  paymentDirect(user_app_id, total){
+    return axios.post(API_URL + 'user/payment/direct', {"user_app_id" : user_app_id, "total" : total}, {headers : authHeader()});
   }
 
   getUserBoard() {

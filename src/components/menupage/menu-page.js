@@ -13,6 +13,8 @@ import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import MenuCategory from './menu-category.js';
 import HeroSession from '../decorate-component/hero-session.js';
 import NearMeList from './nearme-list.js';
+import './menu-page.css';
+import ArrowBlock from '../popular-component/arrow-block.js';
 
 export default class TitlebarImageList extends Component {
 
@@ -28,15 +30,15 @@ export default class TitlebarImageList extends Component {
 
             </ImageListItem>
             {itemData.map((item) => (
+                // <div className="food-type">
               <Link to={{ pathname: `/menu/${item.path}`}} style={{ borderRadius: "20px" }}>
-
-                <ImageListItem key={item.img} style={{ width: 350, height: 250 }}>
+                <ImageListItem key={item.img} style={{ width: 340, height: 250 }} className='food-type'>
                   <img
                     src={`${item.img}?w=248&fit=crop&auto=format`}
                     srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                     alt={item.title}
                     loading="lazy"
-                    style={{ width: 350, height: 250 }}
+                    style={{ width: 340, height: 250 }}
                   />
                   <ImageListItemBar
                     title={item.title}
@@ -48,20 +50,17 @@ export default class TitlebarImageList extends Component {
 
                       </IconButton>
                     }
-                  />
+                    />
                 </ImageListItem>
               </Link>
+                    // </div>
             ))}
           </ImageList>
           <Divider />
+          <ArrowBlock title={"Quán ăn gần tôi"} />
           <NearMeList />
 
         </div>
-
-        <div>
-            {/* <Link to={"menu/category/rice"}> <div>Day la router</div></Link> */}
-          </div>
-
 
       </div>
     );
