@@ -14,8 +14,8 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
-import { Menu, Dropdown, Button, Space, Badge, Modal, List, Avatar, InputNumber} from 'antd';
-import { DownOutlined } from '@ant-design/icons';
+import { Menu, Dropdown, Button, Space, Badge, Modal, List, Avatar, InputNumber } from 'antd';
+import { DownOutlined, DollarCircleOutlined } from '@ant-design/icons';
 import ValidateRegister from "./components/validate-register";
 import "./cssConfig/footer.css";
 import Footer from "./components/footer";
@@ -31,6 +31,11 @@ import { CartProvider, CartContext } from './contexts/cart-context';
 import { ShoppingCartOutlined } from '@ant-design/icons';
 import userService from "./services/user.service";
 import SearchBar from "./components/search/search-bar";
+import TestGoogleMapAutoComplete from "./components/test-ggmap/test-ggmap-autocomplete";
+import AddAddressNewUser from "./components/test-ggmap/add-address-new-user";
+import PaymentPage from "./components/payment/payment-page";
+import PaypalPage from "./components/paypal/paypal-page";
+import HandlePaypal from "./components/paypal/handle-paypal";
 
 // const data = [
 //   {
@@ -57,7 +62,7 @@ class App extends Component {
       showAdminBoard: false,
       currentUser: undefined,
       visible: false,
-      confirmModalVisible : false
+      confirmModalVisible: false
     };
   }
 
@@ -196,27 +201,55 @@ class App extends Component {
                             <ShoppingCartOutlined style={{ fontSize: "30px" }} onClick={() => this.setState(
                               {
                                 ...this.state,
-                                visible : !this.state.visible
+                                visible: !this.state.visible
                               }
-                            )}/>
+                            )} />
                           </Badge>
                           <Modal
                             title="Giỏ hàng của bạn"
                             centered
                             visible={this.state.visible}
-                            onOk={() => {this.setState(
-                              {
-                                ...this.state,
-                                visible : false
-                              }
-                            )
 
-                            }
-                          }
+                            footer={[
+                              <div>
+                                <Button onClick={() => {
+                                  this.setState(
+                                    {
+                                      ...this.state,
+                                      visible: false
+                                    }
+                                  );
+
+                                }} style={{ marginRight: 7 }}>
+                                  Đóng
+                                </Button>
+                                <Link to={"/payment"}> <Button type="primary" icon={<DollarCircleOutlined style={{ fontSize: 20, marginBottom: 5 }} />} style={{ backgroundColor: "#52c41a" }} onClick={() => {
+                                  this.setState(
+                                    {
+                                      ...this.state,
+                                      visible: false
+                                    }
+                                  );
+
+                                }}>
+                                  Mua hàng
+                                </Button></Link>
+                              </div>
+                            ]}
+
+                            //   onOk={() => {this.setState(
+                            //     {
+                            //       ...this.state,
+                            //       visible : false
+                            //     }
+                            //   )
+
+                            //   }
+                            // }
                             onCancel={() => this.setState(
                               {
                                 ...this.state,
-                                visible : false
+                                visible: false
                               }
                             )}
                             width={600}
@@ -225,26 +258,26 @@ class App extends Component {
                               itemLayout="horizontal"
                               dataSource={cartItems}
                               renderItem={item => (
-                                <Badge.Ribbon text = {(item.amount * item.price).toLocaleString() + "đ"}  color={"Red"}>
+                                <Badge.Ribbon text={(item.amount * item.price).toLocaleString() + "đ"} color={"Red"}>
 
-                                <List.Item>
-                                  <List.Item.Meta
-                                    avatar={<Avatar src={item.avatar} />}
-                                    title={<a href="https://ant.design">{item.food_name}</a>}
-                                    description={item.store_name}
+                                  <List.Item>
+                                    <List.Item.Meta
+                                      avatar={<Avatar src={item.avatar} />}
+                                      title={<a href="https://ant.design">{item.food_name}  {item.note != "" ? " - " + item.note : " "}</a>}
+                                      description={item.store_name}
                                     />
-                                  <span style={{marginRight : 50}}>  Số lượng :  <InputNumber value={item.amount} onChange={(value) => {
-                                    addToCart(item, value - item.amount);
-                                  }} /></span>
-                                </List.Item>
-                                  </Badge.Ribbon>
+                                    <span style={{ marginRight: 50 }}>  Số lượng :  <InputNumber value={item.amount} onChange={(value) => {
+                                      addToCart(item, value - item.amount);
+                                    }} /></span>
+                                  </List.Item>
+                                </Badge.Ribbon>
                               )}
                             />,
-                            <div style={{marginLeft : 210}}>Tổng tiền : {
+                            <div style={{ marginLeft: 210 }}>Tổng tiền : {
                               cartItems.length != 0 && (cartItems.reduce((tota, item) => {
                                 return parseInt(tota + item.amount * item.price)
                               }, 0)).toLocaleString() + "đ"
-                              }
+                            }
                             </div>
                           </Modal>
                         </div>
@@ -285,6 +318,10 @@ class App extends Component {
                 <Route path="/store/:id" component={Store} />
                 <Route path="/user" component={UserManager} />
                 <Route path="/search" component={SearchBar} />
+                <Route path="/add-address-new-user" component={AddAddressNewUser} />
+                <Route path="/payment" component={PaymentPage} />
+                <Route path="/paypal" component={PaypalPage} />
+                <Route path="/handle-paypal" component={HandlePaypal} />
               </Switch>
             </div>
 

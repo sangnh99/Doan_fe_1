@@ -20,126 +20,6 @@ import { useState, useEffect } from 'react';
 import { food_category } from '../../enum/food-category';
 import FoodDetail from '../food-detail/food-detail';
 
-
-
-// export default class MenuSpecific extends Component {
-//     constructor(props) {
-//         super(props);
-//         console.log("constructor");
-//         this.state = {
-//             type: this.props.type,
-//             sortType : "ASC",
-//             sortValue: "price",
-//             offset: 0,
-//             listItems: []
-//         }
-
-//         console.log("state" + JSON.stringify(this.state));
-
-//         this.onChangePage = this.onChangePage.bind(this);
-
-//         this.getListFood = this.getListFood.bind(this);
-//         this.getListFoodStart = this.getListFoodStart.bind(this);
-//     }
-
-
-
-//     componentDidMount() {
-//         console.log("didmount");
-//         this.getListFoodStart();
-//     }
-
-//     async getListFoodStart(offset = 0) {
-//         console.log("start");
-//         const response = await FoodService.getFoodByFoodType(this.props.type, 0, 9, "price", "ASC");
-//         console.log(response.data.data);
-
-
-
-//         this.setState({
-//             ...this.state,
-//             listItems: response.data.data
-//         });
-//     }
-
-//     componentDidUpdate(pp, ps) {
-//         console.log("update");
-//         console.log(this.state.sortValue);
-//         if (this.state.offset != ps.offset || this.state.sortType != this.props.sortType || this.state.sortValue != this.props.sortValue) {
-//             this.getListFood(this.state.offset);
-//             console.log('before', pp);
-//             console.log('after', ps);
-//         }
-//     }
-
-//     onChangePage(page) {
-//         console.log(page);
-//         this.setState({
-//             ...this.state,
-//             offset: page
-//         });
-
-//     };
-
-
-//     async getListFood(offset = 0) {
-//         const response = await FoodService.getFoodByFoodType(this.props.type, offset, 9, this.props.sortValue, this.props.sortType);
-//         console.log(response.data.data);
-
-
-
-//         this.setState({
-//             ...this.state,
-//             type: this.props.type,
-//             sortType : this.props.sortType,
-//             sortValue: this.props.sortValue,
-//             listItems: response.data.data
-//         });
-//     }
-
-//     render() {
-//         console.log("render");
-//         return (
-//             <div className="container">
-//                 <div className="row">
-//                     <div className="col-xl-3" style={{ display: "inline" }}>{this.props.type}</div>
-//                     <div className="col-xl-9">
-//                         {
-//                             JSON.stringify(this.state)
-//                         }
-//                         <div className="row">
-//                             {
-//                                 this.state.listItems.map(item => {
-//                                     return (
-//                                         <div className="col-xl-4">
-//                                             <Link to={"/menu/" + item.id} >
-//                                                 <Card
-//                                                     name={item.name}
-//                                                     store={item.store_name}
-//                                                     ima={item.avatar}
-//                                                     rating={item.rating}
-//                                                     price={item.price}
-//                                                 />
-
-//                                             </Link>
-//                                         </div>
-//                                     );
-//                                 })
-//                             }
-//                             <Pagination current={this.state.offset} onChange={this.onChangePage} total={50} style={{ marginBottom: 50, display: "flex", justifyContent: "center", alignItems: "center" }} />;
-//                         </div>
-//                     </div>
-//                 </div>
-//             </div>
-//         );
-//     }
-// }
-
-
-// =======================================================================================
-
-// 
-
 // =======================================================================================
 export default function MenuSpecific(props) {
     const [type, setType] = useState(props.type);
@@ -226,6 +106,8 @@ export default function MenuSpecific(props) {
                                                     ima={item.avatar != null ? item.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl85MbwvCl_l-ri_GAYI2iCr8F8cSze8Ho8A&usqp=CAU"}
                                                     rating={item.rating}
                                                     price={item.price}
+                                                    discountPercent={item.discount_percent}
+                                                    distance={item.distance}
                                                 />
 
                                             </div>

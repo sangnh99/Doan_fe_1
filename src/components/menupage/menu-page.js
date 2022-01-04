@@ -12,8 +12,12 @@ import Divider from '@mui/material/Divider';
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom';
 import MenuCategory from './menu-category.js';
 import HeroSession from '../decorate-component/hero-session.js';
+import NearMeList from './nearme-list.js';
+import './menu-page.css';
+import ArrowBlock from '../popular-component/arrow-block.js';
 
 export default class TitlebarImageList extends Component {
+
   render() {
 
     return (
@@ -26,15 +30,15 @@ export default class TitlebarImageList extends Component {
 
             </ImageListItem>
             {itemData.map((item) => (
+                // <div className="food-type">
               <Link to={{ pathname: `/menu/${item.path}`}} style={{ borderRadius: "20px" }}>
-
-                <ImageListItem key={item.img} style={{ width: 350, height: 250 }}>
+                <ImageListItem key={item.img} style={{ width: 340, height: 250 }} className='food-type'>
                   <img
                     src={`${item.img}?w=248&fit=crop&auto=format`}
                     srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
                     alt={item.title}
                     loading="lazy"
-                    style={{ width: 350, height: 250 }}
+                    style={{ width: 340, height: 250 }}
                   />
                   <ImageListItemBar
                     title={item.title}
@@ -46,50 +50,17 @@ export default class TitlebarImageList extends Component {
 
                       </IconButton>
                     }
-                  />
+                    />
                 </ImageListItem>
               </Link>
+                    // </div>
             ))}
           </ImageList>
           <Divider />
-          <div className="row">
-
-            <Card
-              author={recipeAuthor}
-              title={recipeItem.title}
-              date={recipeItem.date}
-              description={recipeItem.description}
-              ima="https://www.thaistreet.com.vn/wp-content/uploads/2021/04/Food.jpg"
-              liked={isLiked}
-              likeCount={like}
-            />
-            <Card
-              author={recipeAuthor}
-              title={recipeItem.title}
-              date={recipeItem.date}
-              description={recipeItem.description}
-              ima="https://asianfoodnetwork.com/content/dam/afn/global/en/homepage/new-content-carousel/AFN_Food_Made_Good_HK_Awards_good_to_go_award_mobile.jpg.transform/desktop-img/img.jpg"
-              liked={isLiked}
-              likeCount={like}
-            />
-
-            <Card
-              author={recipeAuthor}
-              title={recipeItem.title}
-              date={recipeItem.date}
-              description={recipeItem.description}
-              ima="https://asianfoodnetwork.com/content/dam/afn/global/en/homepage/new-content-carousel/AFN_Food_Made_Good_HK_Awards_good_to_go_award_mobile.jpg.transform/desktop-img/img.jpg"
-              liked={isLiked}
-              likeCount={like}
-            />
-          </div>
+          <ArrowBlock title={"Quán ăn gần tôi"} />
+          <NearMeList />
 
         </div>
-
-        <div>
-            {/* <Link to={"menu/category/rice"}> <div>Day la router</div></Link> */}
-          </div>
-
 
       </div>
     );

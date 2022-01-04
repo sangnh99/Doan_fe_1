@@ -6,7 +6,7 @@ const API_URL = "https://sang-delivery.herokuapp.com/";
 
 class ImageService{
     async postImageUserAvatar(fd, id){
-        return axios.post(API_URL + "image/upload-user-avatar/" + id, fd, { headers : authHeader()})
+        return await axios.post(API_URL + "image/upload-user-avatar/" + id, fd, { headers : authHeader()})
     };
     //     postImage(fd){
     //     httpCommon.post("/image/upload", fd)

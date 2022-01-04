@@ -33,12 +33,24 @@ class UserService {
     return axios.post(API_URL + 'user/cart/add', {"user_app_id" : user_app_id, "food_id" : food_id, "amount" : amount}, {headers : authHeader()})
   }
 
+  addToCartWithNote(user_app_id, food_id, amount, note){
+    return axios.post(API_URL + 'user/cart/add-with-note', {"user_app_id" : user_app_id, "food_id" : food_id, "amount" : amount, "note" : note}, {headers : authHeader()})
+  }
+
   getCurrentCart(id){
     return axios.get(API_URL + 'user/cart', {params : {id : id},  headers: authHeader() });
   }
 
-  deleteAndAddToCart(user_app_id, food_id, amount){
-    return axios.post(API_URL + 'user/cart/delete-and-add', {"user_app_id" : user_app_id, "food_id" : food_id, "amount" : amount}, {headers : authHeader()})
+  deleteAndAddToCart(user_app_id, food_id, amount, note){
+    return axios.post(API_URL + 'user/cart/delete-and-add', {"user_app_id" : user_app_id, "food_id" : food_id, "amount" : amount, "note" : note}, {headers : authHeader()})
+  }
+
+  getUserTransaction(user_app_id){
+    return axios.get(API_URL + 'user/transaction', {params : {user_app_id : user_app_id},  headers: authHeader() });
+  }
+
+  paymentDirect(user_app_id, total){
+    return axios.post(API_URL + 'user/payment/direct', {"user_app_id" : user_app_id, "total" : total}, {headers : authHeader()});
   }
 
   getUserBoard() {

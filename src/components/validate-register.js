@@ -27,7 +27,7 @@ export default class ValidateRegister extends Component {
                     message: response.data.message,
                     isSuccess: true
                 });
-                setTimeout(() => {                this.props.history.push("/login");
+                setTimeout(() => {this.props.history.push("/add-address-new-user");
                 window.location.reload();}, 1500);
 
             },
