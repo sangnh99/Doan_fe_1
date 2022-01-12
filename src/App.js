@@ -123,9 +123,9 @@ class App extends Component {
 
         <div>
           <Router>
-            <nav className="navbar navbar-expand navbar-light" style={{ backgroundColor: "#e3f2fd" }}>
+            <nav className="navbar navbar-expand navbar-light" style={{ backgroundColor: "#87e8de" }}>
               <Link to={"/"} className="navbar-brand">
-                bezKoder
+                SangOrder
               </Link>
               <div className="navbar-nav mr-auto">
                 <li className="nav-item">
@@ -142,14 +142,6 @@ class App extends Component {
                   <Link to={"/search"} className="nav-link">
                     Tìm kiếm
                   </Link>
-                </li>
-
-                <li className="nav-item" style={{ marginTop: "8px", marginLeft: "7px", fontSize: "16px" }}>
-                  <Dropdown overlay={menu}>
-                    <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                      Hover me <DownOutlined />
-                    </a>
-                  </Dropdown>
                 </li>
 
 

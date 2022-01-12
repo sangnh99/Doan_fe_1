@@ -371,7 +371,7 @@ export default function UserDeliveryAddress(props) {
                 {
                     lat != null && (
                         <div>
-                        <ShowMap1 lat={lat} lng={lng}/>
+                        <ShowMap1 lat={lat} lng={lng} height={"500px"} width={"700px"} marginLeft={"190px"} marginBottom={"30px"}/>
                         <span style={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom : 50}}> 
                         <Button style={{width : 700}} type="primary" onClick={confirmAdd}>Xác nhận</Button>
                         </span>
