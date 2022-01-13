@@ -112,9 +112,11 @@ class App extends Component {
 
           <div>
             <Helmet>
-              <meta property="og:site_name" content="This is site name" />
-              <meta property="og:image" content="./static/logo512.png" />
-              <meta property="og:image:secure_url" content="./static/logo512.png" />
+              <meta property="og:title" content="SangOrder Web" />
+              <meta property="og:site_name" content="http://sang-delivery-fe.herokuapp.com" />
+              <meta property="og:description" content="Web đặc thức ăn nhanh chóng, tiện lợi" />
+              {/* <meta property="og:image" content="https://bloganh.net/wp-content/uploads/2021/03/chup-anh-dep-anh-sang-min.jpg" /> */}
+              <meta property="og:image:secure_url" content="https://bloganh.net/wp-content/uploads/2021/03/chup-anh-dep-anh-sang-min.jpg" />
             </Helmet>
             <Router>
 
