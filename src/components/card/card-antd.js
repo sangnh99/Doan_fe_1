@@ -14,7 +14,7 @@ export default function CardAntd(props) {
                         <Link to={"/food/" + props.item.id} >
                             <Card
                                 hoverable
-                                style={{ width: 255 }}
+                                style={{ width: "100%" }}
                                 cover={<img alt="example" src={props.item.avatar} style={{ height: 255 }} />}
                             >
                                 <Meta title={props.item.name} description={<div>
@@ -53,7 +53,7 @@ export default function CardAntd(props) {
                     <Link to={"/food/" + props.item.id} >
                         <Card
                             hoverable
-                            style={{ width: 255 }}
+                            style={{ width: "100%" }}
                             cover={<img alt="example" src={props.item.avatar} style={{ height: 255 }} />}
                         >
                             <Meta title={props.item.name} description={<div>

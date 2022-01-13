@@ -85,10 +85,7 @@ export default function FoodDetail() {
                         <span style={{ color: "#C0C0C0", fontSize: 16 }}><Link to={"/home"}> Trang chủ </Link> </span> <span style={{ color: "#C0C0C0", fontSize: 10 }}>>> </span> <span style={{ color: "#C0C0C0", fontSize: 16 }}><Link to={"/menu/" + food_category[foodDetail.food_type_id]} >{food_category_vn[foodDetail.food_type_id]} </Link></span><span style={{ color: "#C0C0C0", fontSize: 10 }}> >> </span> <span style={{ color: "#187caa", fontSize: 16 }}>{foodDetail.food_name}</span>
 
                         <div className="row">
-                            {/* <div className="col-xl-5">
-                                <img className="card-image" src={foodDetail.avatar != null ? foodDetail.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl85MbwvCl_l-ri_GAYI2iCr8F8cSze8Ho8A&usqp=CAU"} alt="" />
-                            </div> */}
-                            <div className="col-xl-5">
+                            <div className="col-xl-5" style={{paddingRight : 0}}>
                                 <div className="ava-card">
                                 {
                                     foodDetail.discount_percent != null && (
@@ -97,7 +94,7 @@ export default function FoodDetail() {
                                         </div>
                                     )
                                 }
-                                <img src={foodDetail.avatar != null ? foodDetail.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl85MbwvCl_l-ri_GAYI2iCr8F8cSze8Ho8A&usqp=CAU"} alt="" style={{backgroundSize : "cover", width : 462, height : 300}}/>
+                                <img src={foodDetail.avatar != null ? foodDetail.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl85MbwvCl_l-ri_GAYI2iCr8F8cSze8Ho8A&usqp=CAU"} alt="" style={{backgroundSize : "cover", width : "100%", height : 300}}/>
                                 </div>
                             </div>
                             <div className="col-xl-7" style={{paddingLeft: 30}}>

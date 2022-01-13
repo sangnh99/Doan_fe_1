@@ -129,7 +129,7 @@ export default function Store(props) {
                             {
                                 storeDetail.list_must_try_food.map(item =>  {
                                     return (
-                                        <div className="col-xl-3">
+                                        <div className="col-xl-3" style={{paddingRight : 0}}>
                                             <CardAntd item={item}/>
                                       </div>
                                     )
