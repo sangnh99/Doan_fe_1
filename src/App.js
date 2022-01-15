@@ -39,6 +39,7 @@ import HandlePaypal from "./components/paypal/handle-paypal";
 import SharePost from "./components/facebook/share-post";
 // import { Helmet, HelmetProvider } from 'react-helmet-async';
 import logo512 from "./static/logo512.png";
+import HelmetMetaData from "./components/facebook/helmet-metadata";
 
 class App extends Component {
   constructor(props) {
@@ -108,7 +109,7 @@ class App extends Component {
 
     return (
         <CartProvider>
-
+          <HelmetMetaData image={"https://chupanhmonan.com/wp-content/uploads/2018/04/Vanessa-Rees-food-photography-background.jpg"}/>
           <div>
             <Router>
 
