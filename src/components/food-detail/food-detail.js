@@ -7,7 +7,7 @@ import { food_category } from '../../enum/food-category';
 import foodService from '../../services/food-service';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
-import { InputNumber, Cascader, Button, message, Tabs, Input, Rate } from 'antd';
+import { InputNumber, Cascader, Button, message, Tabs, Input, Rate, Tooltip } from 'antd';
 import { ShoppingCartOutlined, DollarCircleOutlined, HeartOutlined } from '@ant-design/icons';
 import { Divider } from 'antd';
 import CommentBox from '../comment-box/comment-box';
@@ -20,6 +20,10 @@ import Loading from '../loading/loading-component';
 import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
+import FavoriteIcon from '@mui/icons-material/Favorite';
 import "./food-detail.css";
 
 const { TabPane } = Tabs;
@@ -85,19 +89,31 @@ export default function FoodDetail() {
                         <span style={{ color: "#C0C0C0", fontSize: 16 }}><Link to={"/home"}> Trang chủ </Link> </span> <span style={{ color: "#C0C0C0", fontSize: 10 }}>>> </span> <span style={{ color: "#C0C0C0", fontSize: 16 }}><Link to={"/menu/" + food_category[foodDetail.food_type_id]} >{food_category_vn[foodDetail.food_type_id]} </Link></span><span style={{ color: "#C0C0C0", fontSize: 10 }}> >> </span> <span style={{ color: "#187caa", fontSize: 16 }}>{foodDetail.food_name}</span>
 
                         <div className="row">
-                            <div className="col-xl-5" style={{paddingRight : 0}}>
+                            <div className="col-xl-5" style={{ paddingRight: 0, paddingLeft: 0, border: "1px solid gray" }}>
                                 <div className="ava-card">
-                                {
-                                    foodDetail.discount_percent != null && (
-                                        <div class="ribbon ribbon-top-right">
-                                            <span>Giảm {foodDetail.discount_percent}%</span>
-                                        </div>
-                                    )
-                                }
-                                <img src={foodDetail.avatar != null ? foodDetail.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl85MbwvCl_l-ri_GAYI2iCr8F8cSze8Ho8A&usqp=CAU"} alt="" style={{backgroundSize : "cover", width : "100%", height : 300}}/>
+                                    {
+                                        foodDetail.discount_percent != null && (
+                                            <div class="ribbon ribbon-top-right">
+                                                <span>Giảm {foodDetail.discount_percent}%</span>
+                                            </div>
+                                        )
+                                    }
+                                    <img src={foodDetail.avatar != null ? foodDetail.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl85MbwvCl_l-ri_GAYI2iCr8F8cSze8Ho8A&usqp=CAU"} alt="" style={{ backgroundSize: "cover", width: "100%", height: 312 }} />
+                                </div>
+                                <div className='row' style={{ marginTop: 20 }}>
+                                    {
+                                        isFavourite != 1 ? (
+                                            <Tooltip title="Thêm vào ưa thích" color={"red"}><div className='col-xl-4' style={{ paddingLeft: 0, paddingRight: 0 }}><FavoriteBorderIcon style={{ color: "red", marginLeft: 75 }} onClick={addToFavourite} /><span style={{ float: "right" }}>|</span></div></Tooltip>
+                                        ) : (
+                                            <Tooltip title="Đã thêm vào ưa thích !" color={"red"}><div className='col-xl-4' style={{ paddingLeft: 0, paddingRight: 0 }}><FavoriteIcon style={{ color: "red", marginLeft: 75 }} /><span style={{ float: "right" }}>|</span></div></Tooltip>
+                                        )
+                                    }
+
+                                    <Tooltip title="Chia sẻ lên facebook" color={"red"}><div className='col-xl-4' style={{ paddingLeft: 0, paddingRight: 0 }}><FacebookIcon style={{ color: "blue", marginLeft: 75 }} /><span style={{ float: "right" }}>|</span></div></Tooltip>
+                                    <Tooltip title="Tùy chọn" color={"red"}><div className='col-xl-4' style={{ paddingLeft: 0, paddingRight: 0 }}><SettingsOutlinedIcon style={{ color: "orange", marginLeft: 75 }} /></div></Tooltip>
                                 </div>
                             </div>
-                            <div className="col-xl-7" style={{paddingLeft: 30}}>
+                            <div className="col-xl-7" style={{ paddingLeft: 30 }}>
                                 <h1 style={{ fontFamily: "Nunito" }}>{foodDetail.food_name}</h1>
                                 <Link to={"/store/" + foodDetail.store_id}><p style={{ fontFamily: 'Nunito', fontSize: 16 }}>{foodDetail.store_name} -  &nbsp; {foodDetail.distance}km</p></Link>
                                 <p><RoomOutlinedIcon style={{ fontSize: 20, color: "orange" }} /> {foodDetail.store_address.substring(0, foodDetail.store_address.length - 16)}</p>
@@ -145,35 +161,35 @@ export default function FoodDetail() {
                                     {
                                         foodDetail.discount_percent != null ? (
                                             <span style={{ fontFamily: "Nunito", fontSize: 22, paddingTop: 4 }}><LocalOfferOutlinedIcon style={{ color: "red" }} />
-                                            {foodDetail.price}đ <i class='fas fa-long-arrow-alt-left' style={{ fontSize: 24 }}></i>&ensp;
-                                            <span style={{ textDecoration: "line-through" }}> {foodDetail.original_price}đ </span>
-                                            <span><img src="https://www.publicdomainpictures.net/pictures/120000/t2/red-sale-label-1425210027dkz.jpg" style={{ width: 46, height: 36, paddingBottom: 6 }}></img></span></span>
+                                                {foodDetail.price}đ <i class='fas fa-long-arrow-alt-left' style={{ fontSize: 24 }}></i>&ensp;
+                                                <span style={{ textDecoration: "line-through" }}> {foodDetail.original_price}đ </span>
+                                                <span><img src="https://www.publicdomainpictures.net/pictures/120000/t2/red-sale-label-1425210027dkz.jpg" style={{ width: 46, height: 36, paddingBottom: 6 }}></img></span></span>
                                         ) : (
                                             <span style={{ fontFamily: "Nunito", fontSize: 22, paddingTop: 4 }}><LocalOfferOutlinedIcon style={{ color: "red" }} />
-                                            {foodDetail.price}đ</span>
+                                                {foodDetail.price}đ</span>
                                         )
                                     }
                                 </div>
-                                <Button disabled={isFavourite == 1 ? true : false}
-                                    type="primary" icon={<HeartOutlined
-                                        style={{ fontSize: 20, marginBottom: 5 }} />} size={"large"}
-                                    style={{ backgroundColor: "#52c41a", marginTop: 20 }}
-                                    onClick={addToFavourite}
-                                >
-                                    {isFavourite == 1 ? "Đã thêm vào ưa thích" : "Thêm vào ưa thích"}
-                                </Button>
                                 <div>
                                     <CartContext.Consumer >
-                                        {({ confirmAddToCart }) => (
-                                            <Button onClick={() => { confirmAddToCart(foodDetail, quantity, note) }} type="primary" icon={<ShoppingCartOutlined style={{ fontSize: 20, marginBottom: 5 }} />} size={"large"} style={{ marginTop: 20 }}>
-                                                Thêm vào giỏ hàng
-                                            </Button>
+                                        {({ confirmAddToCart, confirmAddToCartAndBuy }) => (
+                                            <div>
+                                                <div>
+                                                    <Button onClick={() => { confirmAddToCart(foodDetail, quantity, note) }} type="primary" icon={<ShoppingCartOutlined style={{ fontSize: 20, marginBottom: 5 }} />} size={"large"} style={{ marginTop: 20, width : 250 }}>
+                                                        Thêm vào giỏ hàng
+                                                    </Button>
+
+                                                </div>
+                                                <div style={{marginTop : 20}}>
+                                                    <Button type="primary"  onClick={() => { confirmAddToCartAndBuy(foodDetail, quantity, note, history) }} icon={<DollarCircleOutlined style={{ fontSize: 20, marginBottom: 5 }} />} size={"large"} style={{ backgroundColor: "#d0011b", width : 250 }}>
+                                                        Mua hàng
+                                                    </Button>
+                                                </div>
+                                            </div>
                                         )}
 
                                     </CartContext.Consumer>
-                                    <Link to={"/payment"}> <Button type="primary" icon={<DollarCircleOutlined style={{ fontSize: 20, marginBottom: 5 }} />} size={"large"} style={{ backgroundColor: "#52c41a" }}>
-                                        Mua hàng
-                                    </Button></Link>
+
                                 </div>
                             </div>
                         </div>
