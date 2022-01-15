@@ -35,7 +35,7 @@ export default function HelmetMetaData(props) {
             <meta property="og:quote" content={quote} />
             <meta property="og:hashtag" content={hashtag} />
             <meta property="og:image" content={image} />
-            <meta property="og:image:secure_url" content="https://mir-s3-cdn-cf.behance.net/project_modules/fs/924bb463959443.5ac2a3000fe85.jpg" />
+            <meta property="og:image:secure_url" content="https://dotobjyajpegd.cloudfront.net/photo/5d120439849a5e0be8811bb3" />
             <meta property="og:image:type" content="image/jpeg" />
             <meta property="og:image:width" content="400" />
             <meta property="og:image:height" content="300" />
