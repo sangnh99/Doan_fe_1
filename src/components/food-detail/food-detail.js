@@ -21,10 +21,11 @@ import RoomOutlinedIcon from '@mui/icons-material/RoomOutlined';
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FacebookIcon from '@mui/icons-material/Facebook';
+
 import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import "./food-detail.css";
+import SharePost from '../facebook/share-post';
 
 const { TabPane } = Tabs;
 
@@ -109,7 +110,12 @@ export default function FoodDetail() {
                                         )
                                     }
 
-                                    <Tooltip title="Chia sẻ lên facebook" color={"red"}><div className='col-xl-4' style={{ paddingLeft: 0, paddingRight: 0 }}><FacebookIcon style={{ color: "blue", marginLeft: 75 }} /><span style={{ float: "right" }}>|</span></div></Tooltip>
+                                    <Tooltip title="Chia sẻ lên facebook" color={"red"}><div className='col-xl-4' style={{paddingLeft: 0, paddingRight: 0 }}>
+                                        <SharePost
+                                        url={"https://sang-delivery-fe.herokuapp.com/food/" + foodDetail.food_id}
+                                        quote={foodDetail.food_name + "-" + foodDetail.store_name + "ngon tuyệt !"}
+                                        />
+                                        <span style={{ float: "right" }}>|</span></div></Tooltip>
                                     <Tooltip title="Tùy chọn" color={"red"}><div className='col-xl-4' style={{ paddingLeft: 0, paddingRight: 0 }}><SettingsOutlinedIcon style={{ color: "orange", marginLeft: 75 }} /></div></Tooltip>
                                 </div>
                             </div>

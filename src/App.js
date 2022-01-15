@@ -111,16 +111,6 @@ class App extends Component {
         <CartProvider>
 
           <div>
-            <Helmet>
-              <meta property="og:title" content="SangOrder Web" />
-              <meta property="og:site_name" content="http://sang-delivery-fe.herokuapp.com" />
-              <meta property="og:description" content="Web đặc thức ăn nhanh chóng, tiện lợi" />
-              <meta property="og:image" content="https://mir-s3-cdn-cf.behance.net/project_modules/fs/924bb463959443.5ac2a3000fe85.jpg" />
-              <meta property="og:image:secure_url" content="https://mir-s3-cdn-cf.behance.net/project_modules/fs/924bb463959443.5ac2a3000fe85.jpg" />
-              <meta property="og:image:type" content="image/jpeg" />
-              <meta property="og:image:width" content="400" />
-              <meta property="og:image:height" content="300" />
-            </Helmet>
             <Router>
 
               <nav className="navbar navbar-expand navbar-light" style={{ backgroundColor: "#87e8de" }}>
