@@ -13,7 +13,6 @@ export default function HelmetMetaData(props) {
     let hashtag = props.hashtag !== undefined ? props.hashtag : "#camperstribe";
     return (
         <Helmet>
-            <head>
             <title>{title}</title>
             <meta charset="utf-8" />
             <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -44,7 +43,6 @@ export default function HelmetMetaData(props) {
             <meta property="og:url" content={currentUrl} />
             <meta property="og:site_name" content="CampersTribe" />
             <meta property="og:description" content={description} />  
-            </head>  
             </Helmet>
     );
 }
