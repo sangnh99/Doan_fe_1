@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { FacebookShareButton, TwitterShareButton } from "react-share";
 import FacebookIcon from '@mui/icons-material/Facebook';
-import { Helmet } from "react-helmet-async";
+import HelmetMetaData from "./helmet-metadata";
 
 export default function SharePost(props) {
 
@@ -50,16 +50,7 @@ export default function SharePost(props) {
             <div>
                 <button onClick={shareFb}>click aaaa</button>
             </div> */}
-            <Helmet>
-              <meta property="og:title" content="SangOrder Web" />
-              <meta property="og:site_name" content="http://sang-delivery-fe.herokuapp.com" />
-              <meta property="og:description" content="Web đặc thức ăn nhanh chóng, tiện lợi" />
-              <meta property="og:image" content="https://dotobjyajpegd.cloudfront.net/photo/5d120439849a5e0be8811bb3" />
-              <meta property="og:image:secure_url" content="https://dotobjyajpegd.cloudfront.net/photo/5d120439849a5e0be8811bb3" />
-              <meta property="og:image:type" content="image/jpeg" />
-              <meta property="og:image:width" content="400" />
-              <meta property="og:image:height" content="300" />
-            </Helmet>
+            <HelmetMetaData />
             <FacebookShareButton
                 url={props.url}
                 quote={props.quote}

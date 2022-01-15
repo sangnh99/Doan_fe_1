@@ -37,7 +37,7 @@ import PaymentPage from "./components/payment/payment-page";
 import PaypalPage from "./components/paypal/paypal-page";
 import HandlePaypal from "./components/paypal/handle-paypal";
 import SharePost from "./components/facebook/share-post";
-import { Helmet, HelmetProvider } from 'react-helmet-async';
+// import { Helmet, HelmetProvider } from 'react-helmet-async';
 import logo512 from "./static/logo512.png";
 
 class App extends Component {
@@ -107,7 +107,6 @@ class App extends Component {
 
 
     return (
-      <HelmetProvider>
         <CartProvider>
 
           <div>
@@ -313,7 +312,6 @@ class App extends Component {
             <Footer />
           </div>
         </CartProvider>
-      </HelmetProvider>
     );
   }
 }
