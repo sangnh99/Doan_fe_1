@@ -26,6 +26,7 @@ import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import "./food-detail.css";
 import SharePost from '../facebook/share-post';
+import HelmetMetaData from '../facebook/helmet-metadata';
 
 const { TabPane } = Tabs;
 
@@ -84,6 +85,7 @@ export default function FoodDetail() {
 
     return (
         <div>
+            <HelmetMetaData />
             {
                 foodDetail != 0 ? (
                     <div className="container">
