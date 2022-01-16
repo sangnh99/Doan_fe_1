@@ -5,7 +5,7 @@ export default function HelmetMetaData(props) {
     let location = useLocation();
     let currentUrl = "https://sang-delivery-fe.herokuapp.com" + location.pathname;
     let quote = props.quote !== undefined ? props.quote : "";
-    let title = props.title !== undefined ? props.title : "CampersTribe - World is yours to explore";
+    let title = "SangOrder-Web";
     let image = props.image !== undefined ? props.image : "https://dotobjyajpegd.cloudfront.net/photo/5d120439849a5e0be8811bb3";
     let description = props.description !== undefined ? props.description : "CampersTribe lets you experience the camping culture. We discover the hidden gems in the nearby to help you connect with nature & yourself by learning in the woods, on the riverbank under the open sky." +
         "Trust us, its million dollars experience to ride away from city life, pitch a tent, do campfire and endless talk!" +
@@ -40,7 +40,7 @@ export default function HelmetMetaData(props) {
             <meta property="og:image:width" content="400" />
             <meta property="og:image:height" content="300" />
             {/* <meta content="image/*" property="og:image:type" /> */}
-            <meta property="og:url" content={currentUrl} />
+            {/* <meta property="og:url" content={currentUrl} /> */}
             <meta property="og:site_name" content="CampersTribe" />
             <meta property="og:description" content={description} />  
             </Helmet>

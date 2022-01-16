@@ -110,8 +110,8 @@ class App extends Component {
     return (
         <CartProvider>
           <div>
-          <HelmetMetaData />
             <Router>
+          <HelmetMetaData />
 
               <nav className="navbar navbar-expand navbar-light" style={{ backgroundColor: "#87e8de" }}>
                 <Link to={"/"} className="navbar-brand">
