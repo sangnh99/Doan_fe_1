@@ -85,7 +85,6 @@ export default function FoodDetail() {
 
     return (
         <div>
-            <HelmetMetaData />
             {
                 foodDetail != 0 ? (
                     <div className="container">

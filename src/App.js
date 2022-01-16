@@ -109,8 +109,8 @@ class App extends Component {
 
     return (
         <CartProvider>
-          <HelmetMetaData image={"https://chupanhmonan.com/wp-content/uploads/2018/04/Vanessa-Rees-food-photography-background.jpg"}/>
           <div>
+          <HelmetMetaData />
             <Router>
 
               <nav className="navbar navbar-expand navbar-light" style={{ backgroundColor: "#87e8de" }}>
