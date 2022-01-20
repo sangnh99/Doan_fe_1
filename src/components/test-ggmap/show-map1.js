@@ -4,7 +4,7 @@ import GoogleMapReact from 'google-map-react';
 const coordinates = {lat : 16.0038912, lng: 108.199936};
 export default function ShowMap1(props) {
     return (
-        <div style={{marginLeft : 190, marginBottom : 30, height: '500px', width: '700px' }}>
+        <div style={{marginLeft : props.marginLeft, marginBottom : props.marginBottom, height: props.height, width: props.width }}>
             <GoogleMapReact 
             bootstrapURLKeys={{key: 'AIzaSyAyvTvIJSyOspJ6_GHlvL3klcnJEnzNVXw'}}
             defaultCenter={{

@@ -37,7 +37,7 @@ const settings = {
   infinite: false,
   speed: 500,
   slidesToShow: 4,
-  slidesToScroll: 1,
+  slidesToScroll: 2,
   nextArrow: <SampleNextArrow />,
   prevArrow: <SamplePrevArrow />
 };
@@ -61,7 +61,7 @@ export default function NearMeList(props) {
                 {
                   listNearItem.map(item => {
                     return (
-                      <Link to={"/food/" + item.id} >
+                      <Link to={"/store/" + item.id} >
                       <Card 
                       name={item.name}
                       store={item.distance + "km"}
@@ -80,13 +80,3 @@ export default function NearMeList(props) {
 }
 
 
-{/* <Card
-ima="https://www.thaistreet.com.vn/wp-content/uploads/2021/04/Food.jpg"
-liked={1}
-likeCount={1}
-/>
-<Card
-ima="https://asianfoodnetwork.com/content/dam/afn/global/en/homepage/new-content-carousel/AFN_Food_Made_Good_HK_Awards_good_to_go_award_mobile.jpg.transform/desktop-img/img.jpg"
-liked={1}
-likeCount={1}
-/> */}

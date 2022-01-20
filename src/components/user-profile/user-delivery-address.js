@@ -354,13 +354,25 @@ export default function UserDeliveryAddress(props) {
 
             <Collapse defaultActiveKey={['1']} style={{marginBottom : 150}}>
                 <Panel header={<span style={{ display: "flex", justifyContent: "center", alignItems: "center" }}><PlusOutlined style={{ fontSize: 16 }} />&nbsp; Thêm địa chỉ</span>} key="1" showArrow={false}>
-                <div style={{marginLeft : 188}}>
+                {/* <div style={{marginLeft : 188}}>
                     <p style={{fontFamily : "Nunito", marginBottom : 10}}>Tên địa điểm <span style={{color : "red"}}>*</span> :</p>
                     <Input style={{width : 700, marginBottom : 10}} onChange={(event) => {setAddressName(event.target.value)}}/>
                     <br/>
                     <p style={{fontFamily : "Nunito", marginBottom : 10}}>Ghi chú cho tài xế :</p>
                     <Input style={{width : 700, marginBottom : 20}} onChange={(event) => {setAddressNote(event.target.value)}}/>
-                </div>    
+                </div>     */}
+                <div>
+                    <p style={{fontFamily : "Nunito", marginBottom : 10, marginLeft : 202}}>Tên địa điểm <span style={{color : "red"}}>*</span> :</p>
+                    <div style={{display : "flex", justifyContent : "center", alignItems :"center"}}>
+                    <Input style={{width : 700}} onChange={(event) => {setAddressName(event.target.value)}}/>
+                    </div>
+                    <br/>
+                    <p style={{fontFamily : "Nunito", marginBottom : 10, marginLeft : 202}}>Ghi chú cho tài xế :</p>
+                    <div style={{display : "flex", justifyContent : "center", alignItems :"center"}}>
+                    <Input style={{width : 700, marginBottom : 20}} onChange={(event) => {setAddressNote(event.target.value)}}/>
+                    </div>
+                </div>
+                
                 <div className="search-container">
                     <div className="search">
                     <span><Search /></span>
@@ -371,7 +383,7 @@ export default function UserDeliveryAddress(props) {
                 {
                     lat != null && (
                         <div>
-                        <ShowMap1 lat={lat} lng={lng}/>
+                        <ShowMap1 lat={lat} lng={lng} height={"500px"} width={"700px"} marginLeft={"190px"} marginBottom={"30px"}/>
                         <span style={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom : 50}}> 
                         <Button style={{width : 700}} type="primary" onClick={confirmAdd}>Xác nhận</Button>
                         </span>

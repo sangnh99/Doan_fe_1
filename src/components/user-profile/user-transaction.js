@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { messagge, Divider, Collapse, Comment, Avatar, List, Button, Modal, Rate, Input, message } from 'antd';
+import { messagge, Divider, Collapse, Comment, Avatar, List, Button, Modal, Rate, Input, message, Pagination } from 'antd';
 import { Link } from "react-router-dom";
 import userService from "../../services/user.service";
 import Loading from "../loading/loading-component";
@@ -11,11 +11,11 @@ const { Panel } = Collapse;
 const { TextArea } = Input;
 
 const customIcons = {
-  1: <FrownOutlined />,
-  2: <FrownOutlined />,
-  3: <MehOutlined />,
-  4: <SmileOutlined />,
-  5: <SmileOutlined />,
+    1: <FrownOutlined />,
+    2: <FrownOutlined />,
+    3: <MehOutlined />,
+    4: <SmileOutlined />,
+    5: <SmileOutlined />,
 };
 
 export default function UserTransaction(props) {
@@ -37,18 +37,22 @@ export default function UserTransaction(props) {
 
     const handleOk = () => {
 
-        foodService.addRatingForFood(JSON.parse(localStorage.getItem("user")).id, currentItem.food_id, currentRating, currentComment).then(
-            response => {
-                if ("success" != response.data.data){
-                    message.error("Đã có lỗi xảy ra trong quá trình đánh giá, vui lòng thử lại sau !")
-                } else {
-                    message.success("Đã đánh giá thành công !");
-                }
-                setCurrentComment("");
-                setVisibleRating(false);
-            }
-        );
+        if (currentRating != 0) {
 
+            foodService.addRatingForFood(JSON.parse(localStorage.getItem("user")).id, currentItem.food_id, currentRating, currentComment).then(
+                response => {
+                    if ("success" != response.data.data) {
+                        message.error("Đã có lỗi xảy ra trong quá trình đánh giá, vui lòng thử lại sau !")
+                    } else {
+                        message.success("Đã đánh giá thành công !");
+                    }
+                    setCurrentComment("");
+                    setVisibleRating(false);
+                }
+            );
+        } else {
+            message.info("Vui lòng lựa chọn điểm đánh giá !");
+        }
 
     }
 
@@ -59,14 +63,14 @@ export default function UserTransaction(props) {
 
     return (
         <div className="container" style={{ paddingRight: 200 }}>
-            <p style={{ fontFamily: "Nunito", fontSize: 30, marginTop : 20 }}>Đơn hàng của bạn</p>
-                        <Modal title="Đánh giá về món ăn " visible={visibleRating} onOk={handleOk} onCancel={handleCancel}>
-                        <div style={{width :"100%", height : "100%"}}>
-                            <p style={{fontFamily : "Nunito", display : "flex", justifyContent : "center", alignItems : "center"}}>Đánh giá của bạn về món {currentItem.food_name} của {currentStoreName} ?</p>
-                            <Rate onChange={(value) => {setCurrentRating(value)}} style={{display : "flex", justifyContent : "center", alignItems : "center", fontSize : 40}} defaultValue={0} character={({ index }) => customIcons[index + 1]} />
-                            <TextArea rows={4} style={{fontFamily : "Nunito", display : "flex", justifyContent : "center", alignItems : "center"}} placeholder="Bình luận của bạn về món ăn" onChange={(event) => {setCurrentComment(event.target.value)}}/>
-                        </div>
-                    </Modal>
+            <p style={{ fontFamily: "Nunito", fontSize: 30, marginTop: 20 }}>Đơn hàng của bạn</p>
+            <Modal title="Đánh giá về món ăn " visible={visibleRating} onOk={handleOk} onCancel={handleCancel}>
+                <div style={{ width: "100%", height: "100%" }}>
+                    <p style={{ fontFamily: "Nunito", display: "flex", justifyContent: "center", alignItems: "center" }}>Đánh giá của bạn về món {currentItem.food_name} của {currentStoreName} ?</p>
+                    <Rate onChange={(value) => { setCurrentRating(value) }} style={{ display: "flex", justifyContent: "center", alignItems: "center", fontSize: 40 }} defaultValue={0} character={({ index }) => customIcons[index + 1]} />
+                    <TextArea rows={4} style={{ fontFamily: "Nunito", display: "flex", justifyContent: "center", alignItems: "center" }} placeholder="Bình luận của bạn về món ăn" onChange={(event) => { setCurrentComment(event.target.value) }} />
+                </div>
+            </Modal>
             <Divider />
             {
                 transaction != null ? (

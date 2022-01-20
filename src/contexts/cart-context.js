@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import userService from '../services/user.service';
 import { Modal, message } from 'antd';
 
+
 export const CartContext = React.createContext();
 
 export class CartProvider extends Component {
@@ -13,7 +14,8 @@ export class CartProvider extends Component {
             visible : false,
             amount : 0,
             currentNote : "",
-            cartItems: []
+            cartItems: [],
+            buyHistory : 0
         }
         this.handleOk = this.handleOk.bind(this);
         this.handleCancel = this.handleCancel.bind(this);
@@ -63,6 +65,28 @@ export class CartProvider extends Component {
         };
     }
 
+    confirmAddToCartAndBuy(product, amount, note, history){
+        if (this.state.cartItems.length != 0){
+            const store_id = this.state.cartItems[0].store_id;
+            if (store_id != product.store_id){
+                this.setState({
+                    ...this.state,
+                    item : product,
+                    itemAmount :amount,
+                    currentNote : note,
+                    visible: true,
+                    buyHistory : history
+                })
+            } else {
+                this.addToCartWithNote(product, amount, note);        
+                history.push("/payment");   
+            }
+        } else {//list rong
+            this.addToCartWithNote(product, amount, note);
+            history.push("/payment");
+        };
+    }
+
     success () {
         message.success('Thêm vào giỏ hàng thành công !');
       };
@@ -81,15 +105,28 @@ export class CartProvider extends Component {
             }
         );
 
-        this.setState({
-            itemAmount : 0,
-            item : undefined,
-            visible :false,
-            amount : amount,
-            currentNote : "",
-            cartItems : [item]
-        })
-        this.success();
+        if (this.state.buyHistory == 0){
+            this.setState({
+                itemAmount : 0,
+                item : undefined,
+                visible :false,
+                amount : amount,
+                currentNote : "",
+                cartItems : [item]
+            })
+            this.success();
+        } else {
+            this.state.buyHistory.push("/payment");
+            this.setState({
+                itemAmount : 0,
+                item : undefined,
+                visible :false,
+                amount : amount,
+                currentNote : "",
+                cartItems : [item],
+                buyHistory : 0
+            })
+        }
       };
     
     handleCancel () {
@@ -189,7 +226,8 @@ export class CartProvider extends Component {
             cartItems: this.state.cartItems,
             addToCart: this.addToCart.bind(this),
             totalPrice: this.state.totalPrice,
-            confirmAddToCart : this.confirmAddToCart.bind(this)
+            confirmAddToCart : this.confirmAddToCart.bind(this),
+            confirmAddToCartAndBuy: this.confirmAddToCartAndBuy.bind(this)
         }}>
             <div>
             <Modal title="Tạo giỏ hàng mới ?" visible={this.state.visible} onOk={this.handleOk} onCancel={this.handleCancel}>
