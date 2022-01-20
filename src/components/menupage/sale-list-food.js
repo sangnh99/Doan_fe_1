@@ -6,8 +6,7 @@ import Slider from "react-slick";
 import './nearme-list.css';
 import foodService from "../../services/food-service";
 import Loading from "../loading/loading-component";
-import CardAntd from "../card/card-antd";
-import CardAntdStore from "../card/card-antd-store";
+import CardAntdFood from "../card/card-antd-food";
 
 
 function SampleNextArrow(props) {
@@ -44,29 +43,30 @@ const settings = {
   prevArrow: <SamplePrevArrow />
 };
 
-export default function NearMeList(props) {
-  const [listNearItem, setListNearItem] = useState(null);
+export default function SaleListFood(props) {
+  const [listSaleItem, setListSaleItem] = useState(null);
 
   useEffect(() => {
-    foodService.getListNearFood(JSON.parse(localStorage.getItem("user")).id).then(
+    foodService.getListSaleFood(JSON.parse(localStorage.getItem("user")).id).then(
       response => {
-        setListNearItem(response.data.data);
+        setListSaleItem(response.data.data);
       }
     );
   }, [])
 
   return (
-    <div style={{marginTop : 30, marginBottom : 25}}>
+    <div style={{marginTop : 30, marginBottom : 50}}>
       {
-        listNearItem != null ? (
+        listSaleItem!= null ? (
           <Slider {...settings}>
                 {
-                  listNearItem.map(item => {
+                  listSaleItem.map(item => {
                     return (
-                      <Link to={"/store/" + item.id} >
-                      <CardAntdStore 
+                      <Link to={"/food/" + item.id} >
+                      <CardAntdFood
                         item = {item}
                         width={"255px"}
+                        height={"230px"}
                       />
                       </Link>
                     )

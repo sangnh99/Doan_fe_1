@@ -30,5 +30,11 @@ class FoodService {
     getListNearFood(user_app_id){
         return axios.get(API_URL + "food/get-list-near-food",  {params : {user_app_id: user_app_id}, headers : authHeader()});
     }
+    getListRecommendFood(user_app_id){
+        return axios.get(API_URL + "food/get-list-recommend-food",  {params : {user_app_id: user_app_id}, headers : authHeader()});
+    }
+    getListSaleFood(user_app_id){
+        return axios.get(API_URL + "food/get-list-sale-food",  {params : {user_app_id: user_app_id}, headers : authHeader()});
+    }
 }
 export default new FoodService();

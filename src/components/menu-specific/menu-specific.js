@@ -19,6 +19,7 @@ import { Pagination, Row, Col } from 'antd';
 import { useState, useEffect } from 'react';
 import { food_category } from '../../enum/food-category';
 import FoodDetail from '../food-detail/food-detail';
+import { transition } from '@chakra-ui/react';
 
 // =======================================================================================
 export default function MenuSpecific(props) {

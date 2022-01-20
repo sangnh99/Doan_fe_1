@@ -15,6 +15,9 @@ import HeroSession from '../decorate-component/hero-session.js';
 import NearMeList from './nearme-list.js';
 import './menu-page.css';
 import ArrowBlock from '../popular-component/arrow-block.js';
+import RecommendListFood from './recommend-list-food.js';
+import ArrowBlockRecommend from '../popular-component/arrow-block-recommend.js';
+import SaleListFood from './sale-list-food.js';
 
 export default class TitlebarImageList extends Component {
 
@@ -58,8 +61,11 @@ export default class TitlebarImageList extends Component {
           </ImageList>
           <Divider />
           <ArrowBlock title={"Quán ăn gần tôi"} />
-          <NearMeList />
-
+          <NearMeList/>
+          <ArrowBlockRecommend title={"Có thể bạn sẽ thích"} />
+          <RecommendListFood />
+          <img src="https://pngfile.net/public/uploads/preview//sale-tag-png-free-download-11565861038hxdnc08s1u.png" style={{display : "block", marginLeft : "auto", marginRight : "auto", width : "30%", height : 120}}></img>
+          <SaleListFood />
         </div>
 
       </div>

@@ -1,10 +1,13 @@
-/* .slick-arrow{
-    background-color: red;
-    height: 35px;
-    width: 35px;
-    border-radius: 100px;
+.slick-arrow{
+    background-color: white !important;
     margin: 0px 0px;
 }
-.slick-arrow:hover, .slick-arrow:active {
+/* .slick-arrow:hover, .slick-arrow:active {
     background-color: red !important;
-} */
+} */ 
+
+.slick-prev:before, .slick-next:before {
+    margin: 0px 0px;
+    font-size: 22px;
+    color: red !important;
+}
