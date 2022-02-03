@@ -101,43 +101,46 @@ export default function UserTransaction(props) {
                                                             itemLayout="horizontal"
                                                             dataSource={item.list_item}
                                                             renderItem={childItem => (
-                                                                <List.Item>
-                                                                    {
-                                                                        childItem.amount != 0 ? (
-                                                                            <div>
-                                                                                <List.Item.Meta
-                                                                                    avatar={<Avatar src={childItem.food_avatar} />}
-                                                                                    title={<a href={childItem.food_id}>{childItem.food_name} x {childItem.amount}</a>}
-                                                                                    description={
-                                                                                        <div>
-                                                                                            {
-                                                                                                childItem.discount_percent != null ? (
-                                                                                                    <p><span style={{ color: "red" }}> {childItem.price.toLocaleString()}đ </span><span>{"<--"}</span> <span style={{ textDecoration: "line-through" }}> {childItem.original_price.toLocaleString()}đ </span> </p>
-                                                                                                ) :
-                                                                                                    (
-                                                                                                        <p>{childItem.price.toLocaleString()}đ </p>
-                                                                                                    )
-                                                                                            }
-                                                                                        </div>
-                                                                                    }
-                                                                                />
-                                                                                <Button type="default" style={{ color: "#fa541c" }} onClick={
-                                                                                    () => {
-                                                                                        setCurrentStoreName(item.store_name);
-                                                                                        setCurrentItem(childItem);
-                                                                                        setVisibleRating(true);
-                                                                                    }
-                                                                                }>Đánh giá</Button>
-                                                                            </div>
-                                                                        ) : (
+                                                                <div>
+                                                                {
+                                                                    
+                                                                    childItem.amount != 0 ? (
+                                                                            <List.Item>
                                                                             <List.Item.Meta
-                                                                            avatar={<Avatar src={childItem.food_avatar} />}
-                                                                            title={"Món ăn đã bị xóa !"}
-                                                                            description={"Món ăn này đã bị xóa khỏi hệ thống !"}
-                                                                        />
+                                                                                avatar={<Avatar src={childItem.food_avatar} />}
+                                                                                title={<a href={childItem.food_id}>{childItem.food_name} x {childItem.amount}</a>}
+                                                                                description={
+                                                                                    <div>
+                                                                                        {
+                                                                                            childItem.discount_percent != null ? (
+                                                                                                <span><span style={{ color: "red" }}> {childItem.price.toLocaleString()}đ </span><span>{"<--"}</span> <span style={{ textDecoration: "line-through" }}> {childItem.original_price.toLocaleString()}đ </span> </span>
+                                                                                            ) :
+                                                                                                (
+                                                                                                    <span>{childItem.price.toLocaleString()}đ </span>
+                                                                                                )
+                                                                                        }
+                                                                                    </div>
+                                                                                }
+                                                                            />
+                                                                            <Button type="default" style={{ color: "#fa541c", display: "inline-block", float : "right" }} onClick={
+                                                                                () => {
+                                                                                    setCurrentStoreName(item.store_name);
+                                                                                    setCurrentItem(childItem);
+                                                                                    setVisibleRating(true);
+                                                                                }
+                                                                            }>Đánh giá</Button>
+                                                                            </List.Item>
+                                                                        ) : (
+                                                                            <List.Item>
+                                                                            <List.Item.Meta
+                                                                                avatar={<Avatar src={childItem.food_avatar} />}
+                                                                                title={"Món ăn đã bị xóa !"}
+                                                                                description={"Món ăn này đã bị xóa khỏi hệ thống !"}
+                                                                            />
+                                                                            </List.Item>
                                                                         )
                                                                     }
-                                                                </List.Item>
+                                                                    </div>
                                                             )}
                                                         />
                                                     </Panel>
