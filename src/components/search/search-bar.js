@@ -94,11 +94,13 @@ export default function SearchBar() {
                                                             name={item.name}
                                                             store={item.store_name}
                                                             ima={item.avatar != null ? item.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl85MbwvCl_l-ri_GAYI2iCr8F8cSze8Ho8A&usqp=CAU"}
-                                                            rating={item.rating}
+                                                            rating={item.summary_rating}
                                                             price={item.price}
                                                             discountPercent={item.discount_percent}
                                                             originalPrice={item.original_price}
                                                             distance={item.distance}
+                                                            isBestSeller={item.is_best_seller}
+                                                            totalBuy={item.total_buy}
                                                         />
 
                                                     </div>

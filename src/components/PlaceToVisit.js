@@ -9,6 +9,8 @@ const useStyles = makeStyles((theme) => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingLeft : "190px",
+    paddingRight : "190px",
     // [theme.breakpoints.down('md')]: {
     //   flexDirection: 'column',
     // },

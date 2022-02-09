@@ -77,6 +77,8 @@ export default function UserFavourite(props) {
                                                                 price={item.price}
                                                                 discountPercent = {item.discount_percent}
                                                                 distance={item.distance}
+                                                                isBestSeller={item.is_best_seller}
+                                                                totalBuy={item.total_buy}
                                                             />
                                                         </div>
                                                     )

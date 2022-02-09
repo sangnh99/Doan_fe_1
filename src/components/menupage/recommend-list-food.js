@@ -50,6 +50,7 @@ export default function RecommendListFood(props) {
     foodService.getListRecommendFood(JSON.parse(localStorage.getItem("user")).id).then(
       response => {
         setListRecommendItem(response.data.data);
+        console.log(response.data.data);
       }
     );
   }, [])

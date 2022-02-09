@@ -1,0 +1,358 @@
+html {
+    scroll-behavior: smooth;
+}
+
+.this-homepage ::-webkit-scrollbar {
+    display: none;
+}
+.section-homepage  {
+    height : 93vh;
+    display : flex;
+    justify-content: center;
+    align-items: center;
+    scroll-snap-align: start;
+}
+
+.container-homepage{
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    height: 93vh;
+}
+
+
+.three-homepage {
+    /* background: rgb(135, 232, 222); */
+}
+.four-homepage {
+
+}
+
+.ant-carousel .slick-dots {
+    margin-left: 0px !important;
+}
+
+/* trang bia */
+
+.trang-bia {
+    height: 93vh;
+    /* // backgroundImage: `url("https://riceberrythaicuisine.co.uk/wp-content/uploads/2021/04/italian-food-background-1.jpg")`, */
+    background-image: url("https://wallpaperaccess.com/full/2614486.jpg");
+    position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    font-family: 'Nunito';
+}
+
+.trang-bia .title {
+    color: #fff;
+    font-size: 4rem;
+}
+
+.two-homepage .intro-box:hover {
+    border: none;
+
+	box-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+
+	transform: scale(1.015);
+}
+
+.click-chuot {
+    line-height: 56px;
+    font-family: 'Rowdies', cursive;
+}
+
+/* button kham pha ngay */
+
+.button-56 {
+    align-items: center;
+    background-color: rgb(135, 232, 222);
+    border: 2px solid #111;
+    border-radius: 8px;
+    box-sizing: border-box;
+    color: #111;
+    cursor: pointer;
+    display: flex;
+    font-family: Inter,sans-serif;
+    font-size: 16px;
+    height: 60px;
+    justify-content: center;
+    line-height: 24px;
+    max-width: 100%;
+    padding: 0 25px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+  }
+  
+  .button-56:after {
+    background-color: #111;
+    border-radius: 8px;
+    content: "";
+    display: block;
+    height: 60px;
+    left: 0;
+    width: 100%;
+    position: absolute;
+    top: -2px;
+    transform: translate(8px, 8px);
+    transition: transform .2s ease-out;
+    z-index: -1;
+  }
+  
+  .button-56:hover:after {
+    transform: translate(0, 0);
+  }
+  
+  .button-56:active {
+    background-color: #ffdeda;
+    outline: 0;
+  }
+  
+  .button-56:hover {
+    outline: 0;
+  }
+
+
+    /* noi bat */
+  
+  
+
+  
+  
+@import url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/library.less");
+@import url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/584938/variables.less");
+body {
+    color: white;
+    font-family: "Lato";
+}
+.media {
+    background-position: center;
+    background-size: cover;
+    height: 100%;
+    position: absolute;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+figure {
+    height: 400px;
+    overflow: hidden;
+    position: relative;
+}
+figure a {
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    z-index: 3;
+}
+figure:hover .media {
+    transform: scale(1.25);
+}
+figcaption {
+    height: 370px;
+    margin: 15px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 250px;
+}
+.body1 {
+    background-color: white;
+    bottom: 0;
+    padding: 15px;
+    position: absolute;
+    width: 100%;
+}
+svg {
+    height: inherit;
+    width: 100%;
+}
+svg text {
+    text-anchor: middle;
+}
+svg #alpha {
+    fill: white;
+}
+svg .title1 {
+    font-size: 28px;
+    font-family: "Montserrat";
+    letter-spacing: 5px;
+}
+svg #base {
+    fill: white;
+    -webkit-mask: url(#mask);
+    mask: url(#mask);
+}
+
+
+/* button 6 */
+
+
+.button-6 {
+  align-items: center;
+  left : 20%;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: rgba(0, 0, 0, 0.85);
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  margin: 0;
+  min-height: 2rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: auto;
+}
+
+.button-6:hover,
+.button-6:focus {
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+  color: rgba(0, 0, 0, 0.65);
+}
+
+.button-6:hover {
+  transform: translateY(-1px);
+}
+
+.button-6:active {
+  background-color: #F0F0F1;
+  border-color: rgba(0, 0, 0, 0.15);
+  box-shadow: rgba(0, 0, 0, 0.06) 0 2px 4px;
+  color: rgba(0, 0, 0, 0.65);
+  transform: translateY(0);
+}
+
+
+
+/* button gan toi */
+
+
+/* CSS */
+.button-50 {
+  appearance: button;
+  background-color: #000;
+  margin-left: 30px;
+  background-image: none;
+  border: 1px solid #000;
+  border-radius: 4px;
+  box-shadow: #fff 4px 4px 0 0,#000 4px 4px 0 1px;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: ITCAvantGardeStd-Bk,Arial,sans-serif;
+  font-size: 1âpx;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0 5px 10px 0;
+  overflow: visible;
+  padding: 12px 20px;
+  text-align: center;
+  text-transform: none;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.button-50:focus {
+  text-decoration: none;
+}
+
+.button-50:hover {
+  text-decoration: none;
+}
+
+.button-50:active {
+  box-shadow: #000 0 3px 5px inset;
+  outline: 0;
+}
+
+.button-50:not([disabled]):active {
+  box-shadow: #fff 2px 2px 0 0, #000 2px 2px 0 1px;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button-50 {
+    padding: 12px 50px;
+  }
+}
+
+
+/* button ̣̀  */
+
+
+
+/* CSS */
+.button-59 {
+  align-items: center;
+  background-color: #fff;
+  border: 2px solid #000;
+  box-sizing: border-box;
+  color: #000;
+  cursor: pointer;
+  display: inline-flex;
+  fill: #000;
+  font-family: Inter,sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  height: 40px;
+  justify-content: center;
+  letter-spacing: -.8px;
+  line-height: 24px;
+  min-width: 140px;
+  outline: 0;
+  padding: 0 17px;
+  text-align: center;
+  text-decoration: none;
+  transition: all .3s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button-59:focus {
+  color: #171e29;
+}
+
+.button-59:hover {
+  border-color: #06f;
+  color: #06f;
+  fill: #06f;
+}
+
+.button-59:active {
+  border-color: #06f;
+  color: #06f;
+  fill: #06f;
+}
+
+@media (min-width: 768px) {
+  .button-59 {
+    min-width: 170px;
+  }
+}

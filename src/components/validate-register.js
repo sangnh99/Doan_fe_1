@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import 'antd/dist/antd.css';
 import { Form, Input, Button } from 'antd';
 import authService from '../services/auth.service';
-import { Alert } from 'antd';
+import { Alert, message } from 'antd';
 
 export default class ValidateRegister extends Component {
     constructor(props) {
@@ -32,17 +32,18 @@ export default class ValidateRegister extends Component {
 
             },
             error => {
-                const resMessage =
-                    (error.response &&
-                        error.response.data &&
-                        error.response.data.message) ||
-                    error.message ||
-                    error.toString();
+                // const resMessage =
+                //     (error.response &&
+                //         error.response.data &&
+                //         error.response.data.message) ||
+                //     error.message ||
+                //     error.toString();
 
-                this.setState({
-                    isSuccess: false,
-                    message: resMessage
-                });
+                // this.setState({
+                //     isSuccess: false,
+                //     message: resMessage
+                // });
+                message.error("Mã xác thực không đúng !");
             }
         );
     }
@@ -127,7 +128,7 @@ export default class ValidateRegister extends Component {
                             }}
                         >
                             <Button type="primary" htmlType="submit" style={{ marginLeft: "200px" }} onClick={this.onSubmitForm}>
-                                Submit
+                                Tiếp tục
                             </Button>
                         </Form.Item>
                     </Form>

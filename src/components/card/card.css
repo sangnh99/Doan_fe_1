@@ -1,25 +1,28 @@
-.card {
+.card1 {
 	background-color: white;
 	color: #272727;
 	padding: 20px;
 	border-radius: 10px;
-	border: 0px;
-	border-color: tomato;
-	border-style: solid;
+	border: 1px solid black;
+	/* border-color: tomato;
+	border-style: solid; */
 	transition: 200ms;
     width: 265px;
 	height:370px;
 	--ribbon-span-bg: #d4380d;
 	--ribbon-border: #d4380d;
+	/* padding: 20px 25px 30px;
+    margin: 0 0 25px;
+    margin-top: 50px; */
 	visibility: unset !important;
 }
 
-.card:hover {
+/* .card1:hover {
 	transition: 200ms;
 	border: 3px;
 	border-color: tomato;
 	border-style: solid;
-}
+} */
 
 .card-header {
 	display: flex;
@@ -62,11 +65,27 @@
 	margin-top: 0;
 }
 
+/* .card-image {
+	border-radius: 10px;
+	margin-bottom: 10px;
+	margin-top: 10px;
+} */
 .card-image {
+	position: relative;
 	border-radius: 10px;
 	margin-bottom: 10px;
 	margin-top: 10px;
 }
+
+.best-seller-icon-card {
+	position: absolute;
+	top : 5px;
+	left : 5px;
+	width: 60px;
+	height: 60px;
+	border-radius: 30px;
+}
+
 .card-like-icon {
 	height: 25px;
 }
@@ -77,10 +96,9 @@
 }
 
 .card-like-bar {
-	display: flex;
+	/* display: flex; */
 	align-items: center;
-	margin-top: 20px;
-	justify-content: space-between;
+	margin-top: 5px;
 }
 
 .rating-text {
@@ -139,3 +157,35 @@
 	top: 0;
 	left: 0;
 }
+
+/* ========================================== */
+
+.ribbon-wrapper-best-seller {
+	/* width: 85px;
+	height: 88px; */
+	width: 125px;
+	height:128px;
+	overflow: hidden;
+	position: absolute;
+	top: -3px;
+	left: -3px;
+}
+
+.ribbon-wrapper-best-seller .ribbon-best-seller {
+	font: bold 15px sans-serif;
+	color: #333;
+	text-align: center;
+	-webkit-transform: rotate(-45deg);
+	-moz-transform:    rotate(-45deg);
+	-ms-transform:     rotate(-45deg);
+	-o-transform:      rotate(-45deg);
+	position: relative;
+	padding: 8px 0;
+	top: 25px;
+	left: -30px;
+	width: 140px;
+	background-color: #ebb134;
+	color: #fff;
+  }
+
+

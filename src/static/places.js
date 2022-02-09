@@ -1,16 +1,16 @@
 const places = [
     {
-      title: 'Green',
+      title: 'SangOrder có những gì ?',
       description:
-        "The Maldives are home to some of the world's most ravishing islands, but it's the sea, which truly makes these islands shine. Luminous aquamarine waters with a crystal clarity lap upon these dazzling white shores, which barely peek above the Indian Ocean.",
-      imageUrl: 'https://riceberrythaicuisine.co.uk/wp-content/uploads/2021/04/italian-food-background-1.jpg',
+        "Hệ thống tìm kiếm, gợi ý các món ăn cho bạn theo loại thức ăn, theo sở thích của bạn, ảnh hưởng của những người dùng khác (hiệu ứng lan truyền), giúp bạn lựa chọn những món ăn ưng ý nhất một cách nhanh chóng, hiệu quả !",
+      imageUrl: 'https://www.adrianharrison.com.au/wp-content/uploads/2018/04/20180215-IMG_5276.jpg',
       time: 1500,
     },
     {
-      title: 'Bora Bora',
+      title: 'Mục đích',
       description:
-        'Shaped like a giant sombrero, this lush volcanic island stars in countless South Pacific fantasies. The focal point and best asset of this tropical beauty is its ravishing lagoon in technicolor turquoise. Fish, turtles, sharks, and rays swim in the clear waters.',
-      imageUrl: 'https://riceberrythaicuisine.co.uk/wp-content/uploads/2021/04/italian-food-background-1.jpg',
+        'SangOrder là website được tạo nên với mục đích cung cấp một phương tiện để đặt thức ăn online một cách dễ dàng, nhanh chóng trên nền tảng web, giúp thỏa mãn cơn đói của bạn một cách nhanh chóng và thuận tiện nhất !',
+      imageUrl: 'https://chupanhmonan.com/wp-content/uploads/2018/04/Alan-De-Herrera-1024x683.jpg',
       time: 1500,
     },
   ];
