@@ -18,14 +18,27 @@ export default function Card(props) {
           <div className="card-store">{props.store}</div>
         </div>
       </div>
-      <div className="card-image" style={{ height: 180, width: 225 }}>
-        {
-          props.isBestSeller == 1 && (
-            <img className="best-seller-icon-card" src="https://previews.123rf.com/images/artag/artag1211/artag121100001/16235733-best-seller-icon.jpg" />
-          )
-        }
-        <img src={props.ima} alt="Logo" style={{ height: 168, width: "100%", borderRadius: 10 }} />
-      </div>
+      {
+        props.name.length < 20 ? (
+          <div className="card-image" style={{ height: 180, width: 225 }}>
+            {
+              props.isBestSeller == 1 && (
+                <img className="best-seller-icon-card" src="https://previews.123rf.com/images/artag/artag1211/artag121100001/16235733-best-seller-icon.jpg" />
+              )
+            }
+            <img src={props.ima} alt="Logo" style={{ height: 168, width: "100%", borderRadius: 10 }} />
+          </div>
+        ) : (
+          <div className="card-image" style={{ height: 158, width: 225 }}>
+            {
+              props.isBestSeller == 1 && (
+                <img className="best-seller-icon-card" src="https://previews.123rf.com/images/artag/artag1211/artag121100001/16235733-best-seller-icon.jpg" />
+              )
+            }
+            <img src={props.ima} alt="Logo" style={{ height: 146, width: "100%", borderRadius: 10 }} />
+          </div>
+        )
+      }
       {
         props.discountPercent == null ? (<div><div className="card-text" style={{ display: "inline" }}>{parseInt(props.price).toLocaleString()} đ</div><div style={{ float: "right" }}>{props.distance} km</div></div>)
           : (

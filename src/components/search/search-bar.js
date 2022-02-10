@@ -87,7 +87,7 @@ export default function SearchBar() {
                                 {
                                     listItem.map(item => {
                                         return (
-                                            <div className="col-xl-3">
+                                            <div className="col-xl-3" style={{marginTop : 50}}>
                                                 <Link to={"/food/" + item.id} >
                                                     <div>
                                                         <Card

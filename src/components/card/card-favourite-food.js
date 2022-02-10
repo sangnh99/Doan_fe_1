@@ -64,7 +64,7 @@
 
 
 import React, { useState, useEffect } from "react";
-import "./card.css";
+import "./card-favourite.css";
 import { Link } from 'react-router-dom';
 import { Button, Modal, message } from "antd";
 import Item from "antd/lib/list/Item";
@@ -75,11 +75,11 @@ export default function CardFavouriteStore(props) {
     return (
         <FavouriteContext.Consumer >
             {({ showModal }) => (
-                <div className="card">
+                <div className="card4">
                     <Link to={"/food/" + props.id} >
                         {
                             props.discountPercent != null && (
-                                <div class="ribbon ribbon-top-right">
+                                <div class="ribbon4 ribbon-top-right4">
                                     <span>Giảm {props.discountPercent}%</span>
                                 </div>
                             )
@@ -98,7 +98,7 @@ export default function CardFavouriteStore(props) {
                                     <img className="best-seller-icon-card" src="https://previews.123rf.com/images/artag/artag1211/artag121100001/16235733-best-seller-icon.jpg" />
                                 )
                             }
-                            <img src={props.ima} alt="Logo" style={{ height: 158, width: "100%", borderRadius: 10 }} />
+                            <img src={props.ima} alt="Logo" style={{ height: 158, width: 208, borderRadius: 10 }} />
                         </div>
                         <div>
                             {props.address}

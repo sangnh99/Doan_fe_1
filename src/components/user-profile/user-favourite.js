@@ -66,7 +66,7 @@ export default function UserFavourite(props) {
                                             {
                                                 listFood.length != 0 ? listFood.map(item => {
                                                     return (
-                                                        <div className="col-xl-3">
+                                                        <div className="col-xl-3" style={{marginTop : 50}}>
                                                             <CardFavouriteFood
                                                                 item={item}
                                                                 id={item.id}
