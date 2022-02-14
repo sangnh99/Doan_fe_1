@@ -169,6 +169,7 @@ export default function UserDeliveryAddress(props) {
 
 
   const reverseGeocode = ({ latitude: lat, longitude: lng}) => {
+    console.log("get location");
     const url = `${geocodeJson}?key=${apiKey}&latlng=${lat},${lng}`;
     searchInput.current.value = "Getting your location...";
     fetch(url)

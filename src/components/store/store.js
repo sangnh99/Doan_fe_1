@@ -130,7 +130,7 @@ export default function Store(props) {
                                 storeDetail.list_must_try_food.map(item =>  {
                                     return (
                                         <div className="col-xl-3" style={{paddingRight : 0}}>
-                                            <CardAntd item={item}/>
+                                            <CardAntd item={item} width={"100%"} height={255}/>
                                       </div>
                                     )
                                 })
@@ -158,10 +158,12 @@ export default function Store(props) {
                                                                                 name={item.name}
                                                                                 store={item.store_name}
                                                                                 ima={item.avatar}
-                                                                                rating={item.rating}
+                                                                                rating={item.summary_rating}
                                                                                 price={item.price}
                                                                                 distance={item.distance}
                                                                                 discountPercent={item.discount_percent}
+                                                                                isBestSeller={item.is_best_seller}
+                                                                                totalBuy={item.total_buy}
                                                                             />
                                                                         </div>
                                                                     </Link>

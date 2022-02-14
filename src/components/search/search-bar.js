@@ -6,6 +6,7 @@ import './search.css';
 import { Radio, Pagination } from "antd";
 import Card from "../card/card";
 import { BrowserRouter as Router, useHistory, Link } from 'react-router-dom';
+import CardAntdStore from "../card/card-antd-store";
 
 export default function SearchBar() {
     const [valueSearch, setValueSearch] = useState("");
@@ -13,13 +14,15 @@ export default function SearchBar() {
     const [listItem, setListItem] = useState([]);
     const [offset, setOffset] = useState(1);
     const [typeSearchResult, setTypeSearchResult] = useState(null);
+    const [totalRow, setTotalRow] = useState(null);
 
     const onSearch = () => {
         foodService.getAllByValueSearch(valueSearch, typeSearch, offset).then(
             response => {
                 setListItem(response.data.data);
+                setTotalRow(response.data.total_rows);
                 setTypeSearchResult(response.data.message);
-                console.log("message :" + response.data.data);
+                console.log("message :" + response.data.total_rows);
             }
         );
     }
@@ -40,14 +43,18 @@ export default function SearchBar() {
         onSearchOffset(page);
     };
 
+    const resetPage = () => {
+        setOffset(1);
+    }
+
     const history = useHistory();
 
     return (
         <div style={{ marginBottom: 150, marginTop: 100 }} >
             <h2 style={{ textAlign: "center", fontFamily: 'Nunito' }}>Tìm kiếm nhà hàng, món ăn</h2>
             <Radio.Group defaultValue="1" style={{ display: "flex", justifyContent: "center", alignItems: "center", marginTop: 20 }} onChange={(event) => { setTypeSearch(event.target.value) }}>
-                <Radio.Button value="1">Nhà hàng</Radio.Button>
-                <Radio.Button value="2">Món ăn</Radio.Button>
+                <Radio.Button value="1" onClick={resetPage}>Nhà hàng</Radio.Button>
+                <Radio.Button value="2" onClick={resetPage}>Món ăn</Radio.Button>
             </Radio.Group>
             <form action="" className="search-bar">
                 <input placeholder="Tìm nhà hàng, quán ăn" className="input-search" type="search" name="search" required onChange={(event) => { setValueSearch(event.target.value) }} />
@@ -64,20 +71,9 @@ export default function SearchBar() {
                                 {
                                     listItem.map(item => {// nha hang
                                         return (
-                                            <div className="col-xl-3">
-                                                <Link to={"/store/" + item.id} >
-                                                    <div>
-                                                        <Card
-                                                            name={item.name}
-                                                            store={item.store_name}
-                                                            ima={item.avatar}
-                                                            rating={item.rating}
-                                                            price={item.price}
-                                                            distance={item.distance}
-                                                        />
-
-                                                    </div>
-                                                </Link>
+                                            <div className="col-xl-3" style={{marginTop : 25}}>
+                                                <CardAntdStore item={item}
+                                                    width={"255px"} />
                                             </div>
                                         );
                                     })
@@ -91,18 +87,20 @@ export default function SearchBar() {
                                 {
                                     listItem.map(item => {
                                         return (
-                                            <div className="col-xl-3">
+                                            <div className="col-xl-3" style={{marginTop : 50}}>
                                                 <Link to={"/food/" + item.id} >
                                                     <div>
                                                         <Card
                                                             name={item.name}
                                                             store={item.store_name}
                                                             ima={item.avatar != null ? item.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl85MbwvCl_l-ri_GAYI2iCr8F8cSze8Ho8A&usqp=CAU"}
-                                                            rating={item.rating}
+                                                            rating={item.summary_rating}
                                                             price={item.price}
-                                                            discountPercent = {item.discount_percent}
-                                                            originalPrice = {item.original_price}
+                                                            discountPercent={item.discount_percent}
+                                                            originalPrice={item.original_price}
                                                             distance={item.distance}
+                                                            isBestSeller={item.is_best_seller}
+                                                            totalBuy={item.total_buy}
                                                         />
 
                                                     </div>
@@ -116,8 +114,8 @@ export default function SearchBar() {
                     }
                     {
                         typeSearchResult != null && (
-                            <div>
-                                <Pagination current={offset} onChange={onChangePage} total={50} style={{ marginBottom: 50, paddingLeft: 420 }} />;
+                            <div style={{marginTop: 40}}>
+                                <Pagination current={offset} onChange={onChangePage} total={totalRow} pageSize={12} style={{ marginBottom: 50, paddingLeft: 420 }} />;
                             </div>
                         )
                     }

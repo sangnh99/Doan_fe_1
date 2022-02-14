@@ -64,7 +64,7 @@
 
 
 import React, { useState, useEffect } from "react";
-import "./card.css";
+import "./card-favourite.css";
 import { Link } from 'react-router-dom';
 import { Button, Modal, message } from "antd";
 import Item from "antd/lib/list/Item";
@@ -82,7 +82,7 @@ export default function CardFavouriteStore(props) {
     return (
         <FavouriteContext.Consumer >
             {({ showModal }) => (
-                <div className="card">
+                <div className="card3">
                     <Link to={"/store/" + props.id} >
                         <div className="card-header">
                             {/* <div className="profile">

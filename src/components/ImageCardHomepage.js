@@ -4,12 +4,12 @@ import {Card, CardContent, CardMedia, Typography, Collapse} from '@mui/material'
 
 const useStyles = makeStyles({
     root: {
-      maxWidth: 645,
+      maxWidth: 595,
       background: 'rgba(0,0,0,0.5)',
       margin: '20px',
     },
     media: {
-      height: 440,
+      height: 390,
     },
     title: {
       fontFamily: 'Nunito',
@@ -42,7 +42,7 @@ const useStyles = makeStyles({
               component="h1"
               className={classes.title}
             >
-              {place.title}
+              <p style={{color : "black"}}>{place.title}</p>
             </Typography>
             <Typography
               variant="body2"

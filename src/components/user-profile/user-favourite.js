@@ -66,7 +66,7 @@ export default function UserFavourite(props) {
                                             {
                                                 listFood.length != 0 ? listFood.map(item => {
                                                     return (
-                                                        <div className="col-xl-3">
+                                                        <div className="col-xl-3" style={{marginTop : 50}}>
                                                             <CardFavouriteFood
                                                                 item={item}
                                                                 id={item.id}
@@ -77,6 +77,8 @@ export default function UserFavourite(props) {
                                                                 price={item.price}
                                                                 discountPercent = {item.discount_percent}
                                                                 distance={item.distance}
+                                                                isBestSeller={item.is_best_seller}
+                                                                totalBuy={item.total_buy}
                                                             />
                                                         </div>
                                                     )

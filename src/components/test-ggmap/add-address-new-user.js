@@ -104,6 +104,8 @@ export default function AddAddressNewUser() {
         setLat(place.geometry.location.lat());
         setLng(place.geometry.location.lng());
 
+        message.info(place.geometry.location.lat());
+
         if (place.address_components.length == 1) {
             setAddressSave(place.address_components[0].long_name)
         } else {
@@ -225,7 +227,8 @@ export default function AddAddressNewUser() {
             {
                     lat != null && (
                         <div style={{marginLeft:18, marginBottom : 50}}>
-                        <ShowMap1 lat={lat} lng={lng}/>
+                        {/* <ShowMap1 lat={lat} lng={lng} marginLeft={20} marginBottom={50}/> */}
+                        <ShowMap1 lat={lat} lng={lng} height={"500px"} width={"700px"} marginLeft={"190px"} marginBottom={"30px"}/>
                         <span style={{marginLeft : 190, marginBottom : 50}}> 
                         <Button style={{width : 700}} type="primary" onClick={confirmAdd}>Xác nhận</Button>
                         </span>

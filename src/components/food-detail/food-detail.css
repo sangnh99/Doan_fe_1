@@ -56,3 +56,29 @@
 	top: 0;
 	left: 0;
 }
+
+.best-seller-icon-card-food-detail {
+	position: absolute;
+	top : 12px;
+	left : 12px;
+	width: 100px;
+	height: 100px;
+	border-radius: 50px;
+}
+
+
+/* slick */
+
+.slick-arrow{
+    background-color: white !important;
+    margin: 0px 0px;
+}
+/* .slick-arrow:hover, .slick-arrow:active {
+    background-color: red !important;
+} */ 
+
+.slick-prev:before, .slick-next:before {
+    margin: 0px 0px;
+    font-size: 22px;
+    color: red !important;
+}
