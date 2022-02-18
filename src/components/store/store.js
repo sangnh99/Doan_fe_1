@@ -5,7 +5,7 @@ import { useParams } from 'react-router';
 import storeService from "../../services/store-service";
 import { Link } from 'react-router-dom';
 import CardSmall from "../card/card-small";
-import { Button, message } from 'antd';
+import { Button, message, Select } from 'antd';
 import userFavouriteService from "../../services/user.favourite.service";
 import { HeartOutlined } from '@ant-design/icons';
 import LocalOfferOutlinedIcon from '@mui/icons-material/LocalOfferOutlined';
@@ -18,6 +18,7 @@ import CardAntd from '../card/card-antd';
 const { Meta } = Card;
 
 const { TabPane } = Tabs;
+const { Option } = Select;
 
 const success = () => {
     message.success('Đã thêm vào sách ưa thích !');
@@ -27,14 +28,17 @@ export default function Store(props) {
     const [storeId, setStoreId] = useState(useParams().id);
     const [storeDetail, setStoreDetail] = useState(null);
     const [listComment, setListComment] = useState([]);
+    const [listCommentFilterd, setListCommentFilterd] = useState([]);
     const [isFavourite, setIsFavourite] = useState(null);
     const [commentPage, setCommentPage] = useState(1);
+    const [filterComment, setFilterComment] = useState("0");  
 
     useEffect(() => {
         storeService.getStoreDetail(storeId).then(
             response => {
                 setStoreDetail(response.data.data);
                 setListComment(response.data.data.list_comments);
+                setListCommentFilterd(response.data.data.list_comments);
                 setIsFavourite(response.data.data.is_favourite);
                 console.log(response.data.data);
             }
@@ -52,6 +56,16 @@ export default function Store(props) {
 
     const onChangePageComment = (page) => {
         setCommentPage(page);
+    }
+
+    const getCommentFilterd = (value) => {
+        setCommentPage(1);
+        setFilterComment(value);
+        if (value != "0"){
+            setListCommentFilterd(listComment.filter(t => t.rating == parseInt(value)));
+        } else {
+            setListCommentFilterd(listComment);
+        }
     }
 
     return (
@@ -102,10 +116,10 @@ export default function Store(props) {
                                                         <div>
                                                             {
                                                                 item.discount_percent != null ? (
-                                                                    <p><span style={{ color: "red" }}> {item.price.toLocaleString()}đ </span><span>{"<--"}</span> <span style={{ textDecoration: "line-through" }}> {item.original_price.toLocaleString()}đ </span> </p>
+                                                                    <p><span style={{ color: "red" }}> {parseInt(item.price).toLocaleString()}đ </span><span>{"<--"}</span> <span style={{ textDecoration: "line-through" }}> {item.original_price.toLocaleString()}đ </span> </p>
                                                                 ) :
                                                                     (
-                                                                        <p>{item.price.toLocaleString()}đ </p>
+                                                                        <p>{parseInt(item.price).toLocaleString()}đ </p>
                                                                     )
                                                             }
                                                         </div>
@@ -180,13 +194,25 @@ export default function Store(props) {
                             </div>
                         </div>
                         <div style={{ marginTop: 100 }}>
-                            <h3>Bình luận {listComment.length !== 0 && <span>({listComment.length})</span>}</h3>
+                            <span style={{fontSize : 26, fontFamily : "Nunito", fontWeight : "200"}}>Bình luận {listComment.length !== 0 && <span>({listComment.length})</span>} </span>
+                            <span style={{float : 'right'}}> Lọc theo : &ensp;
+                            <Select defaultValue={filterComment} onChange={(value) => {
+                                getCommentFilterd(value);
+                            }}>
+                                <Option value="0">Tất cả</Option>
+                                <Option value="5">5 sao</Option>
+                                <Option value="4">4 sao</Option>
+                                <Option value="3">3 sao</Option>
+                                <Option value="2">2 sao</Option>
+                                <Option value="1">1 sao</Option>
+                            </Select>
+                            </span>
                             <Divider />
                             {
-                                listComment.length !== 0 && (
+                                listCommentFilterd.length !== 0 && (
                                     <div>
                                         {
-                                            listComment.slice(5 * (commentPage - 1), 5 * commentPage).map(item => {
+                                            listCommentFilterd.slice(5 * (commentPage - 1), 5 * commentPage).map(item => {
                                                 return (
                                                     <CommentBox id={item.id}
                                                         name={item.user_app_name}
@@ -194,16 +220,20 @@ export default function Store(props) {
                                                         rating={item.rating}
                                                         comment={item.comment}
                                                         likenum={item.like_number}
-                                                        dislikenum={item.dislike_number} />
+                                                        dislikenum={item.dislike_number} 
+                                                        createddate={item.created_date}
+                                                        listimage={item.list_image}
+                                                        useravatar={item.user_avatar}
+                                                        />
                                                 );
                                             })
                                         }
-                                        <Pagination defaultCurrent={commentPage} pageSize={5} onChange={onChangePageComment} total={listComment.length} style={{ marginTop: 20, marginBottom: 50, display: "flex", justifyContent: "center", alignItems: "center" }} />
+                                        <Pagination current={commentPage} pageSize={5} onChange={onChangePageComment} total={listCommentFilterd.length} style={{ marginTop: 20, marginBottom: 50, display: "flex", justifyContent: "center", alignItems: "center" }} />
                                     </div>
                                 )
                             }
                             {
-                                listComment.length === 0 && (<div style={{ marginBottom: 100 }}>Hiện chưa có đánh giá cho nhà hàng</div>)
+                                listCommentFilterd.length === 0 && (<div style={{ marginBottom: 100 }}>Hiện chưa có đánh giá cho nhà hàng</div>)
                             }
                         </div>
                     </div>

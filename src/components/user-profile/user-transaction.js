@@ -1,11 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
-import { messagge, Divider, Collapse, Comment, Avatar, List, Button, Modal, Rate, Input, message, Pagination } from 'antd';
+import { messagge, Divider, Collapse, Comment, Avatar, List, Button, Modal, Rate, Input, message, Pagination, Upload } from 'antd';
 import { Link } from "react-router-dom";
 import userService from "../../services/user.service";
 import Loading from "../loading/loading-component";
 import { FrownOutlined, MehOutlined, SmileOutlined } from '@ant-design/icons';
 import './user-transaction.css';
 import foodService from "../../services/food-service";
+import { PlusOutlined } from '@ant-design/icons';
+import authHeader from '../../services/auth-header';
 
 const { Panel } = Collapse;
 const { TextArea } = Input;
@@ -26,6 +28,11 @@ export default function UserTransaction(props) {
     const [currentRating, setCurrentRating] = useState(0);
     const [currentComment, setCurrentComment] = useState("");
 
+    const [previewVisible, setPreviewVisible] = useState(false);
+    const [previewImage, setPreviewImage] = useState("");
+    const [fileList, setFileList] = useState([]);
+
+
     useEffect(() => {
         userService.getUserTransaction(JSON.parse(localStorage.getItem("user")).id).then(
             response => {
@@ -35,11 +42,34 @@ export default function UserTransaction(props) {
         );
     }, [])
 
+    const handleCancelAntd = () => {
+        setPreviewVisible(false)
+    }
+
+    const handlePreviewAntd = file => {
+        setPreviewImage(file.thumbUrl);
+        setPreviewVisible(true);
+    };
+
+    const handleUploadAntd = ({ fileList }) => {
+        setFileList(fileList);
+    };
+
     const handleOk = () => {
 
         if (currentRating != 0) {
+            let formData = new FormData();
+            for (let i = 0; i < fileList.length; i++) {
+                formData.append("files", fileList[i].originFileObj);
+            }
+    
+    
+            formData.append("user_app_id", JSON.parse(localStorage.getItem("user")).id);
+            formData.append("rating", currentRating);
+            formData.append("comment", currentComment);
+            formData.append("food_id", currentItem.food_id);
 
-            foodService.addRatingForFood(JSON.parse(localStorage.getItem("user")).id, currentItem.food_id, currentRating, currentComment).then(
+            foodService.addRatingForFood(currentItem.food_id, formData).then(
                 response => {
                     if ("success" != response.data.data) {
                         message.error("Đã có lỗi xảy ra trong quá trình đánh giá, vui lòng thử lại sau !")
@@ -47,9 +77,27 @@ export default function UserTransaction(props) {
                         message.success("Đã đánh giá thành công !");
                     }
                     setCurrentComment("");
+                    setFileList([]);
+                    setPreviewVisible(false);
+                    setPreviewImage("");
+
+                    setCurrentRating(0);
                     setVisibleRating(false);
                 }
             );
+
+
+            // foodService.addRatingForFood(JSON.parse(localStorage.getItem("user")).id, currentItem.food_id, currentRating, currentComment).then(
+            //     response => {
+            //         if ("success" != response.data.data) {
+            //             message.error("Đã có lỗi xảy ra trong quá trình đánh giá, vui lòng thử lại sau !")
+            //         } else {
+            //             message.success("Đã đánh giá thành công !");
+            //         }
+            //         setCurrentComment("");
+            //         setVisibleRating(false);
+            //     }
+            // );
         } else {
             message.info("Vui lòng lựa chọn điểm đánh giá !");
         }
@@ -58,6 +106,11 @@ export default function UserTransaction(props) {
 
     const handleCancel = () => {
         setCurrentComment("");
+        setFileList([]);
+        setPreviewVisible(false);
+        setPreviewImage("");
+
+        setCurrentRating(0);
         setVisibleRating(false);
     }
 
@@ -69,6 +122,28 @@ export default function UserTransaction(props) {
                     <p style={{ fontFamily: "Nunito", display: "flex", justifyContent: "center", alignItems: "center" }}>Đánh giá của bạn về món {currentItem.food_name} của {currentStoreName} ?</p>
                     <Rate onChange={(value) => { setCurrentRating(value) }} style={{ display: "flex", justifyContent: "center", alignItems: "center", fontSize: 40 }} defaultValue={0} character={({ index }) => customIcons[index + 1]} />
                     <TextArea rows={4} style={{ fontFamily: "Nunito", display: "flex", justifyContent: "center", alignItems: "center" }} placeholder="Bình luận của bạn về món ăn" onChange={(event) => { setCurrentComment(event.target.value) }} />
+                    <div style={{marginTop : 12}}>
+                        <Upload
+                            listType="picture-card"
+                            fileList={fileList}
+                            onPreview={handlePreviewAntd}
+                            onChange={handleUploadAntd}
+                            beforeUpload={() => false} // return false so that antd doesn't upload the picture right away
+                        >
+                            <div>
+                                <PlusOutlined />
+                                <div className="ant-upload-text">Upload ảnh đánh giá</div>
+                            </div>
+                        </Upload>
+
+                        <Modal
+                            visible={previewVisible}
+                            footer={null}
+                            onCancel={handleCancelAntd}
+                        >
+                            <img alt="example" style={{ width: "100%" }} src={previewImage} />
+                        </Modal>
+                    </div>
                 </div>
             </Modal>
             <Divider />
@@ -102,45 +177,45 @@ export default function UserTransaction(props) {
                                                             dataSource={item.list_item}
                                                             renderItem={childItem => (
                                                                 <div>
-                                                                {
-                                                                    
-                                                                    childItem.amount != 0 ? (
+                                                                    {
+
+                                                                        childItem.amount != 0 ? (
                                                                             <List.Item>
-                                                                            <List.Item.Meta
-                                                                                avatar={<Avatar src={childItem.food_avatar} />}
-                                                                                title={<a href={childItem.food_id}>{childItem.food_name} x {childItem.amount}</a>}
-                                                                                description={
-                                                                                    <div>
-                                                                                        {
-                                                                                            childItem.discount_percent != null ? (
-                                                                                                <span><span style={{ color: "red" }}> {childItem.price.toLocaleString()}đ </span><span>{"<--"}</span> <span style={{ textDecoration: "line-through" }}> {childItem.original_price.toLocaleString()}đ </span> </span>
-                                                                                            ) :
-                                                                                                (
-                                                                                                    <span>{childItem.price.toLocaleString()}đ </span>
-                                                                                                )
-                                                                                        }
-                                                                                    </div>
-                                                                                }
-                                                                            />
-                                                                            <Button type="default" style={{ color: "#fa541c", display: "inline-block", float : "right" }} onClick={
-                                                                                () => {
-                                                                                    setCurrentStoreName(item.store_name);
-                                                                                    setCurrentItem(childItem);
-                                                                                    setVisibleRating(true);
-                                                                                }
-                                                                            }>Đánh giá</Button>
+                                                                                <List.Item.Meta
+                                                                                    avatar={<Avatar src={childItem.food_avatar} />}
+                                                                                    title={<a href={childItem.food_id}>{childItem.food_name} x {childItem.amount}</a>}
+                                                                                    description={
+                                                                                        <div>
+                                                                                            {
+                                                                                                childItem.discount_percent != null ? (
+                                                                                                    <span><span style={{ color: "red" }}> {childItem.price.toLocaleString()}đ </span><span>{"<--"}</span> <span style={{ textDecoration: "line-through" }}> {childItem.original_price.toLocaleString()}đ </span> </span>
+                                                                                                ) :
+                                                                                                    (
+                                                                                                        <span>{childItem.price.toLocaleString()}đ </span>
+                                                                                                    )
+                                                                                            }
+                                                                                        </div>
+                                                                                    }
+                                                                                />
+                                                                                <Button type="default" style={{ color: "#fa541c", display: "inline-block", float: "right" }} onClick={
+                                                                                    () => {
+                                                                                        setCurrentStoreName(item.store_name);
+                                                                                        setCurrentItem(childItem);
+                                                                                        setVisibleRating(true);
+                                                                                    }
+                                                                                }>Đánh giá</Button>
                                                                             </List.Item>
                                                                         ) : (
                                                                             <List.Item>
-                                                                            <List.Item.Meta
-                                                                                avatar={<Avatar src={childItem.food_avatar} />}
-                                                                                title={"Món ăn đã bị xóa !"}
-                                                                                description={"Món ăn này đã bị xóa khỏi hệ thống !"}
-                                                                            />
+                                                                                <List.Item.Meta
+                                                                                    avatar={<Avatar src={childItem.food_avatar} />}
+                                                                                    title={"Món ăn đã bị xóa !"}
+                                                                                    description={"Món ăn này đã bị xóa khỏi hệ thống !"}
+                                                                                />
                                                                             </List.Item>
                                                                         )
                                                                     }
-                                                                    </div>
+                                                                </div>
                                                             )}
                                                         />
                                                     </Panel>

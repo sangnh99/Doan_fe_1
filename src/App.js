@@ -40,6 +40,8 @@ import SharePost from "./components/facebook/share-post";
 // import { Helmet, HelmetProvider } from 'react-helmet-async';
 import logo512 from "./static/logo512.png";
 import HelmetMetaData from "./components/facebook/helmet-metadata";
+import PicturesWall from "./components/user-profile/upload-img-antd";
+import ForgotPasswordPage from "./components/forgot-password/forgot-password-page";
 
 class App extends Component {
   constructor(props) {
@@ -122,7 +124,7 @@ class App extends Component {
                   <div className="navbar-nav mr-auto">
                     <li className="nav-item">
                       <Link to={"/home"} className="nav-link">
-                        Home
+                        Trang chủ
                       </Link>
                     </li>
                     <li className="nav-item">
@@ -275,13 +277,13 @@ class App extends Component {
                 <div className="navbar-nav ml-auto">
                   <li className="nav-item">
                     <Link to={"/login"} className="nav-link">
-                      Login
+                      Đăng nhập
                     </Link>
                   </li>
 
                   <li className="nav-item">
                     <Link to={"/register"} className="nav-link">
-                      Sign Up
+                      Đăng kí
                     </Link>
                   </li>
                 </div>
@@ -309,6 +311,8 @@ class App extends Component {
                 <Route path="/paypal" component={PaypalPage} />
                 <Route path="/handle-paypal" component={HandlePaypal} />
                 <Route path="/share" component={SharePost} />
+                <Route path="/test-upload-antd" component={PicturesWall} />
+                <Route path="/forgot-password" component={ForgotPasswordPage} />
               </Switch>
             </div>
 

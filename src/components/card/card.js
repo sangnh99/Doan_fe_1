@@ -48,7 +48,7 @@ export default function Card(props) {
       <div className="card-like-bar">
         <i className="fas fa-star" style={{ color: "#fadb14" }}></i>&nbsp;
         {
-          props.rating != 0 ? (
+          (props.rating != 0 && props.rating != null) ? (
             <span>{props.rating.substring(0, 3)}</span>
           ) : (
             <span style={{ fontFamily: "Nunito" }}>Chưa có đánh giá</span>

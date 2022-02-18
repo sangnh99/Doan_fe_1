@@ -30,6 +30,7 @@ export default function MenuSpecific(props) {
     const [sortType, setSortType] = useState(props.sortType);
     const [listItems, setListItems] = useState([]);
     const [offset, setOffset] = useState(1);
+    const [currentMenu, setCurrentMenu] = useState(0);
 
     useEffect(() => {
         getListFood();
@@ -50,10 +51,12 @@ export default function MenuSpecific(props) {
 
 
     const getListFood = () => {
+        setCurrentMenu(type);
         FoodService.getFoodByFoodType(type, offset, 9, sortValue, sortType, searchValue).then(
             response => {
                 console.log(response.data.data);
                 setListItems(response.data.data);
+
             }
         );
     }
@@ -70,33 +73,52 @@ export default function MenuSpecific(props) {
         <Router>
             <div className="container">
                 <div className="row">
-                    <div className="col-xl-3">
+                    <div className="col-xl-3" style={{marginTop : 20}}>
                         <div>
-                            <h3 className="w3-bar-item" style={{
-                            }}>Bạn muốn ăn gì </h3>
+                            <div style={{marginTop: 16}}>
+                                <img src='https://claude-bernard.ent.auvergnerhonealpes.fr/lectureFichiergw.do?ID_FICHIER=21439' style={{width : 260, height : 100}}></img>
+                            </div>
 
                             <Link to={"/menu/rice"} onClick={() => {
                                 setType(1);
-                            }}> <button class="button-52_com" role="button">Cơm</button></Link>
+                                setCurrentMenu(1);
+                            }}> <div class="wrapper-menu">
+                                    <p className={currentMenu == 1 ? "a-menu-red" : "a-menu"}><span class="span-menu">Cơm</span></p>
+                                </div></Link>
                             <Link to={"/menu/noodle"} onClick={() => {
                                 setType(2);
-                            }}><button class="button-52_bun" role="button">Bún/phở</button>
+                                setCurrentMenu(2);
+                            }}><div class="wrapper-menu">
+                                    <p className={currentMenu == 2 ? "a-menu-red" : "a-menu"}><span class="span-menu">Bún/phở</span></p>
+                                </div>
                             </Link>
                             <Link to={"/menu/fastfood"} onClick={() => {
                                 setType(3);
-                            }}><button class="button-52_anvat" role="button">Ăn vặt/Đồ ăn nhanh</button>
+                                setCurrentMenu(3);
+                            }}><div class="wrapper-menu">
+                                    <p className={currentMenu == 3 ? "a-menu-red" : "a-menu"}><span class="span-menu">Ăn vặt/đồ ăn nhanh</span></p>
+                                </div>
                             </Link>
                             <Link to={"/menu/speciality"} onClick={() => {
                                 setType(4);
-                            }}><button class="button-52_dacsan" role="button">Đặc sản</button>
+                                setCurrentMenu(4);
+                            }}><div class="wrapper-menu">
+                                    <p className={currentMenu == 4 ? "a-menu-red" : "a-menu"}><span class="span-menu">Đặc sản</span></p>
+                                </div>
                             </Link>
                             <Link to={"/menu/healthy"} onClick={() => {
                                 setType(5);
-                            }}><button class="button-52_healthy" role="button">Healthy</button>
+                                setCurrentMenu(5);
+                            }}><div class="wrapper-menu">
+                                    <p className={currentMenu == 5 ? "a-menu-red" : "a-menu"}><span class="span-menu">Healthy</span></p>
+                                </div>
                             </Link>
                             <Link to={"/menu/drink"} onClick={() => {
                                 setType(6);
-                            }}> <button class="button-52_drink" role="button">Đồ uống</button></Link>
+                                setCurrentMenu(6);
+                            }}> <div class="wrapper-menu">
+                                    <p className={currentMenu == 6 ? "a-menu-red" : "a-menu"}><span class="span-menu">Đồ uống</span></p>
+                                </div></Link>
                         </div>
                     </div>
                     <div className="col-xl-9">

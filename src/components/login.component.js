@@ -173,7 +173,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Form, Input, Button, message } from 'antd';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import AuthService from '../services/auth.service';
 import "../cssConfig/login-component.css";
 
@@ -258,7 +258,7 @@ export default function Login(props) {
                         </Button>
                     </Form.Item>
                 </Form>
-                <p style={{textAlign : "center"}}><a href="#" style={{color: "#096dd9" }}>Quên mật khẩu ?</a></p>
+                <p style={{textAlign : "center"}}><Link to={"/forgot-password"} style={{color: "#096dd9" }}>Quên mật khẩu ?</Link></p>
             </div>
         </section>
     );

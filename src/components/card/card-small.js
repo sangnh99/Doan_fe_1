@@ -69,7 +69,7 @@ export default function CardSmall(props) {
         </div>
       </div>
       {
-        props.name.length < 17 ? (
+        props.name.length < 19 ? (
           <div className="card-image" style={{ height: 170, width: 207 }}>
             {
               props.isBestSeller == 1 && (
@@ -98,7 +98,7 @@ export default function CardSmall(props) {
       <div className="card-like-bar">
         <i className="fas fa-star" style={{ color: "#fadb14" }}></i>&nbsp;
         {
-          props.rating != 0 ? (
+          (props.rating != 0 && props.rating != null ) ? (
             <span>{props.rating.substring(0, 3)}</span>
           ) : (
             <span style={{ fontFamily: "Nunito" }}>Chưa có đánh giá</span>

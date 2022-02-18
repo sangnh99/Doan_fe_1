@@ -140,7 +140,7 @@ export default function () {
                                 <p style={{ color: "#7f8893", fontFamily: "Nunito", fontSize: 20, marginBottom: 48 }}>
                                     Với vài thao tác đơn giản, bạn đã có thể lựa chọn được những món ăn mình ưa thích nhất với hệ sinh thái gồm rất nhiều món ăn phong phú cùng với hệ thống gợi ý món ăn thông minh
                                 </p>
-                                <button class="button-56" role="button"><span style={{ fontFamily: "Nunito", fontSize: 20 }}>Khám phá ngay</span></button>
+                                <Link to={"/menu"}> <button class="button-56" role="button"><span style={{ fontFamily: "Nunito", fontSize: 20 }}>Khám phá ngay</span></button></Link>
                             </div>
 
                             <div className='col-xl-6'>
@@ -212,76 +212,78 @@ export default function () {
                                 </p>
                             </div>
                             <div class="col-xl-6 col-lg-6 col-lg-offset-0 col-md-6 col-md-offset-0 col-sm-10 col-sm-offset-1 col-xs-12">
-                                <Carousel autoplay>
-                                    <figure>
-                                        <div class="media" style={{ backgroundImage: `url("https://cdn.profoto.com/cdn/05238cd/globalassets/tips-and-tricks/profoto-c1-plus-food-photography-anders-hannola.jpg?width=1200&quality=75&format=jpg")` }}></div>
-                                        <figcaption><svg viewBox="0 0 200 200" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <mask id="mask" x="0" y="0" width="100%" height="100%">
-                                                    <rect id="alpha" x="0" y="0" width="100%" height="100%"></rect><text class="title1" dx="50%" dy="2.5em">SELECT</text><text class="title1" dx="50%" dy="3.5em">YOUR</text><text class="title1" dx="50%" dy="4.5em">MENU</text>
-                                                </mask>
-                                            </defs>
-                                            <rect id="base" x="0" y="0" width="100%" height="100%"></rect>
-                                        </svg>
-                                            <div class="body1">
-                                                <p>&emsp;&ensp;Lựa chọn món ăn theo loại</p>
-                                                <button class="button-6" role="button">Đi tới menu</button>
-                                            </div>
-                                        </figcaption><a href="#"></a>
-                                    </figure>
-                                    <figure>
-                                        <div class="media" style={{ backgroundImage: `url("http://www.gommamag.com/wp-content/uploads/2019/07/Food-Photography-Techniques-You-need-to-Know.jpg")` }}></div>
-                                        <figcaption><svg viewBox="0 0 200 200" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <mask id="mask" x="0" y="0" width="100%" height="100%">
-                                                    <rect id="alpha" x="0" y="0" width="100%" height="100%"></rect><text class="title1" dx="50%" dy="2.5em">SELECT</text><text class="title1" dx="50%" dy="3.5em">YOUR</text><text class="title1" dx="50%" dy="4.5em">MENU</text>
+                                <Link to={"/menu"}>
+                                    <Carousel autoplay>
+                                        <figure>
+                                            <div class="media" style={{ backgroundImage: `url("https://cdn.profoto.com/cdn/05238cd/globalassets/tips-and-tricks/profoto-c1-plus-food-photography-anders-hannola.jpg?width=1200&quality=75&format=jpg")` }}></div>
+                                            <figcaption><svg viewBox="0 0 200 200" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <mask id="mask" x="0" y="0" width="100%" height="100%">
+                                                        <rect id="alpha" x="0" y="0" width="100%" height="100%"></rect><text class="title1" dx="50%" dy="2.5em">SELECT</text><text class="title1" dx="50%" dy="3.5em">YOUR</text><text class="title1" dx="50%" dy="4.5em">MENU</text>
+                                                    </mask>
+                                                </defs>
+                                                <rect id="base" x="0" y="0" width="100%" height="100%"></rect>
+                                            </svg>
+                                                <div class="body1">
+                                                    <p>&emsp;&ensp;Lựa chọn món ăn theo loại</p>
+                                                    <button class="button-6" role="button">Đi tới menu</button>
+                                                </div>
+                                            </figcaption><a href="#"></a>
+                                        </figure>
+                                        <figure>
+                                            <div class="media" style={{ backgroundImage: `url("http://www.gommamag.com/wp-content/uploads/2019/07/Food-Photography-Techniques-You-need-to-Know.jpg")` }}></div>
+                                            <figcaption><svg viewBox="0 0 200 200" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <mask id="mask" x="0" y="0" width="100%" height="100%">
+                                                        <rect id="alpha" x="0" y="0" width="100%" height="100%"></rect><text class="title1" dx="50%" dy="2.5em">SELECT</text><text class="title1" dx="50%" dy="3.5em">YOUR</text><text class="title1" dx="50%" dy="4.5em">MENU</text>
 
-                                                </mask>
-                                            </defs>
-                                            <rect id="base" x="0" y="0" width="100%" height="100%"></rect>
-                                        </svg>
-                                            <div class="body1">
-                                                <p>&emsp;&ensp;Lựa chọn món ăn gần bạn nhất</p>
-                                                &ensp;<button class="button-50" role="button">Món ăn gần tôi</button>
-                                            </div>
-                                        </figcaption><a href="#"></a>
-                                    </figure>
-                                    <figure>
-                                        <div class="media" style={{ backgroundImage: `url("https://images.squarespace-cdn.com/content/v1/561646c6e4b0f890085faa02/1610298624970-WIX4XMHGZYKTW2Z2738T/Food+Photography+Workshop")` }}></div>
-                                        <figcaption><svg viewBox="0 0 200 200" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <mask id="mask" x="0" y="0" width="100%" height="100%">
-                                                    <rect id="alpha" x="0" y="0" width="100%" height="100%"></rect><text class="title1" dx="50%" dy="2.5em">SELECT</text><text class="title1" dx="50%" dy="3.5em">YOUR</text><text class="title1" dx="50%" dy="4.5em">MENU</text>
+                                                    </mask>
+                                                </defs>
+                                                <rect id="base" x="0" y="0" width="100%" height="100%"></rect>
+                                            </svg>
+                                                <div class="body1">
+                                                    <p>&emsp;&ensp;Lựa chọn món ăn gần bạn nhất</p>
+                                                    &ensp;<button class="button-50" role="button">Món ăn gần tôi</button>
+                                                </div>
+                                            </figcaption><a href="#"></a>
+                                        </figure>
+                                        <figure>
+                                            <div class="media" style={{ backgroundImage: `url("https://images.squarespace-cdn.com/content/v1/561646c6e4b0f890085faa02/1610298624970-WIX4XMHGZYKTW2Z2738T/Food+Photography+Workshop")` }}></div>
+                                            <figcaption><svg viewBox="0 0 200 200" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <mask id="mask" x="0" y="0" width="100%" height="100%">
+                                                        <rect id="alpha" x="0" y="0" width="100%" height="100%"></rect><text class="title1" dx="50%" dy="2.5em">SELECT</text><text class="title1" dx="50%" dy="3.5em">YOUR</text><text class="title1" dx="50%" dy="4.5em">MENU</text>
 
-                                                </mask>
-                                            </defs>
-                                            <rect id="base" x="0" y="0" width="100%" height="100%"></rect>
-                                        </svg>
-                                            <div class="body1">
-                                                <p>&emsp;&ensp;Tìm các món ăn mà bạn muốn</p>
-                                                &ensp;&ensp;&ensp;<button class="button-59" role="button">Đi đến tìm kiếm</button>
-                                            </div>
-                                        </figcaption><a href="#"></a>
-                                    </figure>
-                                    <figure>
-                                        <div class="media" style={{ backgroundImage: `url("https://www.ppa.com/assets/images/ppmag_articles/2019320160929_ftinc_286_2.jpg")` }}></div>
-                                        <figcaption><svg viewBox="0 0 200 200" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-                                            <defs>
-                                                <mask id="mask" x="0" y="0" width="100%" height="100%">
-                                                    <rect id="alpha" x="0" y="0" width="100%" height="100%"></rect><text class="title1" dx="50%" dy="2.5em">SELECT</text><text class="title1" dx="50%" dy="3.5em">YOUR</text><text class="title1" dx="50%" dy="4.5em">MENU</text>
+                                                    </mask>
+                                                </defs>
+                                                <rect id="base" x="0" y="0" width="100%" height="100%"></rect>
+                                            </svg>
+                                                <div class="body1">
+                                                    <p>&emsp;&ensp;Tìm các món ăn mà bạn muốn</p>
+                                                    &ensp;&ensp;&ensp;<button class="button-59" role="button">Đi đến tìm kiếm</button>
+                                                </div>
+                                            </figcaption><a href="#"></a>
+                                        </figure>
+                                        <figure>
+                                            <div class="media" style={{ backgroundImage: `url("https://www.ppa.com/assets/images/ppmag_articles/2019320160929_ftinc_286_2.jpg")` }}></div>
+                                            <figcaption><svg viewBox="0 0 200 200" version="1.1" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+                                                <defs>
+                                                    <mask id="mask" x="0" y="0" width="100%" height="100%">
+                                                        <rect id="alpha" x="0" y="0" width="100%" height="100%"></rect><text class="title1" dx="50%" dy="2.5em">SELECT</text><text class="title1" dx="50%" dy="3.5em">YOUR</text><text class="title1" dx="50%" dy="4.5em">MENU</text>
 
-                                                </mask>
-                                            </defs>
-                                            <rect id="base" x="0" y="0" width="100%" height="100%"></rect>
-                                        </svg>
-                                            <div class="body1">
-                                                <p>&emsp;Lựa chọn món ăn đang giảm giá</p>
-                                                &ensp;<button class="button-50" role="button">Món ăn giảm giá</button>
-                                            </div>
-                                        </figcaption><a href="#"></a>
-                                    </figure>
+                                                    </mask>
+                                                </defs>
+                                                <rect id="base" x="0" y="0" width="100%" height="100%"></rect>
+                                            </svg>
+                                                <div class="body1">
+                                                    <p>&emsp;Lựa chọn món ăn đang giảm giá</p>
+                                                    &ensp;<button class="button-50" role="button">Món ăn giảm giá</button>
+                                                </div>
+                                            </figcaption><a href="#"></a>
+                                        </figure>
 
-                                </Carousel>
+                                    </Carousel>
+                                </Link>
                             </div>
                         </div>
                     </div>

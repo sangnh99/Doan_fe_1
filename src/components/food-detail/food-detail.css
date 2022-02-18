@@ -8,14 +8,14 @@
 /* ===================================================================================== */
 
 
-.ribbon {
+.ribbon-big {
 	width: 110px;
 	height: 110px;
 	overflow: hidden;
 	position: absolute;
 }
 
-.ribbon span {
+.ribbon-big span {
 	position: absolute;
 	width: 225px;
 	padding: 15px 0;
@@ -25,34 +25,34 @@
 	color: #fff;
 }
 
-.ribbon::after, .ribbon::before {
+.ribbon-big::after, .ribbon-big::before {
 	content: '';
 	border: 5px solid var(--ribbon-border);
 	position: absolute;
 }
 
-.ribbon-top-right {
+.ribbon-top-right-big {
 	top: -10px;
 	right: -10px;
 }
 
-.ribbon-top-right span {
+.ribbon-top-right-big span {
 	left: -35px;
 	top: 16px;
 	transform: rotate(45deg);
 }
 
-.ribbon-top-right::before, .ribbon-top-right::after {
+.ribbon-top-right-big::before, .ribbon-top-right-big::after {
 	border-top-color: transparent;
 	border-right-color: transparent;
 }
 
-.ribbon-top-right::after {
+.ribbon-top-right-big::after {
 	bottom: 0;
 	right: 0;
 }
 
-.ribbon-top-right::before {
+.ribbon-top-right-big::before {
 	top: 0;
 	left: 0;
 }
