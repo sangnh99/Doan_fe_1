@@ -193,8 +193,8 @@ export default function FoodDetail() {
 
                                     <Tooltip title="Chia sẻ lên facebook" color={"red"}><div className='col-xl-4' style={{ paddingLeft: 0, paddingRight: 0 }}>
                                         <SharePost
-                                            url={"https://sang-delivery-fe.herokuapp.com/food/" + foodDetail.food_id}
-                                            quote={foodDetail.food_name + "-" + foodDetail.store_name + "ngon tuyệt !"}
+                                            url={"https://sang-order.herokuapp.com/food/" + foodDetail.food_id}
+                                            quote={foodDetail.food_name + " - " + foodDetail.store_name + " ngon tuyệt !"}
                                         />
                                         <span style={{ float: "right" }}>|</span></div></Tooltip>
                                     <Tooltip title={foodDetail.total_buy + " lượt mua"} color={"red"}><div className='col-xl-4' style={{ paddingLeft: 0, paddingRight: 0 }}><span style={{ marginLeft: 70, fontSize: 16, color: "" }}>{foodDetail.total_buy}</span><ShoppingCartOutlinedIcon style={{ color: "orange" }} /></div></Tooltip>

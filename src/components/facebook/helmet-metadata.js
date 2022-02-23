@@ -3,7 +3,7 @@ import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
 export default function HelmetMetaData(props) {
     let location = useLocation();
-    let currentUrl = "https://sang-delivery-fe.herokuapp.com" + location.pathname;
+    let currentUrl = "https://sang-order.herokuapp.com" + location.pathname;
     let quote = props.quote !== undefined ? props.quote : "";
     let title = "SangOrder-Web";
     let image = props.image !== undefined ? props.image : "https://dotobjyajpegd.cloudfront.net/photo/5d120439849a5e0be8811bb3";

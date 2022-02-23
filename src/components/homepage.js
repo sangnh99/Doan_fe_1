@@ -178,7 +178,7 @@ export default function () {
                                     Bằng việc nhấn like và chia sẻ của bạn, SangOrder sẽ có cơ hội để tiếp cận tới nhiều người hơn, từ đó mang lại cho người dùng những đánh giá và chia sẻ tốt nhất
                                 </p>
                                 <p style={{ marginTop: 30 }}>&emsp;</p>
-                                <div class="fb-like" data-href="https://sang-delivery-fe.herokuapp.com/"
+                                <div class="fb-like" data-href="https://sang-order.herokuapp.com/"
                                     data-width="600px" data-layout="standard" data-action="like"
                                     data-size="large" data-share="true"></div>
 
