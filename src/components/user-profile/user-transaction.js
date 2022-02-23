@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { messagge, Divider, Collapse, Comment, Avatar, List, Button, Modal, Rate, Input, message, Pagination, Upload } from 'antd';
+import { messagge, Divider, Collapse, Comment, Avatar, List, Button, Modal, Rate, Input, message, Pagination, Upload, Spin } from 'antd';
 import { Link } from "react-router-dom";
 import userService from "../../services/user.service";
 import Loading from "../loading/loading-component";
@@ -40,6 +40,18 @@ export default function UserTransaction(props) {
                 console.log(response.data.data);
             }
         );
+        const interval = setInterval(() => {
+            userService.getUserTransaction(JSON.parse(localStorage.getItem("user")).id).then(
+                response => {
+                    setTransaction(response.data.data);
+                    console.log(response.data.data);
+                }
+            );
+        }, 1000 * 60);
+        return () => {
+            console.log(`clearing interval`);
+            clearInterval(interval);
+        };
     }, [])
 
     const handleCancelAntd = () => {
@@ -59,11 +71,12 @@ export default function UserTransaction(props) {
 
         if (currentRating != 0) {
             let formData = new FormData();
+
             for (let i = 0; i < fileList.length; i++) {
                 formData.append("files", fileList[i].originFileObj);
             }
-    
-    
+
+
             formData.append("user_app_id", JSON.parse(localStorage.getItem("user")).id);
             formData.append("rating", currentRating);
             formData.append("comment", currentComment);
@@ -122,7 +135,7 @@ export default function UserTransaction(props) {
                     <p style={{ fontFamily: "Nunito", display: "flex", justifyContent: "center", alignItems: "center" }}>Đánh giá của bạn về món {currentItem.food_name} của {currentStoreName} ?</p>
                     <Rate onChange={(value) => { setCurrentRating(value) }} style={{ display: "flex", justifyContent: "center", alignItems: "center", fontSize: 40 }} defaultValue={0} character={({ index }) => customIcons[index + 1]} />
                     <TextArea rows={4} style={{ fontFamily: "Nunito", display: "flex", justifyContent: "center", alignItems: "center" }} placeholder="Bình luận của bạn về món ăn" onChange={(event) => { setCurrentComment(event.target.value) }} />
-                    <div style={{marginTop : 12}}>
+                    <div style={{ marginTop: 12 }}>
                         <Upload
                             listType="picture-card"
                             fileList={fileList}
@@ -161,7 +174,7 @@ export default function UserTransaction(props) {
                                                         <div className="row">
                                                             <div className="col-xl-2" style={{ height: 120 }}><img src={item.store_avatar} style={{ width: "100%", height: "100%", backgroundSize: "cover" }}></img></div>
                                                             <div className="col-xl-8" style={{ fontFamily: "Nunito" }}>
-                                                                <p style={{ marginBottom: 2, fontSize: 18 }}><Link to={"/store/" + item.store_id}>{item.store_name}</Link></p>
+                                                                <p style={{ marginBottom: 2, fontSize: 18 }}><Link to={"/store/" + item.store_id}>{item.store_name}</Link>{item.status != "đã giao thành công" && <span>{" - " + item.status + " "}<Spin /> </span>}</p>
                                                                 <p style={{ marginBottom: 2 }}>{item.address.substring(0, item.address.length - 16)}</p>
                                                                 <p style={{ marginBottom: 2 }}>Phí áp dụng({item.distance}km): {(parseInt(item.distance * 7) * 1000).toLocaleString()}đ</p>
                                                                 <p style={{ marginBottom: 2 }}>Phương thức thanh toán : {item.payment_method}</p>
@@ -183,7 +196,7 @@ export default function UserTransaction(props) {
                                                                             <List.Item>
                                                                                 <List.Item.Meta
                                                                                     avatar={<Avatar src={childItem.food_avatar} />}
-                                                                                    title={<a href={childItem.food_id}>{childItem.food_name} x {childItem.amount}</a>}
+                                                                                    title={<Link to={"/food/" + childItem.food_id}>{childItem.food_name} x {childItem.amount}</Link>}
                                                                                     description={
                                                                                         <div>
                                                                                             {
@@ -197,13 +210,17 @@ export default function UserTransaction(props) {
                                                                                         </div>
                                                                                     }
                                                                                 />
-                                                                                <Button type="default" style={{ color: "#fa541c", display: "inline-block", float: "right" }} onClick={
-                                                                                    () => {
-                                                                                        setCurrentStoreName(item.store_name);
-                                                                                        setCurrentItem(childItem);
-                                                                                        setVisibleRating(true);
-                                                                                    }
-                                                                                }>Đánh giá</Button>
+                                                                                {
+                                                                                    item.status == "đã giao thành công" && (
+                                                                                        <Button type="default" style={{ color: "#fa541c", display: "inline-block", float: "right" }} onClick={
+                                                                                            () => {
+                                                                                                setCurrentStoreName(item.store_name);
+                                                                                                setCurrentItem(childItem);
+                                                                                                setVisibleRating(true);
+                                                                                            }
+                                                                                        }>Đánh giá</Button>
+                                                                                    )
+                                                                                }
                                                                             </List.Item>
                                                                         ) : (
                                                                             <List.Item>
