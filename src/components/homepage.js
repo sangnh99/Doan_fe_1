@@ -195,7 +195,7 @@ export default function () {
                                     đa dạng !
                                 </h3>
                                 <p style={{ color: "#7f8893", fontFamily: "Nunito", fontSize: 20, marginBottom: 30 }}>
-                                    Bao gồm rất nhiều loại thức ăn khác nhau :
+                                    Bao gồm rất nhiều loại món ăn khác nhau :
                                     <p>
                                         + Cơm, bún/phở
                                         <br />
