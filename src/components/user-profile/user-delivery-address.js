@@ -257,7 +257,8 @@ export default function UserDeliveryAddress(props) {
       // =====
 
       const handleOkDelete = () => {
-        userAddressService.deleteAddress(JSON.parse(localStorage.getItem("user")).id, currentAddress.id).then(
+        if (data.length > 1){
+          userAddressService.deleteAddress(JSON.parse(localStorage.getItem("user")).id, currentAddress.id).then(
             response => {
                 setData(response.data.data);
                 if (response.data.data.length != 0) {
@@ -265,7 +266,12 @@ export default function UserDeliveryAddress(props) {
                 }
                 successDelete();
             }
-        )
+        ).catch(error => {
+          message.error(error.response.data.message);
+        })
+        } else {
+          message.error("Bạn phải có ít nhất một địa chỉ giao hàng !");
+        }
 
         setIsVisibleDeleteModal(false);
       };
@@ -384,7 +390,7 @@ export default function UserDeliveryAddress(props) {
                 {
                     lat != null && (
                         <div>
-                        <ShowMap1 lat={lat} lng={lng} height={"500px"} width={"700px"} marginLeft={"190px"} marginBottom={"30px"}/>
+                        <ShowMap1 lat={lat} lng={lng} height={"500px"} width={"700px"} marginLeft={"217px"} marginBottom={"30px"}/>
                         <span style={{display: "flex", justifyContent: "center", alignItems: "center", marginBottom : 50}}> 
                         <Button style={{width : 700}} type="primary" onClick={confirmAdd}>Xác nhận</Button>
                         </span>

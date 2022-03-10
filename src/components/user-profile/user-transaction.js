@@ -84,6 +84,7 @@ export default function UserTransaction(props) {
 
             foodService.addRatingForFood(currentItem.food_id, formData).then(
                 response => {
+                    foodService.updateRecommendFile();
                     if ("success" != response.data.data) {
                         message.error("Đã có lỗi xảy ra trong quá trình đánh giá, vui lòng thử lại sau !")
                     } else {

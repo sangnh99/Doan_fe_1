@@ -39,5 +39,8 @@ class FoodService {
     getListSaleFood(user_app_id){
         return axios.get(API_URL + "food/get-list-sale-food",  {params : {user_app_id: user_app_id}, headers : authHeader()});
     }
+    updateRecommendFile(){
+        return axios.get(API_URL + "food/update-recommend-file",  {params : {}, headers : authHeader()});
+    }
 }
 export default new FoodService();

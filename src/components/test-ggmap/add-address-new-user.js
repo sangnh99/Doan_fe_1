@@ -203,7 +203,7 @@ export default function AddAddressNewUser() {
             <Modal width={1000} title="Thêm địa chỉ" visible={isVisibleAddModal} onOk={handleOkAdd} onCancel={handleCancelAdd}>
                 <p>Bạn có muốn thêm địa chỉ {addressSave} ?</p>
             </Modal>
-            <div style={{marginLeft : 206}}>
+            <div style={{marginLeft : 236}}>
                     <div style={{marginTop : 50, marginBottom : 30 }}>
                         <span style={{fontSize : 30, fontFamily : "Nunito"}}>Thiết lập địa chỉ giao hàng của bạn</span>
                     </div>
@@ -228,8 +228,8 @@ export default function AddAddressNewUser() {
                     lat != null && (
                         <div style={{marginLeft:18, marginBottom : 50}}>
                         {/* <ShowMap1 lat={lat} lng={lng} marginLeft={20} marginBottom={50}/> */}
-                        <ShowMap1 lat={lat} lng={lng} height={"500px"} width={"700px"} marginLeft={"190px"} marginBottom={"30px"}/>
-                        <span style={{marginLeft : 190, marginBottom : 50}}> 
+                        <ShowMap1 lat={lat} lng={lng} height={"500px"} width={"700px"} marginLeft={"217px"} marginBottom={"30px"}/>
+                        <span style={{marginLeft : 217, marginBottom : 50}}> 
                         <Button style={{width : 700}} type="primary" onClick={confirmAdd}>Xác nhận</Button>
                         </span>
                         </div>

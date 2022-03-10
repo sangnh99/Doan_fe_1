@@ -280,6 +280,13 @@ export default function FoodDetail() {
                                 </div>
                             </div>
                         </div>
+                        <div>
+                            {
+                                foodDetail.like_number != 0 && (
+                                    <p>Có {foodDetail.like_number} người dùng đã thích sản phẩm này gần đây. </p>   
+                                )
+                            }
+                        </div>
 
                         {/* slick */}
 

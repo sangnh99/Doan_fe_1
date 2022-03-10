@@ -21,6 +21,7 @@ import { food_category } from '../../enum/food-category';
 import FoodDetail from '../food-detail/food-detail';
 import { transition } from '@chakra-ui/react';
 import MenuOption from './menu-option';
+import Loading from '../loading/loading-component';
 
 // =======================================================================================
 export default function MenuSpecific(props) {
@@ -28,7 +29,8 @@ export default function MenuSpecific(props) {
     const [sortValue, setSortValue] = useState(props.sortValue);
     const [searchValue, SetSearchValue] = useState(props.searchValue);
     const [sortType, setSortType] = useState(props.sortType);
-    const [listItems, setListItems] = useState([]);
+    const [listItems, setListItems] = useState(null);
+    const [totalRows, setTotalRows] = useState(0);
     const [offset, setOffset] = useState(1);
     const [currentMenu, setCurrentMenu] = useState(0);
 
@@ -41,29 +43,27 @@ export default function MenuSpecific(props) {
         setSortValue(props.sortValue);
         setSortType(props.sortType);
         SetSearchValue(props.searchValue);
-        // getListFood();
     }, [props.sortType, props.sortValue, props.searchValue]);
 
     useEffect(() => {
-        console.log("update state");
-        getListFood();
-    }, [sortType, sortValue, offset, searchValue, type]);
+        getListFood(1);
+        setOffset(1);
+    }, [sortType, sortValue, searchValue, type]);
 
 
-    const getListFood = () => {
+    const getListFood = (page = offset) => {
         setCurrentMenu(type);
-        FoodService.getFoodByFoodType(type, offset, 9, sortValue, sortType, searchValue).then(
+        FoodService.getFoodByFoodType(type, page, 9, sortValue, sortType, searchValue).then(
             response => {
                 console.log(response.data.data);
                 setListItems(response.data.data);
-
+                setTotalRows(response.data.total_rows);
             }
         );
     }
 
 
     function onChangePage(page) {
-        console.log(page);
         setOffset(page);
     };
 
@@ -73,10 +73,10 @@ export default function MenuSpecific(props) {
         <Router>
             <div className="container">
                 <div className="row">
-                    <div className="col-xl-3" style={{marginTop : 20}}>
+                    <div className="col-xl-3" style={{ marginTop: 20 }}>
                         <div>
-                            <div style={{marginTop: 16}}>
-                                <img src='https://claude-bernard.ent.auvergnerhonealpes.fr/lectureFichiergw.do?ID_FICHIER=21439' style={{width : 260, height : 100}}></img>
+                            <div style={{ marginTop: 16 }}>
+                                <img src='https://claude-bernard.ent.auvergnerhonealpes.fr/lectureFichiergw.do?ID_FICHIER=21439' style={{ width: 260, height: 100 }}></img>
                             </div>
 
                             <Link to={"/menu/rice"} onClick={() => {
@@ -122,31 +122,38 @@ export default function MenuSpecific(props) {
                         </div>
                     </div>
                     <div className="col-xl-9">
-                        <div className="row">
-                            {
-                                listItems.map(item => {
-                                    return (
-                                        <div className="col-xl-4" style={{ marginTop: 50 }}>
-                                            <div onClick={() => { history.push(`/food/${item.id}`) }}>
-                                                <Card
-                                                    name={item.name}
-                                                    store={item.store_name}
-                                                    ima={item.avatar != null ? item.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl85MbwvCl_l-ri_GAYI2iCr8F8cSze8Ho8A&usqp=CAU"}
-                                                    rating={item.summary_rating}
-                                                    price={item.price}
-                                                    discountPercent={item.discount_percent}
-                                                    distance={item.distance}
-                                                    isBestSeller={item.is_best_seller}
-                                                    totalBuy={item.total_buy}
-                                                />
+                        {
+                            listItems != null ? (
+                                <div className="row">
 
-                                            </div>
-                                        </div>
-                                    );
-                                })
-                            }
-                            <Pagination current={offset} onChange={onChangePage} total={50} style={{ marginBottom: 50, paddingLeft: 350, marginTop: 60 }} />
-                        </div>
+                                    {
+                                        listItems.map(item => {
+                                            return (
+                                                <div className="col-xl-4" style={{ marginTop: 50 }}>
+                                                    <div onClick={() => { history.push(`/food/${item.id}`) }}>
+                                                        <Card
+                                                            name={item.name}
+                                                            store={item.store_name}
+                                                            ima={item.avatar != null ? item.avatar : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTl85MbwvCl_l-ri_GAYI2iCr8F8cSze8Ho8A&usqp=CAU"}
+                                                            rating={item.summary_rating}
+                                                            price={item.price}
+                                                            discountPercent={item.discount_percent}
+                                                            distance={item.distance}
+                                                            isBestSeller={item.is_best_seller}
+                                                            totalBuy={item.total_buy}
+                                                        />
+
+                                                    </div>
+                                                </div>
+                                            );
+                                        })
+                                    }
+                                    <div style={{width : "100%"}}>
+                                    <Pagination current={offset} onChange={(value) => { setOffset(value); getListFood(value) }} total={totalRows} style={{ marginBottom: 50, paddingLeft: 350, marginTop: 60 }} />
+                                    </div>
+                                </div>
+                            ) : <Loading />
+                        }
                     </div>
                 </div>
             </div>
