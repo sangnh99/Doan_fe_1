@@ -66,7 +66,7 @@ export default class ValidateRegister extends Component {
     render() {
         return (
             <div>
-                <div className="container-fluid">
+                <div className="container-fluid" style={{marginBottom : 200}}>
                     {this.state.message && (
                         <Alert
                             message={this.state.message}

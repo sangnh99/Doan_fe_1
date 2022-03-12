@@ -52,6 +52,14 @@ class AuthService {
   getCurrentUser() {
     return JSON.parse(localStorage.getItem('user'));;
   }
+
+  confirmEmailForgotPassword(email){
+    return axios.post(API_URL + 'forgot_password/confirm-email', {"email" : email});
+  }
+
+  setNewPasswordForgotPassword(new_password, user_app_id, email){
+    return axios.post(API_URL + 'forgot_password/reset_password', {"new_password" : new_password, "user_app_id" : user_app_id , "email" : email});
+  }
 }
 
 export default new AuthService();

@@ -2,7 +2,7 @@ import React from "react";
 import "./card.css";
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 
-export default function Card(props) {
+export default function CardFindFood(props) {
   return (
     <div className="card1">
       {
@@ -49,7 +49,7 @@ export default function Card(props) {
         <i className="fas fa-star" style={{ color: "#fadb14" }}></i>&nbsp;
         {
           (props.rating != 0 && props.rating != null) ? (
-            <span>{props.rating.substring(0, 3)}</span>
+            <span>{props.rating}</span>
           ) : (
             <span style={{ fontFamily: "Nunito" }}>Chưa có đánh giá</span>
           )

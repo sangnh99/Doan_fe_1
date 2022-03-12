@@ -9,31 +9,31 @@ export default class Footer extends Component {
                     <div className="container">
                         <div className="row">
                             <div className="footer-col">
-                                <h4>company</h4>
+                                <h4>Website</h4>
                                 <ul>
-                                    <li><a href="#">about us</a></li>
-                                    <li><a href="#">our services</a></li>
-                                    <li><a href="#">privacy policy</a></li>
-                                    <li><a href="#">affiliate program</a></li>
+                                    <li><a href="#">giới thiệu</a></li>
+                                    <li><a href="#">các dịch vụ</a></li>
+                                    <li><a href="#">chính sách</a></li>
+                                    <li><a href="#">Liên hệ</a></li>
                                 </ul>
                             </div>
                             <div className="footer-col">
-                                <h4>get help</h4>
+                                <h4>Trợ giúp</h4>
                                 <ul>
                                     <li><a href="#">FAQ</a></li>
-                                    <li><a href="#">shipping</a></li>
-                                    <li><a href="#">returns</a></li>
-                                    <li><a href="#">order status</a></li>
-                                    <li><a href="#">payment options</a></li>
+                                    <li><a href="#">hướng dẫn</a></li>
+                                    <li><a href="#">đăng kí</a></li>
+                                    <li><a href="#">Llựa chọn món ăn</a></li>
+                                    <li><a href="#">Lựa chọn thanh toán</a></li>
                                 </ul>
                             </div>
                             <div className="footer-col">
-                                <h4>online shop</h4>
+                                <h4>Menu SangOrder</h4>
                                 <ul>
-                                    <li><a href="#">watch</a></li>
-                                    <li><a href="#">bag</a></li>
-                                    <li><a href="#">shoes</a></li>
-                                    <li><a href="#">dress</a></li>
+                                    <li><a href="#">thức ăn chính</a></li>
+                                    <li><a href="#">ăn vặt/ăn nhanh</a></li>
+                                    <li><a href="#">healthy</a></li>
+                                    <li><a href="#">đồ uống</a></li>
                                 </ul>
                             </div>
                             <div className="footer-col">

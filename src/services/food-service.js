@@ -24,8 +24,11 @@ class FoodService {
     getAllByValueSearch(value_search, type_search, offset){
         return axios.get(API_URL + "food/search", {params : {user_app_id: JSON.parse(localStorage.getItem("user")).id, value_search : value_search, type_search : type_search, offset: offset}, headers : authHeader()});
     }
-    addRatingForFood(user_app_id, food_id, rating, comment){
-        return axios.post(API_URL + "food/" + food_id + "/add-rating",  {"user_app_id" : user_app_id, "rating" : rating, "comment" : comment},{ headers : authHeader()});
+    // addRatingForFood(user_app_id, food_id, rating, comment){
+    //     return axios.post(API_URL + "food/" + food_id + "/add-rating",  {"user_app_id" : user_app_id, "rating" : rating, "comment" : comment},{ headers : authHeader()});
+    // }
+    addRatingForFood(food_id, data){
+        return axios.post(API_URL + "food/" + food_id + "/add-rating", data,{ headers : authHeader()});
     }
     getListNearFood(user_app_id){
         return axios.get(API_URL + "food/get-list-near-food",  {params : {user_app_id: user_app_id}, headers : authHeader()});
@@ -35,6 +38,9 @@ class FoodService {
     }
     getListSaleFood(user_app_id){
         return axios.get(API_URL + "food/get-list-sale-food",  {params : {user_app_id: user_app_id}, headers : authHeader()});
+    }
+    updateRecommendFile(){
+        return axios.get(API_URL + "food/update-recommend-file",  {params : {}, headers : authHeader()});
     }
 }
 export default new FoodService();

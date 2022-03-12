@@ -66,7 +66,7 @@ export default class MenuCategory extends Component {
                                     sortValue: value
                                 });
                             }}>
-                                <Option value="id">Sản phẩm mới</Option>
+                                <Option value="id">Món ăn mới</Option>
                                 <Option value="price">Giá tiền</Option>
                                 <Option value="summaryRating">Rating</Option>
                             </Select>

@@ -7,7 +7,7 @@ import { food_category } from '../../enum/food-category';
 import foodService from '../../services/food-service';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
-import { InputNumber, Cascader, Button, message, Tabs, Input, Rate, Tooltip } from 'antd';
+import { InputNumber, Cascader, Button, message, Tabs, Input, Rate, Tooltip, Select, Pagination } from 'antd';
 import { ShoppingCartOutlined, DollarCircleOutlined, HeartOutlined } from '@ant-design/icons';
 import { Divider } from 'antd';
 import CommentBox from '../comment-box/comment-box';
@@ -36,6 +36,7 @@ import CardAntdFood from '../card/card-antd-food';
 import ArrowBlockRecommend from '../popular-component/arrow-block-recommend';
 
 const { TabPane } = Tabs;
+const { Option } = Select;
 
 const success = () => {
     message.success('Đã thêm vào sách ưa thích !');
@@ -87,6 +88,9 @@ export default function FoodDetail() {
     const [foodOfStore, setFoodOfStore] = useState([]);
     const [isFavourite, setIsFavourite] = useState(null);
     const [note, setNote] = useState("");
+    const [commentPage, setCommentPage] = useState(1);
+    const [filterComment, setFilterComment] = useState("0");  
+    const [listCommentFilterd, setListCommentFilterd] = useState([]);
 
     useEffect(() => {
         getFoodDetail(id);
@@ -104,10 +108,10 @@ export default function FoodDetail() {
             response => {
                 setFoodDetail(response.data.data);
                 setListComment(response.data.data.list_comments);
+                setListCommentFilterd(response.data.data.list_comments);
                 setIsFavourite(response.data.data.is_favourite);
                 setNote(response.data.data.note);
                 setStoreId(response.data.data.store_id);
-                console.log(response.data.data);
                 noteInput.current.value = response.data.data.note;
             }
         );
@@ -118,7 +122,7 @@ export default function FoodDetail() {
     }
 
     const clickNewFoodRecommend = (foodId, store) => {
-        if (store == storeId){
+        if (store == storeId) {
             getFoodDetail(foodId);
         } else {
             getFoodDetail(foodId);
@@ -126,7 +130,7 @@ export default function FoodDetail() {
                 response => {
                     setFoodOfStore(response.data.data);
                 }
-            );            
+            );
         }
     }
 
@@ -139,6 +143,20 @@ export default function FoodDetail() {
         );
     }
 
+    const onChangePageComment = (page) => {
+        setCommentPage(page);
+    }
+
+    const getCommentFilterd = (value) => {
+        setCommentPage(1);
+        setFilterComment(value);
+        if (value != "0"){
+            setListCommentFilterd(listComment.filter(t => t.rating == parseInt(value)));
+        } else {
+            setListCommentFilterd(listComment);
+        }
+    }
+
 
     return (
         <div>
@@ -147,12 +165,12 @@ export default function FoodDetail() {
                     <div className="container">
                         <span style={{ color: "#C0C0C0", fontSize: 16 }}><Link to={"/home"}> Trang chủ </Link> </span> <span style={{ color: "#C0C0C0", fontSize: 10 }}>>> </span> <span style={{ color: "#C0C0C0", fontSize: 16 }}><Link to={"/menu/" + food_category[foodDetail.food_type_id]} >{food_category_vn[foodDetail.food_type_id]} </Link></span><span style={{ color: "#C0C0C0", fontSize: 10 }}> >> </span> <span style={{ color: "#187caa", fontSize: 16 }}>{foodDetail.food_name}</span>
 
-                        <div className="row" style={{marginBottom : 30}}>
+                        <div className="row" style={{ marginBottom: 30 }}>
                             <div className="col-xl-5" style={{ paddingRight: 0, paddingLeft: 0, border: "1px solid gray" }}>
                                 <div className="ava-card" style={{ position: "relative" }}>
                                     {
                                         foodDetail.discount_percent != null && (
-                                            <div class="ribbon ribbon-top-right">
+                                            <div class="ribbon-big ribbon-top-right-big">
                                                 <span>Giảm {foodDetail.discount_percent}%</span>
                                             </div>
                                         )
@@ -175,8 +193,8 @@ export default function FoodDetail() {
 
                                     <Tooltip title="Chia sẻ lên facebook" color={"red"}><div className='col-xl-4' style={{ paddingLeft: 0, paddingRight: 0 }}>
                                         <SharePost
-                                            url={"https://sang-delivery-fe.herokuapp.com/food/" + foodDetail.food_id}
-                                            quote={foodDetail.food_name + "-" + foodDetail.store_name + "ngon tuyệt !"}
+                                            url={"https://sang-order.herokuapp.com/food/" + foodDetail.food_id}
+                                            quote={foodDetail.food_name + " - " + foodDetail.store_name + " ngon tuyệt !"}
                                         />
                                         <span style={{ float: "right" }}>|</span></div></Tooltip>
                                     <Tooltip title={foodDetail.total_buy + " lượt mua"} color={"red"}><div className='col-xl-4' style={{ paddingLeft: 0, paddingRight: 0 }}><span style={{ marginLeft: 70, fontSize: 16, color: "" }}>{foodDetail.total_buy}</span><ShoppingCartOutlinedIcon style={{ color: "orange" }} /></div></Tooltip>
@@ -230,12 +248,12 @@ export default function FoodDetail() {
                                     {
                                         foodDetail.discount_percent != null ? (
                                             <span style={{ fontFamily: "Nunito", fontSize: 22, paddingTop: 4 }}><LocalOfferOutlinedIcon style={{ color: "red" }} />
-                                                {foodDetail.price}đ <i class='fas fa-long-arrow-alt-left' style={{ fontSize: 24 }}></i>&ensp;
-                                                <span style={{ textDecoration: "line-through" }}> {foodDetail.original_price}đ </span>
+                                                {parseInt(foodDetail.price).toLocaleString()}đ <i class='fas fa-long-arrow-alt-left' style={{ fontSize: 24 }}></i>&ensp;
+                                                <span style={{ textDecoration: "line-through" }}> {foodDetail.original_price.toLocaleString()}đ </span>
                                                 <span><img src="https://www.publicdomainpictures.net/pictures/120000/t2/red-sale-label-1425210027dkz.jpg" style={{ width: 46, height: 36, paddingBottom: 6 }}></img></span></span>
                                         ) : (
                                             <span style={{ fontFamily: "Nunito", fontSize: 22, paddingTop: 4 }}><LocalOfferOutlinedIcon style={{ color: "red" }} />
-                                                {foodDetail.price}đ</span>
+                                                {parseInt(foodDetail.price).toLocaleString()}đ</span>
                                         )
                                     }
                                 </div>
@@ -262,9 +280,16 @@ export default function FoodDetail() {
                                 </div>
                             </div>
                         </div>
+                        <div>
+                            {
+                                foodDetail.like_number != 0 && (
+                                    <p>Có {foodDetail.like_number} người dùng đã thích sản phẩm này gần đây. </p>   
+                                )
+                            }
+                        </div>
 
                         {/* slick */}
-                        
+
                         <ArrowBlockRecommend title={"Có thể bạn cũng sẽ thích"} />
 
                         <div style={{ marginTop: 40, marginBottom: 70 }}>
@@ -331,28 +356,45 @@ export default function FoodDetail() {
                             </div>
                         </div>
                         <div style={{ marginTop: 100 }}>
-                            <h3>Bình luận</h3>
+                            <span style={{ fontSize: 26, fontFamily: "Nunito", fontWeight: "200" }}>Bình luận {listComment.length !== 0 && <span>({listComment.length})</span>} </span>
+                            <span style={{ float: 'right' }}> Lọc theo : &ensp;
+                                <Select defaultValue={filterComment} onChange={(value) => {
+                                    getCommentFilterd(value);
+                                }}>
+                                    <Option value="0">Tất cả</Option>
+                                    <Option value="5">5 sao</Option>
+                                    <Option value="4">4 sao</Option>
+                                    <Option value="3">3 sao</Option>
+                                    <Option value="2">2 sao</Option>
+                                    <Option value="1">1 sao</Option>
+                                </Select>
+                            </span>
                             <Divider />
                             {
-                                listComment.length !== 0 && (
+                                listCommentFilterd.length !== 0 && (
                                     <div>
                                         {
-                                            listComment.map(item => {
+                                            listCommentFilterd.slice(5 * (commentPage - 1), 5 * commentPage).map(item => {
                                                 return (
                                                     <CommentBox id={item.id}
                                                         name={item.user_app_name}
                                                         rating={item.rating}
                                                         comment={item.comment}
                                                         likenum={item.like_number}
-                                                        dislikenum={item.dislike_number} />
+                                                        dislikenum={item.dislike_number} 
+                                                        createddate={item.created_date}
+                                                        listimage={item.list_image}
+                                                        useravatar={item.user_avatar}
+                                                        />
                                                 );
                                             })
                                         }
+                                        <Pagination current={commentPage} pageSize={5} onChange={onChangePageComment} total={listCommentFilterd.length} style={{ marginTop: 20, marginBottom: 50, display: "flex", justifyContent: "center", alignItems: "center" }} />
                                     </div>
                                 )
                             }
                             {
-                                listComment.length === 0 && (<div style={{ marginBottom: 100 }}>Hiện chưa có đánh giá cho sản phẩm</div>)
+                                listCommentFilterd.length === 0 && (<div style={{ marginBottom: 100 }}>Hiện chưa có đánh giá cho món ăn</div>)
                             }
                         </div>
                     </div>
