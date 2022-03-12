@@ -92,14 +92,35 @@ export default function CardFavouriteStore(props) {
                                 <div className="card-store">{props.store}</div>
                             </div>
                         </div>
-                        <div className="card-image" style={{ height: 170, width: 225 }}>
+                        {/* <div className="card-image" style={{ height: 170, width: 225 }}>
                             {
                                 props.isBestSeller == 1 && (
                                     <img className="best-seller-icon-card" src="https://previews.123rf.com/images/artag/artag1211/artag121100001/16235733-best-seller-icon.jpg" />
                                 )
                             }
                             <img src={props.ima} alt="Logo" style={{ height: 158, width: 208, borderRadius: 10 }} />
-                        </div>
+                        </div> */}
+                        {
+                            props.name.length < 20 ? (
+                                <div className="card-image" style={{ height: 170, width: 225 }}>
+                                    {
+                                        props.isBestSeller == 1 && (
+                                            <img className="best-seller-icon-card" src="https://previews.123rf.com/images/artag/artag1211/artag121100001/16235733-best-seller-icon.jpg" />
+                                        )
+                                    }
+                                    <img src={props.ima} alt="Logo" style={{ height: 158, width: 208, borderRadius: 10 }} />
+                                </div>
+                            ) : (
+                                <div className="card-image" style={{ height: 148, width: 225 }}>
+                                    {
+                                        props.isBestSeller == 1 && (
+                                            <img className="best-seller-icon-card" src="https://previews.123rf.com/images/artag/artag1211/artag121100001/16235733-best-seller-icon.jpg" />
+                                        )
+                                    }
+                                    <img src={props.ima} alt="Logo" style={{ height: 136, width: 208, borderRadius: 10 }} />
+                                </div>
+                            )
+                        }
                         <div>
                             {props.address}
                         </div>

@@ -104,7 +104,7 @@ export default function AddAddressNewUser() {
         setLat(place.geometry.location.lat());
         setLng(place.geometry.location.lng());
 
-        message.info(place.geometry.location.lat());
+        // message.info(place.geometry.location.lat());
 
         if (place.address_components.length == 1) {
             setAddressSave(place.address_components[0].long_name)

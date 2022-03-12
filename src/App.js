@@ -42,6 +42,7 @@ import logo512 from "./static/logo512.png";
 import HelmetMetaData from "./components/facebook/helmet-metadata";
 import PicturesWall from "./components/user-profile/upload-img-antd";
 import ForgotPasswordPage from "./components/forgot-password/forgot-password-page";
+import PrivateRoute from "./components/private-route";
 
 class App extends Component {
   constructor(props) {
@@ -295,19 +296,19 @@ class App extends Component {
                 <Route exact path={["/", "/home"]} component={Home} />
                 <Route exact path="/login" component={Login} />
                 <Route exact path="/register" component={Register} />
-                <Route exact path="/profile" component={Profile} />
+                {/* <PrivateRoute exact path="/profile" component={Profile} /> */}
                 {/* <Route path="/user" component={BoardUser} /> */}
                 <Route path="/mod" component={BoardModerator} />
                 <Route path="/admin" component={BoardAdmin} />
                 <Route path="/validate-register" component={ValidateRegister} />
-                <Route exact path="/menu" component={MenuPage} />
-                <Route path="/menu/:category" component={MenuCategory} />
-                <Route path="/food/:id" component={FoodDetail} />
-                <Route path="/store/:id" component={Store} />
-                <Route path="/user" component={UserManager} />
-                <Route path="/search" component={SearchBar} />
+                <PrivateRoute exact path="/menu" component={MenuPage} />
+                <PrivateRoute path="/menu/:category" component={MenuCategory} />
+                <PrivateRoute path="/food/:id" component={FoodDetail} />
+                <PrivateRoute path="/store/:id" component={Store} />
+                <PrivateRoute path="/user" component={UserManager} />
+                <PrivateRoute path="/search" component={SearchBar} />
                 <Route path="/add-address-new-user" component={AddAddressNewUser} />
-                <Route path="/payment" component={PaymentPage} />
+                <PrivateRoute path="/payment" component={PaymentPage} />
                 <Route path="/paypal" component={PaypalPage} />
                 <Route path="/handle-paypal" component={HandlePaypal} />
                 <Route path="/share" component={SharePost} />
