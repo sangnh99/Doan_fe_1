@@ -77,7 +77,7 @@ export default class ValidateRegister extends Component {
                     )}
                     {this.state.isSuccess && (
                         <Alert
-                            message={'Bạn đã đăng kí thành công'}
+                            message={'Bạn đã xác thực email thành công !'}
                             type="success"
                             closable
                             style={{textAlign: "center" }}

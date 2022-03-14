@@ -17,7 +17,7 @@ export default function CardAntdStore(props) {
                 >
                     <Meta title={props.item.name} description={
                         <div>
-                            <p>{props.item.address.substring(0, props.item.address.length - 25)}&emsp;&ensp;</p>
+                            <p>{props.item.address.substring(0, props.item.address.length - 26)}&emsp;&ensp;</p>
                             <span>{props.item.distance} km</span>
                             {
                                 props.item.summary_rating != 0 ? (
