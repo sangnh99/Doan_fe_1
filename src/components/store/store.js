@@ -14,6 +14,8 @@ import Loading from "../loading/loading-component";
 import ShowMap1 from "../test-ggmap/show-map1";
 import { width } from "@mui/system";
 import CardAntd from '../card/card-antd';
+import { Box } from '@mui/material';
+import Rating from '@mui/material/Rating';
 
 const { Meta } = Card;
 
@@ -84,8 +86,8 @@ export default function Store(props) {
                                 <p style={{ fontSize: 16 }}>Số điện thoại : {storeDetail.phone}</p>
                                 <p style={{ fontSize: 16 }}>Giờ mở cửa : {storeDetail.open_time}</p>
                                 {
-                                    storeDetail.number_of_rating != 0 ? <p><Rate disabled value={storeDetail.summary_rating + 0.25} allowHalf={true} readOnly />({storeDetail.number_of_rating} đánh giá)</p>
-                                        : <p><Rate value={storeDetail.summary_rating} allowHalf={true} readOnly />(chưa có đánh giá)</p>
+                                    storeDetail.number_of_rating != 0 ? <div style={{display : "flex", alignItems : "center", marginBottom : 18}}><Rating disabled value={storeDetail.summary_rating} name="half-rating-read" precision={0.5} readOnly /><Box>({storeDetail.number_of_rating} đánh giá)</Box></div>
+                                        : <div style={{display : "flex", alignItems : "center", marginBottom : 18}}><Rating value={storeDetail.summary_rating} name="half-rating-read" precision={0.5} readOnly /><Box>(chưa có đánh giá)</Box></div>
                                 }
                                 <p style={{ fontSize: 17 }}><LocalOfferOutlinedIcon style={{ color: "red" }} /> {storeDetail.price_range}</p>
                                 <Button disabled={isFavourite == 1 ? true : false}

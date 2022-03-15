@@ -34,6 +34,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import CardAntdFood from '../card/card-antd-food';
 import ArrowBlockRecommend from '../popular-component/arrow-block-recommend';
+import { Box } from '@mui/material';
 
 const { TabPane } = Tabs;
 const { Option } = Select;
@@ -89,7 +90,7 @@ export default function FoodDetail() {
     const [isFavourite, setIsFavourite] = useState(null);
     const [note, setNote] = useState("");
     const [commentPage, setCommentPage] = useState(1);
-    const [filterComment, setFilterComment] = useState("0");  
+    const [filterComment, setFilterComment] = useState("0");
     const [listCommentFilterd, setListCommentFilterd] = useState([]);
 
     useEffect(() => {
@@ -150,7 +151,7 @@ export default function FoodDetail() {
     const getCommentFilterd = (value) => {
         setCommentPage(1);
         setFilterComment(value);
-        if (value != "0"){
+        if (value != "0") {
             setListCommentFilterd(listComment.filter(t => t.rating == parseInt(value)));
         } else {
             setListCommentFilterd(listComment);
@@ -204,9 +205,13 @@ export default function FoodDetail() {
                                 <h1 style={{ fontFamily: "Nunito" }}>{foodDetail.food_name}</h1>
                                 <Link to={"/store/" + foodDetail.store_id}><p style={{ fontFamily: 'Nunito', fontSize: 16 }}>{foodDetail.store_name} -  &nbsp; {foodDetail.distance}km</p></Link>
                                 <p><RoomOutlinedIcon style={{ fontSize: 20, color: "orange" }} /> {foodDetail.store_address.substring(0, foodDetail.store_address.length - 16)}</p>
-                                {
-                                    foodDetail.number_of_vote != 0 ? <p><Rate disabled value={parseFloat(foodDetail.summary_rating + 0.25)} allowHalf={true} readOnly />({foodDetail.number_of_vote} đánh giá)</p>
+                                {/* {
+                                    foodDetail.number_of_vote != 0 ? <p><Rate value={parseFloat(foodDetail.summary_rating + 0.25)} allowHalf={true} disabled readOnly />({foodDetail.number_of_vote} đánh giá)</p>
                                         : <p><Rate value={foodDetail.summary_rating} allowHalf={true} readOnly />(chưa có đánh giá)</p>
+                                } */}
+                                {
+                                    foodDetail.number_of_vote != 0 ? <div style={{display : "flex", alignItems : "center", marginBottom : 18}}><Rating value={parseFloat(foodDetail.summary_rating)} name="half-rating-read" precision={0.5} readOnly  /><Box >({foodDetail.number_of_vote} đánh giá)</Box></div>
+                                        : <div style={{display : "flex", alignItems : "center", marginBottom : 18}}><Rating value={foodDetail.summary_rating} name="half-rating-read" precision={0.5} readOnly/><Box>(chưa có đánh giá)</Box></div>
                                 }
                                 <div>
 
@@ -283,7 +288,7 @@ export default function FoodDetail() {
                         <div>
                             {
                                 foodDetail.like_number != 0 && (
-                                    <p>Có {foodDetail.like_number} người dùng đã thích sản phẩm này gần đây. </p>   
+                                    <p>Có {foodDetail.like_number} người dùng đã thích món ăn này gần đây. </p>
                                 )
                             }
                         </div>
@@ -381,11 +386,11 @@ export default function FoodDetail() {
                                                         rating={item.rating}
                                                         comment={item.comment}
                                                         likenum={item.like_number}
-                                                        dislikenum={item.dislike_number} 
+                                                        dislikenum={item.dislike_number}
                                                         createddate={item.created_date}
                                                         listimage={item.list_image}
                                                         useravatar={item.user_avatar}
-                                                        />
+                                                    />
                                                 );
                                             })
                                         }
