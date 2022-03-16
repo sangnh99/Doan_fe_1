@@ -204,7 +204,7 @@ export default function FoodDetail() {
                             <div className="col-xl-7" style={{ paddingLeft: 30 }}>
                                 <h1 style={{ fontFamily: "Nunito" }}>{foodDetail.food_name}</h1>
                                 <Link to={"/store/" + foodDetail.store_id}><p style={{ fontFamily: 'Nunito', fontSize: 16 }}>{foodDetail.store_name} -  &nbsp; {foodDetail.distance}km</p></Link>
-                                <p><RoomOutlinedIcon style={{ fontSize: 20, color: "orange" }} /> {foodDetail.store_address.substring(0, foodDetail.store_address.length - 16)}</p>
+                                <p><RoomOutlinedIcon style={{ fontSize: 20, color: "orange" }} /> {foodDetail.store_address.substring(0, foodDetail.store_address.length - 17)}</p>
                                 {/* {
                                     foodDetail.number_of_vote != 0 ? <p><Rate value={parseFloat(foodDetail.summary_rating + 0.25)} allowHalf={true} disabled readOnly />({foodDetail.number_of_vote} đánh giá)</p>
                                         : <p><Rate value={foodDetail.summary_rating} allowHalf={true} readOnly />(chưa có đánh giá)</p>

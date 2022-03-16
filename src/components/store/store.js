@@ -82,7 +82,7 @@ export default function Store(props) {
                             </div>
                             <div className="col-xl-7">
                                 <h1 style={{ fontFamily: 'Nunito' }}>{storeDetail.name}</h1>
-                                <p><RoomOutlinedIcon style={{ fontSize: 20, color: "orange" }} /> {storeDetail.address.substring(0, storeDetail.address.length - 16)}</p>
+                                <p><RoomOutlinedIcon style={{ fontSize: 20, color: "orange" }} /> {storeDetail.address.substring(0, storeDetail.address.length - 17)}</p>
                                 <p style={{ fontSize: 16 }}>Số điện thoại : {storeDetail.phone}</p>
                                 <p style={{ fontSize: 16 }}>Giờ mở cửa : {storeDetail.open_time}</p>
                                 {

@@ -8,6 +8,7 @@ import './user-transaction.css';
 import foodService from "../../services/food-service";
 import { PlusOutlined } from '@ant-design/icons';
 import authHeader from '../../services/auth-header';
+import SharePostTransaction from "../facebook/share-post-transaction";
 
 const { Panel } = Collapse;
 const { TextArea } = Input;
@@ -167,6 +168,9 @@ export default function UserTransaction(props) {
                         {
                             transaction.length != 0 ? (
                                 <div>
+                                    <div>
+                                        <p style={{ fontFamily: 'Nunito', marginBottom: 20 }}>Click vào đơn hàng và ấn đánh giá để chia sẻ cảm nghĩ về các món ăn để mọi người cùng biết nhé ! <span><img src="https://cdn.dribbble.com/users/282075/screenshots/4756098/icon_reward.gif" style={{ display: "inline", width: 70, height: 70, borderRadius: 30 }} /></span></p>
+                                    </div>
                                     {
                                         transaction.map(item => {
                                             return (
@@ -213,13 +217,20 @@ export default function UserTransaction(props) {
                                                                                 />
                                                                                 {
                                                                                     item.status == "đã giao thành công" && (
-                                                                                        <Button type="default" style={{ color: "#fa541c", display: "inline-block", float: "right" }} onClick={
-                                                                                            () => {
-                                                                                                setCurrentStoreName(item.store_name);
-                                                                                                setCurrentItem(childItem);
-                                                                                                setVisibleRating(true);
-                                                                                            }
-                                                                                        }>Đánh giá</Button>
+                                                                                        <div>
+
+                                                                                            <SharePostTransaction
+                                                                                                url={"https://sang-order.herokuapp.com/food/" + childItem.food_id}
+                                                                                                quote={childItem.food_name + " - " + item.store_name + " ngon tuyệt !"} />
+                                                                                            <Button type="default" style={{ color: "#fa541c", display: "inline-block", float: "right" }} onClick={
+                                                                                                () => {
+                                                                                                    setCurrentStoreName(item.store_name);
+                                                                                                    setCurrentItem(childItem);
+                                                                                                    setVisibleRating(true);
+                                                                                                }
+                                                                                            }>Đánh giá</Button>
+
+                                                                                        </div>
                                                                                     )
                                                                                 }
                                                                             </List.Item>
