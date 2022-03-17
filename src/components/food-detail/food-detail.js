@@ -114,6 +114,7 @@ export default function FoodDetail() {
                 setNote(response.data.data.note);
                 setStoreId(response.data.data.store_id);
                 noteInput.current.value = response.data.data.note;
+                console.log(response.data.data.list_comments);
             }
         );
     }
@@ -390,6 +391,7 @@ export default function FoodDetail() {
                                                         createddate={item.created_date}
                                                         listimage={item.list_image}
                                                         useravatar={item.user_avatar}
+                                                        listlikefood={item.list_like_food}
                                                     />
                                                 );
                                             })

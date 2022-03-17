@@ -108,7 +108,7 @@ import foodService from '../../services/food-service';
 import { Link, useHistory } from 'react-router-dom';
 
 
-export default function CommentBox(props) {
+export default function CommentBoxStore(props) {
   const [likes, setLikes] = useState(0);
   const [listImage, setListImage] = useState([]);
   const [dislikes, setDislikes] = useState(0);
@@ -190,7 +190,7 @@ export default function CommentBox(props) {
                     props.listlikefood.map(recomm => {
                       return (
                         // <a onClick={() => { history.push(`/food/${recomm.food_id}`) }}>&ensp;{recomm.food_name}&ensp;</a>
-                        <Link to={"/food/" + recomm.food_id}><span  onClick={() => { setTimeout(() => {window.location.reload()}, 500) }}>&ensp;{recomm.food_name}&ensp;</span></Link>
+                        <Link to={"/food/" + recomm.food_id}><span>&ensp;{recomm.food_name}&ensp;</span></Link>
                       )
                     }
                     )

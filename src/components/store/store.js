@@ -1,5 +1,6 @@
 import { Divider, Tabs, Pagination, Rate, List, Avatar, Card } from "antd";
 import CommentBox from "../comment-box/comment-box";
+import CommentBoxStore from "../comment-box/comment-box-store";
 import React, { useState, useEffect } from "react";
 import { useParams } from 'react-router';
 import storeService from "../../services/store-service";
@@ -216,7 +217,7 @@ export default function Store(props) {
                                         {
                                             listCommentFilterd.slice(5 * (commentPage - 1), 5 * commentPage).map(item => {
                                                 return (
-                                                    <CommentBox id={item.id}
+                                                    <CommentBoxStore id={item.id}
                                                         name={item.user_app_name}
                                                         foodName={item.food_name}
                                                         rating={item.rating}
@@ -226,6 +227,7 @@ export default function Store(props) {
                                                         createddate={item.created_date}
                                                         listimage={item.list_image}
                                                         useravatar={item.user_avatar}
+                                                        listlikefood={item.list_like_food}
                                                         />
                                                 );
                                             })
