@@ -48,7 +48,7 @@ export default function UserTransaction(props) {
                     console.log(response.data.data);
                 }
             );
-        }, 1000 * 30);
+        }, 1000 * 15);
         return () => {
             console.log(`clearing interval`);
             clearInterval(interval);
